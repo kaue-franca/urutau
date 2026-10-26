@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia urutau</title>
+<style>
+:root {
+  --bg: #fbfaf7; --fg: #1d1d1b; --muted: #5d5b55; --card: #ffffff; --line: #e3e0d8;
+  --accent: #2f6b4f; --accent-soft: #e4f0e9; --warn: #8a5a00; --code: #f2efe8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161714; --fg: #ecebe6; --muted: #a8a69e; --card: #1f201c; --line: #34352f;
+    --accent: #7cc4a0; --accent-soft: #23332b; --warn: #e0b257; --code: #2a2b26;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161714; --fg: #ecebe6; --muted: #a8a69e; --card: #1f201c; --line: #34352f;
+  --accent: #7cc4a0; --accent-soft: #23332b; --warn: #e0b257; --code: #2a2b26;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 920px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 1.9rem; margin: 0 0 4px; }
+h2 { font-size: 1.35rem; margin: 40px 0 12px; padding-top: 8px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.05rem; margin: 0 0 6px; }
+p, li { max-width: 72ch; }
+.sub { color: var(--muted); margin: 0 0 16px; }
+code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+a { color: var(--accent); }
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .95rem; margin: 12px 0 8px; }
+.progress { position: sticky; top: 0; z-index: 2; background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 0; font-size: .95rem; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin-top: 4px; }
+.bar > div { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+.grid { display: grid; gap: 12px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.card.done { border-color: var(--accent); box-shadow: inset 4px 0 0 var(--accent); }
+.card header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.card dl { margin: 6px 0 0; display: grid; grid-template-columns: 9.5em 1fr; gap: 4px 12px; }
+.card dt { color: var(--muted); font-size: .9rem; }
+.card dd { margin: 0; }
+@media (max-width: 560px) { .card dl { grid-template-columns: 1fr; } .card dt { margin-top: 6px; } }
+label.ok { font-size: .85rem; color: var(--muted); white-space: nowrap; cursor: pointer; }
+.tag { display: inline-block; font-size: .78rem; padding: 0 6px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tablewrap { overflow-x: auto; }
+svg { width: 100%; height: auto; max-width: 760px; display: block; margin: 8px 0; }
+svg .node rect { fill: var(--card); stroke: var(--accent); stroke-width: 1.5; }
+svg .node text { fill: var(--fg); font: 13px system-ui, sans-serif; }
+svg .edge { stroke: var(--muted); stroke-width: 1.4; fill: none; marker-end: url(#arrow); }
+svg #arrow path { fill: var(--muted); }
+.note { border-left: 3px solid var(--warn); padding: 4px 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<h1>Guia urutau — Scientific SDD (v0)</h1>
+<p class="sub">Desenvolvimento orientado a especificação com o método científico, para trabalho de ciência de dados com agentes (Claude Code, Codex). Leitura de ~15 min. Os IDs das regras (R1–R14) são os mesmos de <code>global/AGENTS.md</code>; as fontes (S01–S38) estão em <a href="../references/sources.md">references/sources.md</a>.</p>
+
+<div class="progress" aria-live="polite">
+  <span id="progress-text">Validados: 0 de 0</span>
+  <div class="bar"><div id="progress-bar"></div></div>
+</div>
+
+<nav class="toc">
+  <a href="#ciclo">Ciclo</a><a href="#modos">Modos</a><a href="#arquivos">Arquivos</a><a href="#regras">Regras</a>
+  <a href="#templates">Templates</a><a href="#modulos">Módulos</a><a href="#instalar">Instalar</a><a href="#mudou">O que mudou</a><a href="#limites">Limites</a>
+</nav>
+
+<section id="ciclo">
+<h2>O ciclo</h2>
+<p>Pergunta → hipóteses rivais → explorar → pré-registrar → confirmar → checar → concluir → registrar. O ciclo é reentrante: um resultado pode levar a uma nova hipótese, a revisar suposições ou de volta à exploração (S04, S08).</p>
+<svg viewBox="0 0 760 230" role="img" aria-label="Diagrama do ciclo: pergunta, rivais, explorar, pré-registrar, confirmar, checar, concluir, registrar, com retorno ao início">
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+  <g class="node"><rect x="10" y="20" width="160" height="40" rx="8"/><text x="90" y="45" text-anchor="middle">1 Pergunta</text></g>
+  <g class="node"><rect x="200" y="20" width="160" height="40" rx="8"/><text x="280" y="45" text-anchor="middle">2 Hipóteses rivais</text></g>
+  <g class="node"><rect x="390" y="20" width="160" height="40" rx="8"/><text x="470" y="45" text-anchor="middle">3 Explorar (EXPL)</text></g>
+  <g class="node"><rect x="580" y="20" width="170" height="40" rx="8"/><text x="665" y="45" text-anchor="middle">4 Pré-registrar (EXP)</text></g>
+  <g class="node"><rect x="580" y="160" width="170" height="40" rx="8"/><text x="665" y="185" text-anchor="middle">5 Confirmar</text></g>
+  <g class="node"><rect x="390" y="160" width="160" height="40" rx="8"/><text x="470" y="185" text-anchor="middle">6 Checar modelo</text></g>
+  <g class="node"><rect x="200" y="160" width="160" height="40" rx="8"/><text x="280" y="185" text-anchor="middle">7 Concluir (veredito)</text></g>
+  <g class="node"><rect x="10" y="160" width="160" height="40" rx="8"/><text x="90" y="185" text-anchor="middle">8 Registrar</text></g>
+  <path class="edge" d="M170,40 H198"/><path class="edge" d="M360,40 H388"/><path class="edge" d="M550,40 H578"/>
+  <path class="edge" d="M665,60 V158"/><path class="edge" d="M580,180 H552"/><path class="edge" d="M390,180 H362"/><path class="edge" d="M200,180 H172"/>
+  <path class="edge" d="M90,160 V62"/>
+  <path class="edge" d="M280,160 C280,110 470,110 470,62" stroke-dasharray="5 4"/>
+  <text x="300" y="120" fill="currentColor" font-size="12">revisar hipótese ou suposições</text>
+</svg>
+<p>Vereditos possíveis: <code>supported</code> · <code>refuted</code> · <code>inconclusive</code> · <code>revise assumptions</code>.</p>
+</section>
+
+<section id="modos">
+<h2>Modos</h2>
+<div class="tablewrap"><table>
+<tr><th>Modo</th><th>Quando</th><th>Registro</th></tr>
+<tr><td><b>light</b></td><td>Trabalho determinístico sem incerteza real (refatorar, conectar peças, correção conhecida)</td><td>tarefa → teste de aceitação → <code>status.md</code></td></tr>
+<tr><td><b>explore</b></td><td>Tentativas baratas para gerar ideias</td><td>uma linha <code>EXPL</code> em <code>log.md</code>: tentou → esperado → obtido → próximo</td></tr>
+<tr><td><b>confirm</b></td><td>Qualquer afirmação em que alguém vai se apoiar</td><td>cartão <code>EXP</code> commitado antes do teste; dados novos; veredito</td></tr>
+</table></div>
+<p>Na dúvida sobre o modo, o agente pergunta (R2). Só o modo confirm transforma um resultado em afirmação.</p>
+</section>
+
+<section id="arquivos">
+<h2>Mapa de arquivos</h2>
+<div class="tablewrap"><table>
+<tr><th>Onde</th><th>Arquivo</th><th>Para quê</th></tr>
+<tr><td>global (todas as máquinas)</td><td><code>global/AGENTS.md</code></td><td>O método: 14 regras, modos, protocolo de sessão, formato dos arquivos. ≤ 100 linhas.</td></tr>
+<tr><td>sob demanda</td><td><code>modules/ml.md</code>, <code>modules/rl.md</code></td><td>Checklists de domínio, lidos só quando a tarefa toca o domínio.</td></tr>
+<tr><td>projeto</td><td><code>AGENTS.md</code> + <code>CLAUDE.md</code></td><td>Comandos, dados, restrições, módulos ativos. <code>CLAUDE.md</code> só importa <code>@AGENTS.md</code>.</td></tr>
+<tr><td>projeto / <code>sdd/</code></td><td><code>spec.md</code> · <code>status.md</code> · <code>knowledge.md</code> · <code>log.md</code></td><td>Pergunta e critérios · onde estamos · o que sabemos · o que fizemos.</td></tr>
+<tr><td>este repositório</td><td><code>scripts/</code></td><td><code>install.sh</code>, <code>new-project.sh</code>, <code>check.py</code>.</td></tr>
+</table></div>
+<p>Protocolo de sessão: no início, ler <code>status.md</code> → <code>spec.md</code> → últimas entradas do <code>log.md</code> e repetir em uma linha a tarefa e o modo; no fim, atualizar status, log e knowledge e fazer commit.</p>
+</section>
+
+<section id="regras">
+<h2>Regras (R1–R14)</h2>
+<p>Ordenadas por importância: modelos seguem melhor as instruções que vêm primeiro (S33). Cada cartão: o que diz · por quê (com fonte) · como verificar.</p>
+<div class="grid">
+
+<article class="card" data-id="R1"><header><h3>R1 Evidência</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Nada não testado é dito como fato. Toda afirmação cita sua evidência (EXP/EXPL, arquivo, commit) ou leva a tag <code>[assumption]</code> ou <code>[speculation]</code>. Observação, inferência e especulação ficam separadas.</dd>
+<dt>Por quê</dt><dd>Agentes escrevem explicações fluentes sem evidência; ligar cada afirmação ao resultado que a sustenta é a defesa básica (Sandve S18, Lipton &amp; Steinhardt S25, Feynman S07, Kerr S35).</dd>
+<dt>Como verificar</dt><dd><code>check.py --project</code> exige tag em 100% das afirmações de <code>knowledge.md</code> (critério E3).</dd></dl></article>
+
+<article class="card" data-id="R2"><header><h3>R2 Modos</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Todo trabalho é rotulado light, explore ou confirm. Só um teste confirm vira afirmação. Na dúvida, perguntar.</dd>
+<dt>Por quê</dt><dd>Escolhas que dependem dos dados criam falsos positivos mesmo sem má-fé; separar exploração de confirmação torna isso visível (Gelman &amp; Loken S13, Nosek S16). Um único ritual para tudo é pesado demais (SEP S01, Böckeler S34).</dd>
+<dt>Como verificar</dt><dd><code>status.md</code> mostra o modo da tarefa atual; entradas do log são EXPL ou EXP.</dd></dl></article>
+
+<article class="card" data-id="R3"><header><h3>R3 Prever antes</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Antes de qualquer execução, escrever o resultado esperado. Antes de um teste confirm, commitar o cartão EXP: hipóteses rivais, o resultado que refuta cada uma, menor efeito relevante, regra de decisão, plano de análise, orçamento de execuções/busca e o que já foi visto dos dados.</dd>
+<dt>Por quê</dt><dd>Critérios de refutação fixados antes (Popper S02, Platt S06); esperado vs obtido (S04); regra de parada e flexibilidade declaradas (Simmons S12); menor efeito de interesse (Lakens S15); pré-registro e "o que já foi visto" (Nosek S16); orçamento de busca (Dodge S38).</dd>
+<dt>Como verificar</dt><dd><code>check.py --project</code> confere os campos do cartão e, pelo histórico do git, se ele foi commitado antes do resultado (critério E2, meta ≥ 90%).</dd></dl></article>
+
+<article class="card" data-id="R4"><header><h3>R4 Rivais</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>≥ 2 hipóteses rivais por pergunta: sempre um baseline simples ou nulo, e as rivais mundanas — bug, vazamento, artefato de dados ou de seleção, acaso.</dd>
+<dt>Por quê</dt><dd>Apego a uma explicação distorce os fatos (Chamberlin S05); só exclusões são seguras (Platt S06). Em ciência de dados a rival mais comum é um artefato: vazamento explicou ganhos de modelos complexos em muitos estudos (Kapoor &amp; Narayanan S22; Ioannidis S11).</dd>
+<dt>Como verificar</dt><dd>O campo "Hypotheses" do cartão EXP lista H0/baseline e ao menos uma rival de artefato.</dd></dl></article>
+
+<article class="card" data-id="R5"><header><h3>R5 Dados novos</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Confirmar em dados não usados para formar a hipótese: holdout selado ou replicação. Registrar cada olhada no holdout.</dd>
+<dt>Por quê</dt><dd>Uma teoria precisa prever algo além dos fatos que a sugeriram (Feynman S07); holdout selado transforma pós-dição em predição (Nosek S16); reusar o conjunto de teste superajusta sem perceber (Lones S23, Cawley &amp; Talbot S37).</dd>
+<dt>Como verificar</dt><dd>O plano do EXP nomeia o split de confirmação; o log tem uma linha por acesso ao holdout.</dd></dl></article>
+
+<article class="card" data-id="R6"><header><h3>R6 Baseline justo</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Reproduzir o baseline no próprio ambiente antes de mudar qualquer coisa. Baseline e desafiante recebem os mesmos dados, seeds e orçamento de ajuste.</dd>
+<dt>Por quê</dt><dd>Reproduzir a condição original antes de variar (Feynman S07, Henderson S26); métodos novos parecem melhores quando recebem mais ajuste (Efron em S09, REFORMS S21); o vencedor muda com o orçamento de busca (Dodge S38).</dd>
+<dt>Como verificar</dt><dd>Existe um EXP/EXPL que reproduz o número de referência; o plano registra trials por braço.</dd></dl></article>
+
+<article class="card" data-id="R7"><header><h3>R7 Reportar tudo</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Registrar toda execução, desvio e beco sem saída. Examinar resultados bons com o mesmo rigor que os ruins: um resultado bom demais dispara auditoria de bug e vazamento antes de ser reportado. Ideias refutadas ou abandonadas vão para o cemitério com evidência e condição de revivência.</dd>
+<dt>Por quê</dt><dd>Reportar o que pode invalidar o resultado e escrutínio simétrico (Feynman S07); flexibilidade não declarada (Simmons S12); relato completo (ASA S14); efeitos grandes demais são suspeitos (Ioannidis S11); resultados negativos (S25).</dd>
+<dt>Como verificar</dt><dd>Cemitério em <code>status.md</code> com coluna "Revive if"; EXPL com resultado surpreendente seguido de auditoria.</dd></dl></article>
+
+<article class="card" data-id="R8"><header><h3>R8 Estimar</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Reportar efeito ± incerteza contra o baseline em execuções ou reamostragens repetidas; nunca um único score ou um p-valor sozinho. Dizer "sem efeito" só se um teste de equivalência contra o menor efeito relevante passar; senão, "inconclusivo".</dd>
+<dt>Por quê</dt><dd>p-valor não mede tamanho de efeito nem justifica conclusões por limiar (ASA S14); não significativo ≠ ausência de efeito (Lakens S15); poucas execuções enganam (Henderson S26, Agarwal S27); diferenças menores que a variação entre partições não são achados (S37).</dd>
+<dt>Como verificar</dt><dd>O campo "Result" do EXP tem efeito, intervalo, número de execuções e baseline.</dd></dl></article>
+
+<article class="card" data-id="R9"><header><h3>R9 Rastreável</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Todo resultado registra commit, versão dos dados, configuração, seed e comando. Nada de edição manual de dados; toda transformação é código.</dd>
+<dt>Por quê</dt><dd>Regras de reprodutibilidade computacional (Sandve S18), caderno de laboratório (Schnell S19), pacote de reprodutibilidade (REFORMS S21, Pineau S24).</dd>
+<dt>Como verificar</dt><dd>O <code>AGENTS.md</code> do projeto tem um comando que regenera todos os números; o EXP aponta commit e dados.</dd></dl></article>
+
+<article class="card" data-id="R10"><header><h3>R10 Checar</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Checar o modelo contra os dados (diagnósticos, resíduos, estabilidade entre reamostragens) antes de concluir. Registrar anomalias e suposições em <code>knowledge.md</code> em vez de explicá-las de forma conveniente.</dd>
+<dt>Por quê</dt><dd>Ajustar, depois criticar (Box S08); checagens preditivas (Gelman &amp; Shalizi S10); anomalias acumuladas mudam o enquadramento (Kuhn S03); "revisar suposições" é um desfecho legítimo (S04); importâncias instáveis (Breiman S09).</dd>
+<dt>Como verificar</dt><dd>Seções "Assumptions" e "Anomalies" em uso; veredito <code>revise assumptions</code> disponível.</dd></dl></article>
+
+<article class="card" data-id="R11"><header><h3>R11 Simples primeiro</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Preferir a abordagem mais simples adequada. Só adicionar complexidade para corrigir uma discrepância nomeada; creditar um ganho a um componente só após ablação; atacar primeiro a maior ameaça à validade.</dd>
+<dt>Por quê</dt><dd>Parcimônia e "preocupar-se com os tigres, não com os ratos" (Box S08); ablações antes de atribuir ganhos (S25); modelos mais simples podem prever melhor (Shmueli S36); muitos hiperparâmetros superajustam a seleção (S37).</dd>
+<dt>Como verificar</dt><dd>Cada aumento de complexidade no log cita a discrepância que corrige; ganhos atribuídos têm ablação.</dd></dl></article>
+
+<article class="card" data-id="R12"><header><h3>R12 Decisões</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Mudar plano pré-registrado, critério de aceitação ou decisão aceita só com uma nova entrada DEC que diga se os resultados já tinham sido vistos. Nunca reescrever o histórico: substituir ou riscar.</dd>
+<dt>Por quê</dt><dd>Registros curtos de decisão, substituídos e não apagados (Nygard S20); resgates ad hoc são ilegítimos (Popper S02); desvios são aceitáveis quando relatados (Nosek S16); correção por tachado (Schnell S19).</dd>
+<dt>Como verificar</dt><dd>Toda DEC tem "Results seen"; <code>git log -p sdd/log.md</code> só mostra acréscimos e tachados.</dd></dl></article>
+
+<article class="card" data-id="R13"><header><h3>R13 Revisão</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Antes de uma afirmação virar <code>[established]</code> ou ser usada para agir, alguém sem interesse no resultado revisa: o dono do projeto ou um agente com contexto limpo que lê só os arquivos.</dd>
+<dt>Por quê</dt><dd>Exposição à crítica distingue ciência (SEP S01); análise da comunidade e replicação (S04); supervisão metodológica independente e o alerta de que análise automatizada amplifica falsas descobertas (Munafò S17); reprodução independente encontra erros que o código original repete (Pineau S24).</dd>
+<dt>Como verificar</dt><dd>Campo "Reviewed by" preenchido nos EXP que sustentam afirmações <code>[established]</code>.</dd></dl></article>
+
+<article class="card" data-id="R14"><header><h3>R14 Perguntar <span class="tag">preferência do dono</span></h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Perguntar ao dono antes de mudar o escopo ou de ações irreversíveis.</dd>
+<dt>Por quê</dt><dd>Preferência pessoal do dono (<code>owner-preference</code>), não derivada de fonte.</dd>
+<dt>Como verificar</dt><dd>Pedidos aparecem em "Blockers / questions for the owner" no <code>status.md</code>.</dd></dl></article>
+</div>
+</section>
+
+<section id="templates">
+<h2>Templates do projeto</h2>
+<p>Copiados por <code>scripts/new-project.sh</code> sem sobrescrever nada. Cada um tem orientação curta em comentários HTML (o Claude Code remove comentários em bloco do arquivo de memória, então eles não gastam contexto ali; no Codex isso não está documentado). Exemplos preenchidos em <code>templates/examples/</code>.</p>
+<div class="grid">
+<article class="card" data-id="tpl:AGENTS.md"><header><h3>AGENTS.md (projeto)</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Propósito em 1 linha, comandos copiáveis, dados (local, versão, holdout selado), restrições do domínio, módulos ativos. ≤ 30 linhas.</dd>
+<dt>Por quê</dt><dd>Arquivos de contexto escritos à mão e sem visão geral do repositório ajudam mais e custam menos (Gloaguen S31, Lulla S32); agentes rodam os comandos listados (agents.md S28).</dd>
+<dt>Como verificar</dt><dd><code>check.py</code> confere o limite de linhas do template.</dd></dl></article>
+<article class="card" data-id="tpl:CLAUDE.md"><header><h3>CLAUDE.md</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Uma linha: <code>@AGENTS.md</code>. Arquivo real, não link simbólico.</dd>
+<dt>Por quê</dt><dd>O Claude Code importa o <code>AGENTS.md</code> por essa linha; o fallback automático para AGENTS.md desliga se existir qualquer CLAUDE.md, e um CLAUDE.md simbólico não pode ser editado pelo agente (docs e issue em S29).</dd>
+<dt>Como verificar</dt><dd><code>check.py</code> exige exatamente <code>@AGENTS.md</code>; no projeto, <code>/memory</code> lista o AGENTS.md.</dd></dl></article>
+<article class="card" data-id="tpl:sdd/spec.md"><header><h3>sdd/spec.md</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Pergunta; tipo de objetivo (predição · explicação · descrição · construção); escopo e não-objetivos; restrições; critérios <code>AC-nn</code> que nomeiam o resultado que os reprova; tarefas <code>T-nn → AC-nn</code>.</dd>
+<dt>Por quê</dt><dd>O tipo de objetivo muda o que conta como evidência válida (Breiman S09, Shmueli S36); critérios refutáveis (Popper S02).</dd>
+<dt>Como verificar</dt><dd>Cada AC tem "fails if"; mudanças em AC só por DEC (R12).</dd></dl></article>
+<article class="card" data-id="tpl:sdd/status.md"><header><h3>sdd/status.md</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Tarefa atual e modo, último resultado, próximo passo, hipóteses ativas, bloqueios e o cemitério. ≤ 60 linhas em uso.</dd>
+<dt>Por quê</dt><dd>É o ponto de partida de cada sessão (critério E1 do piloto); o cemitério evita repetir ideias mortas (Platt S06, Feynman S07).</dd>
+<dt>Como verificar</dt><dd>Numa sessão nova, o agente responde só pelos arquivos: tarefa atual, último resultado, hipóteses ativas, última ideia abandonada e por quê.</dd></dl></article>
+<article class="card" data-id="tpl:sdd/knowledge.md"><header><h3>sdd/knowledge.md</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Afirmações <code>K-nn</code> com tag de evidência; suposições <code>A-nn</code> com o que as checou; anomalias <code>N-nn</code> com onde apareceram; afirmações superadas tachadas.</dd>
+<dt>Por quê</dt><dd>Separar o que se sabe do que se supõe (S18, S25); listas explícitas de suposições e anomalias (Popper S02, Kuhn S03, Box S08). <code>[established]</code> exige replicação, não só reexecução (Pineau S24).</dd>
+<dt>Como verificar</dt><dd><code>check.py --project</code> mede a fração de afirmações com tag (E3 = 100%).</dd></dl></article>
+<article class="card" data-id="tpl:sdd/log.md"><header><h3>sdd/log.md</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Entradas datadas, só acrescentadas: <code>EXPL</code> (uma linha com esperado), <code>EXP</code> (cartão de pré-registro), <code>DEC</code> (decisão com "results seen"), todas com <code>by:</code>.</dd>
+<dt>Por quê</dt><dd>Caderno cronológico, nunca apagado (Schnell S19); registro de decisões (Nygard S20); pré-registro (Nosek S16).</dd>
+<dt>Como verificar</dt><dd><code>check.py --project</code> confere campos do EXP e se o cartão veio antes do resultado no git.</dd></dl></article>
+</div>
+</section>
+
+<section id="modulos">
+<h2>Módulos</h2>
+<div class="grid">
+<article class="card" data-id="mod:ml"><header><h3>modules/ml.md — ML e modelos estatísticos</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Checklist antes de construir (objetivo, população, split antes de explorar, teste selado), vazamento L1–L3, baselines e comparações com orçamento igual e seleção dentro dos folds, avaliação com incerteza, interpretação estável, pacote de reprodutibilidade.</dd>
+<dt>Por quê</dt><dd>REFORMS (S21), taxonomia de vazamento (S22), armadilhas de ML (S23), overfitting na seleção de modelos (S37), orçamento de busca (S38), explicar vs prever (S36).</dd>
+<dt>Como verificar</dt><dd>Listado como módulo ativo no <code>AGENTS.md</code> do projeto (<code>new-project.sh --ml</code>); ≤ 60 linhas.</dd></dl></article>
+<article class="card" data-id="mod:rl"><header><h3>modules/rl.md — aprendizado por reforço</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Seeds fixadas antes, baseline reproduzido contra números originais, protocolo de avaliação travado, métricas agregadas escolhidas antes (IQM, perfis), todas as execuções reportadas, intervalos por bootstrap estratificado, inspeção de comportamento.</dd>
+<dt>Por quê</dt><dd>Henderson et al. (S26) e Agarwal et al. (S27).</dd>
+<dt>Como verificar</dt><dd><code>new-project.sh --rl</code>; ≤ 30 linhas.</dd></dl></article>
+</div>
+</section>
+
+<section id="instalar">
+<h2>Instalar</h2>
+<ol>
+<li><code>git clone</code> este repositório e rode <code>scripts/install.sh</code>. Ele adiciona <code>@&lt;caminho&gt;/global/AGENTS.md</code> entre marcadores em <code>~/.claude/CLAUDE.md</code> (sem apagar nada) e cria o link <code>~/.codex/AGENTS.md</code> se não existir. <code>--uninstall</code> desfaz.</li>
+<li>Novo projeto: <code>scripts/new-project.sh &lt;pasta&gt; [--ml] [--rl]</code>.</li>
+<li>Verificar: no Claude Code, <code>/memory</code> ou <code>/context</code> lista o arquivo global; no Codex, peça para citar a regra R1.</li>
+<li>Checagens: <code>python3 scripts/check.py</code> (este repositório) e <code>python3 scripts/check.py --project &lt;pasta&gt;</code> (um projeto).</li>
+</ol>
+<p class="note">Testado em 2026-10-26 com Claude Code 2.1.310 e um <code>HOME</code> temporário: o agente citou R1 corretamente e carregou o <code>AGENTS.md</code> do projeto via <code>CLAUDE.md</code>. Codex não foi testado (não instalado no ambiente) — <code>UNVERIFIED</code>.</p>
+</section>
+
+<section id="mudou">
+<h2>O que mudou (v0.2 → v0)</h2>
+<ul>
+<li>Leitura cega das 34 fontes por agentes novos; 31 lidas na íntegra (antes, 21 só pelo resumo). Quatro fontes novas: Kerr (S35), Shmueli (S36), Cawley &amp; Talbot (S37), Dodge (S38).</li>
+<li>Correções ao v0.2: o efeito dos arquivos de contexto escritos à mão é +2,4% e não significativo (S31); Pineau (S24) não prova que checklists melhoram a qualidade; o link do ASA (S14) era o comunicado de imprensa.</li>
+<li>Regras reorganizadas (14 no total): R1 junta "não afirmar sem teste" e "ligar afirmação à evidência"; cemitério entrou em R7; R13 (revisão independente) é nova, com o mecanismo M10.</li>
+<li>Regras ganharam detalhes vindos da leitura: rivais mundanas (R4), registro de acesso ao holdout (R5), orçamento igual (R6), auditoria de resultado bom demais (R7), teste de equivalência antes de "sem efeito" (R8), ablação (R11), "results seen" nas DECs (R12).</li>
+<li>Templates: tipo de objetivo "descrição"; EXPL com resultado esperado; cartão EXP com orçamento, "já visto" e "reviewed by"; campo <code>by:</code> em todas as entradas.</li>
+<li><code>check.py --project</code> mede E2 (pré-registro pelo git) e E3 (tags) automaticamente.</li>
+</ul>
+</section>
+
+<section id="limites">
+<h2>Limites conhecidos</h2>
+<ul>
+<li>Nenhum estudo testou fluxos baseados no método científico para agentes de código; o efeito deste método é desconhecido até o piloto (Fase 7, EXP-001).</li>
+<li>Evidência sobre arquivos de contexto é mista e vem de tarefas de software, não de ciência de dados (S31, S32).</li>
+<li>Pré-registro e checklists têm pouco suporte experimental direto (S16, S24).</li>
+<li>Regras em prosa falham por omissão silenciosa (S33); por isso as partes críticas são checadas por <code>check.py</code>.</li>
+</ul>
+</section>
+</main>
+<script>
+(function () {
+  var KEY = "urutau-guide-v0-validated";
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { state = {}; }
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".card[data-id]"));
+  function render() {
+    var done = 0;
+    cards.forEach(function (c) { var on = !!state[c.dataset.id]; c.classList.toggle("done", on); if (on) done++; });
+    document.getElementById("progress-text").textContent = "Validados: " + done + " de " + cards.length;
+    document.getElementById("progress-bar").style.width = (100 * done / cards.length) + "%";
+  }
+  cards.forEach(function (c) {
+    var box = c.querySelector('input[type="checkbox"]');
+    box.checked = !!state[c.dataset.id];
+    box.addEventListener("change", function () {
+      state[c.dataset.id] = box.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      render();
+    });
+  });
+  render();
+})();
+</script>
+</body>
+</html>
