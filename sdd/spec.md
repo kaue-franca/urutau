@@ -24,5 +24,4 @@ Constraints: budgets in `PLAN.md` §4.1; agent files in English, guide in pt-BR,
 - T-08 Phase 8 — second consolidation, `CHANGELOG.md`, tag `v1.0` (→ all)
 
 ## Open questions
-- `PLAN.md` §7 defaults adopted provisionally (DEC-001); owner may override at any checkpoint.
-- How to restore blinding for Phase 1 (DEC-002).
+- `PLAN.md` §7 defaults adopted (DEC-001, approved at Phase 0); owner may override at any checkpoint.
