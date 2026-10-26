@@ -579,8 +579,48 @@ _Reader: group D._
   - Aim for spec-first, optionally spec-anchored (e.g. a living per-project decision or results log). Avoid spec-as-source for analysis code.
 - Caveats: These are one experienced practitioner's exploratory trials (September 2025) on a few problems, not a systematic study. The tools have changed since then. The article is software-feature oriented, not about data-science or research workflows. Screenshots were not viewed.
 
+## E. Proposed additions read after the Phase 1 checkpoint (S35–S38)
+_Reader: main session (not blind; read after `comparison.md`). Owner approved reading the four high-priority additions._
+
+### S35 · HARKing: Hypothesizing After the Results are Known (Kerr, 1998)
+- Source used: https://pubmed.ncbi.nlm.nih.gov/15647155/ (abstract) · accessed 2026-10-26 · depth: abstract — full text is paywalled (publisher 403; Kent repository restricted); no open copy found.
+- Core claim: HARKing is presenting a post hoc hypothesis (one based on or informed by the results) as if it had been an a priori hypothesis. Kerr identifies several forms, reports survey data suggesting some forms are common and widely seen as inappropriate, discusses why researchers do it and why they should not, concedes the cost–benefit question is complex, and closes with suggestions for deterring it.
+- Implications for the method:
+  - A hypothesis written after seeing a result is labelled exploratory and dated after the result; it can only be confirmed on new data (supports R3, R5).
+  - The git timestamp of the EXP card is the cheap evidence that a hypothesis was a priori; agent-written narratives must not reorder history.
+- Caveats: only the abstract was read; the forms of HARKing, the survey design and the deterrence suggestions are `UNVERIFIED` here. Psychology-centred.
+
+### S36 · To Explain or to Predict? (Shmueli, Statistical Science 25(3), 2010)
+- Source used: https://arxiv.org/abs/1101.0891 (v1 reprint, 23 pp.) · accessed 2026-10-26 · depth: full main text and appendix; published discussion not part of the reprint.
+- Core claim: explanatory modelling (testing causal hypotheses about constructs), predictive modelling (predicting new observations) and descriptive modelling (compact summary of data) are different goals. The difference — causation vs association, theory vs data, retrospective vs prospective, bias vs bias+variance — changes every step: design and sample size, missing-data handling, data partitioning, exploration, variable choice (predictors must be available at prediction time), methods, validation, evaluation and model selection. Explanatory power (in-sample fit, R²) does not imply predictive power; a deliberately "wrong" simpler model can predict better than the true one. The goal must be fixed a priori, and both explanatory and predictive qualities should be reported.
+- Implications for the method:
+  - `spec.md` states the goal type, with **description** as a third data goal beside prediction and explanation (plus build for software).
+  - Never infer predictive power from in-sample fit; predictive claims need out-of-sample evaluation.
+  - Features used for prediction must be available at prediction time ("ex-ante availability") — a direct leakage check for `modules/ml.md`.
+  - Parsimony and model selection criteria depend on the goal; the EXP card names which goal its test serves.
+- Caveats: deliberately polarizes the two goals (the author later frames them as two dimensions); examples are from information systems and economics; little on causal-inference methods themselves.
+
+### S37 · On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation (Cawley & Talbot, JMLR 11, 2010)
+- Source used: https://www.jmlr.org/papers/volume11/cawley10a/cawley10a.pdf · accessed 2026-10-26 · depth: full main text (§1–6); result tables skimmed; §5.3 skimmed.
+- Core claim: optimizing a model-selection criterion (e.g. cross-validation error) over a finite sample can overfit it, just as training overfits the training data; variance of the criterion matters as much as bias. The effect is often as large as the differences between learning algorithms (e.g. the more flexible ARD kernel lost to the nested RBF kernel on 12 of 13 benchmarks). Evaluation protocols that do any part of model selection outside the resampling loop (e.g. the "median hyper-parameters" protocol) give optimistic, internally inconsistent results that favour the least reliable selection procedures. Remedy: treat model selection as part of fitting, redo it inside every fold (nested CV), use multiple random partitions, and regard differences smaller than the partition-to-partition variation as practically insignificant.
+- Implications for the method:
+  - `modules/ml.md`: all tuning, feature and model selection happen inside the training folds; the reported estimate comes from an outer loop or a sealed test set.
+  - Compare "algorithm + selection procedure" pairs, never algorithms alone.
+  - Evaluate over several partitions or seeds; a difference smaller than the split-to-split spread is not a finding (supports R8).
+  - Many hyper-parameters on small data is a warning sign; prefer fewer, regularize, or average.
+- Caveats: kernel methods on small UCI benchmarks; the magnitude will differ for large datasets and deep models; no general theory, as the authors note.
+
+### S38 · Show Your Work: Improved Reporting of Experimental Results (Dodge, Gururangan, Card, Schwartz & Smith, EMNLP 2019)
+- Source used: https://arxiv.org/abs/1909.03004 (v1) · accessed 2026-10-26 · depth: full main text (6 pp.); appendices not read.
+- Core claim: test-set scores of the best configuration are not enough to say which model is better, because the winner depends on how much hyperparameter search each model got. The authors propose reporting **expected validation performance of the best model as a function of search budget** (trials or time), computable from the trials already run. In their case studies the preferred model flips with budget (logistic regression beats a CNN below ~10 trials; ELMo frozen vs fine-tuned depends on hours vs days), and reproducing published numbers needed very different, unreported budgets (up to ~18 GPU days). Their checklist asks for search bounds, number of trials, the selection method and criterion, validation scores for each test score, runtime and infrastructure. None of 50 sampled EMNLP 2018 papers reported everything.
+- Implications for the method:
+  - Every comparison records the search budget and method for each arm; a claim "A beats B" holds only at the budget tested. If the challenger got more budget and wins, the comparison is inconclusive (supports R6).
+  - Agents run many cheap trials, so the number of trials is part of the result, not an implementation detail.
+  - Report validation performance alongside any test score.
+- Caveats: NLP-centred; equalizing trial counts is not automatically fair when search spaces differ (the authors say so); random search assumed for the estimator.
+
 ## Proposed additions (Phase 1, step 2)
-Merged from the five readers; duplicates of listed sources dropped (Platt = S06, Gelman & Loken = S13, Kapoor & Narayanan = S22). **None was read in full** — existence checked only, except where noted. Priority is the main session's suggestion for Phase 2.
+Merged from the five readers; duplicates of listed sources dropped (Platt = S06, Gelman & Loken = S13, Kapoor & Narayanan = S22). **None was read in full** — existence checked only, except where noted. Priority is the main session's suggestion for Phase 2. The four marked high were read afterwards (section E).
 
 | ID | Source | Why (one line) | Priority |
 |---|---|---|---|

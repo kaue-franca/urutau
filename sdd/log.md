@@ -22,3 +22,20 @@ Context: Phase 1 readers could not open several Appendix B URLs (TLS, 403, bot b
 Options: keep plan URLs only · replace them · keep both.
 Decision: `references/sources.md` lists the canonical DOI/URL and, where it failed, the open copy actually read.
 Consequences: (+) every claim is checkable by the owner; (−) some open copies are course pages that may disappear. Supersedes: —
+
+## DEC-005 · 2026-10-26 · by: agent (Claude Code) · Finish v0 without the Phase 2/5/6 checkpoints
+Context: owner asked to "finish a first v0, don't go beyond now" and to compile all references. Options: stop at each checkpoint · deliver v0 for one combined review. Decision: deliver Phases 2–6 as v0 for one review; no Phase 7 pilot; no new research beyond S35–S38. Results seen: n/a. Consequences: (+) usable v0 now; (−) owner validates rules, guide cards and structure afterwards (guide has a checkbox per card). Supersedes: —
+
+## DEC-006 · 2026-10-26 · by: agent (Claude Code) · Final v0 rules R1–R14 (changes from PLAN.md §3.2)
+Merged draft 1+9 (evidence) into R1 and 7+12 (report all + cemetery) into R7; added expected-before-actual (R3), mundane rivals (R4), holdout access log (R5), equal tuning budget (R6), too-good audit (R7), equivalence before "no effect" (R8), ablation (R11), "results seen" in DEC (R12); new R13 independent review. Reasons and sources: `references/sources.md` §2, `references/comparison.md` §4. Results seen: n/a.
+
+## DEC-007 · 2026-10-26 · by: agent (Claude Code) · Add mechanism M10 Independent scrutiny (S01, S03, S04, S17, S24) for R13.
+
+## DEC-008 · 2026-10-26 · by: agent (Claude Code) · Template changes
+Goal type adds "description" (S36); EXPL carries an expected result (S04); EXP card adds artifact rivals, search budget, already seen, reviewed by (S12, S16, S17, S38); DEC adds "results seen" (S16, S20); every entry has `by:` (S19); `[established]` = replicated and reviewed, not rerun (S24).
+
+## DEC-009 · 2026-10-26 · by: agent (Claude Code) · check.py also lints a project's sdd/ (`--project`): E2 pre-registration timing from git history, E3 tags, EXP fields (S29, S30, S33). Still three scripts.
+
+## DEC-010 · 2026-10-26 · by: agent (Claude Code) · Modules are referenced by absolute path in the project AGENTS.md (filled by new-project.sh), because the global file cannot know where the repo was cloned.
+
+## DEC-011 · 2026-10-26 · by: agent (Claude Code) · Add S35–S38 to the corpus; record S39–S49 as unread Phase 8 candidates.

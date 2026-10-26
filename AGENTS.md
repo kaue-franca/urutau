@@ -20,4 +20,5 @@ Purpose: build a personal, portable, science-grounded spec-driven development (S
 `global/` method · `modules/` domain checklists · `templates/` project files and filled examples · `references/` source analysis · `guide/` pt-BR guide · `scripts/` install, scaffold, checks · `sdd/` this repo's own records.
 
 ## Commands
-- Checks: `python3 scripts/check.py` (from Phase 5; not yet written).
+- Checks: `python3 scripts/check.py` and `python3 scripts/check.py --project .`
+- The method itself: `global/AGENTS.md` (installed globally by `scripts/install.sh`).
