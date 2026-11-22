@@ -6,12 +6,12 @@ Pace: step
 
 ## Commands
 - Setup: `uv sync`
-- Tests / lint: `uv run pytest -q` · `uv run ruff check .`
+- Code tests / lint: `uv run pytest -q` · `uv run ruff check .`
 - Reproduce every reported number: `<command>`
 
 ## Data
 - Raw: `<path>` (version: <hash or date>) — read-only
-- Holdout: `<path>` — sealed; every look is logged in `sdd/log.md`
+- Holdout: `<path>` — kept untouched for the final check; every look is logged in `sdd/log.md`
 
 ## Constraints
 - <non-obvious rule: privacy, cost of errors, definitions that must not change>

@@ -1,21 +1,18 @@
 # Knowledge — {{PROJECT}}
-<!-- What we know apart from what we assume (U1). Every Known line carries [checked: <commit | TEST-n | output>] or [source: <reference>]. Superseded lines are struck through, never deleted. -->
+<!-- What we know apart from what we assume (rule: Evidence). Every Known line carries [checked: <commit | Experiment n | Try n | output>] or [source: <reference>]. Superseded lines are struck through, never deleted. -->
 
 ## Known
-<!-- - <claim> [checked: TEST-001] — <date> -->
+<!-- - <claim> [checked: Experiment 1] — <date> -->
 
 ## Assumed
-<!-- - <assumption> — would be checked by: <test or observation> -->
-
-## Unexplained
-<!-- - <observation that does not fit> — seen in: <TRY-n | TEST-n> -->
+<!-- - <assumption> — would be checked by: <experiment or observation> -->
 
 ## Dead ends
-<!-- Refuted or abandoned ideas and tasks, and deleted code (U9). Revive if = the observation that would make it worth retrying. -->
-| What | Verdict | Why (1 line) | Evidence | Revive if |
+<!-- Refuted or abandoned ideas and tasks, and deleted code (rule: Report every run). -->
+| What | Verdict | Why (1 line) | Evidence | Worth retrying if |
 |---|---|---|---|---|
 
-## Map
-<!-- Why each non-code file or folder exists; code files carry their own `Why:` line (U6). Kept by urutau-audit. -->
+## Why each file exists
+<!-- Non-code files and folders; code files carry their own `Why:` line (rule: Everything has a why). -->
 | Path | Why it exists | Status: core · support · one-off · legacy · ? |
 |---|---|---|

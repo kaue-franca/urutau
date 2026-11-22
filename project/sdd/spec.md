@@ -1,5 +1,5 @@
 # Spec — {{PROJECT}}
-<!-- Read first in every session. Success criteria change only through a DEC in log.md that says whether results had been seen (U3). -->
+<!-- Read first in every session. Success criteria change only through a Decision in log.md that says whether results had been seen (rule: Fixed target). -->
 Question:
 Goal type: prediction | explanation | description | build
 Scope and non-goals:
@@ -7,12 +7,12 @@ Constraints:
 
 ## Success criteria
 <!-- Each names the result that would fail it: metric, threshold, data/split, baseline. -->
-- SC-01: <metric> <threshold> on <data/split> vs <baseline>; fails if <result>
+- Criterion 1: <metric> <threshold> on <data/split> vs <baseline>; fails if <result>
 
 ## Current task
-<!-- Exactly ONE detailed task (U5). Fill the card BEFORE starting. One step at a time: expected → do → evidence → tick → commit → report.
-     If the task tests an idea that will be relied on, also commit a TEST card in log.md before running it (U8). -->
-### T-01 <title> (→ SC-01) · branch: t-01-<slug>
+<!-- Exactly ONE detailed task (rule: One task, the owner's pace). Fill the card BEFORE starting. One step at a time: expected → do → evidence → tick → commit → report.
+     If the task checks an idea that will be relied on, also commit an Experiment card in log.md before running it (rule: Tries and experiments). -->
+### Task 1 <title> (serves Criterion 1) · branch: task-1-<slug>
 Why: <the need this task serves>
 Prediction: <observable result expected, written before any work>
 Check: <command or observation> — fails if <result>
@@ -24,10 +24,11 @@ Closing: <done | refuted | abandoned → Dead ends> · Learned: <what goes to kn
 
 ## Next tasks
 <!-- One generic line each; detail one only when it becomes the current task. Reorder or drop them as results come in. -->
-- T-02 <rough idea> (→ SC-nn)
+- Task 2 <rough idea> (serves Criterion n)
 
 ## Done
-<!-- - T-01 <title> — <one-line result> (<commit or log entry>) -->
+<!-- - Task 1 <title> — <one-line result> (<commit or log entry>) -->
 
 ## Open questions
+<!-- Questions for the owner, and observations nothing explains yet (seen in: <Try n | Experiment n>). -->
 -
