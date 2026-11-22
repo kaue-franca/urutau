@@ -9,3 +9,8 @@
 
 ## Anomalies
 <!-- - N-01 <observation that does not fit> — seen in: <EXPL/EXP-n> -->
+
+## Cemetery
+<!-- Refuted or abandoned ideas and tasks (R7). Revive-if = the observation that would make it worth retrying. -->
+| ID | Idea | Verdict | Why (1 line) | Evidence | Revive if |
+|---|---|---|---|---|---|

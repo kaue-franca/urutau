@@ -23,7 +23,7 @@ M10 is new relative to v0.2 (DEC-007).
 
 ## 2. Rules (final for v0)
 
-Order = priority (S33: early instructions are followed more). IDs are identical in `global/AGENTS.md` and `guide/index.html`.
+Order = priority (S33: early instructions are followed more). IDs are identical in `method/AGENTS.md` (`global/AGENTS.md` in v0) and `guide/index.html`.
 
 | ID | Rule (short) | Mechanisms | Sources | From v0.2 §3.2 |
 |---|---|---|---|---|
@@ -41,6 +41,21 @@ Order = priority (S33: early instructions are followed more). IDs are identical 
 | R12 | Change plans, criteria or decisions only by a DEC entry that says whether results were seen. | M8 | S02, S16, S19, S20 | 13 + timing |
 | R13 | Before a claim is marked established or acted on, have it reviewed by the owner or a fresh-context agent. | M10 | S01, S04, S17, S24 | new |
 | R14 | Ask the owner before scope changes or irreversible actions. | — | `owner-preference` | 14 |
+| R15 | Detail only the current task, as a small experiment (task card); later tasks one generic line; one step at a time, report, wait for the go. | M1 (prediction in the card) | `owner-preference` (DEC-012); prediction and refuted-if fields from S02, S04 | new in v0.1 |
+
+### Global layer (v0.1, DEC-012)
+`global/AGENTS.md` holds generic principles for every repository; each one is a domain-free reading of method rules. IDs `G1…` are distinct from `R1…`.
+
+| ID | Principle (short) | Method rules |
+|---|---|---|
+| G1 | Keep checked apart from assumed; say how you know. | R1 |
+| G2 | State the expected result before running; compare; audit surprising good results. | R3, R7 |
+| G3 | One task at a time: detail the current one, step by step, wait for the go. | R15 (`owner-preference`) |
+| G4 | Simplest adequate solution. | R11 |
+| G5 | Changes under version control; no manual data edits; record commands. | R9 |
+| G6 | Ask before scope changes and irreversible or outward-facing actions. | R14 (`owner-preference`) |
+
+Git workflow (task branches; merge/push only on request) and uv for Python are `owner-preference` working conventions, not rules (DEC-012).
 
 14 rules (budget 15). M9 shapes the files rather than adding a rule: budgets, ordering, modules on demand, `scripts/check.py`.
 
@@ -50,7 +65,8 @@ Order = priority (S33: early instructions are followed more). IDs are identical 
 |---|---|---|
 | Goal type: prediction · explanation · description · build | `spec.md` | S09, S36 (DEC-008) |
 | Acceptance criteria name the failing result | `spec.md` | S02, S06 |
-| Cemetery with revive-if | `status.md` | S06, S07, S25 |
+| Cemetery with revive-if | `knowledge.md` (was `status.md` in v0; DEC-012) | S06, S07, S25 |
+| Task card: goal, hypothesis + rival, prediction, acceptance test with failing result, steps with checks | `spec.md` | S02, S04, S06; one-at-a-time `owner-preference` (DEC-012) |
 | Evidence tags; `[established]` = replicated on independent data **and** reviewed, not merely rerun | `knowledge.md` | S11, S18, S24, S25 |
 | Assumptions and anomalies lists | `knowledge.md` | S02, S03, S04, S08 |
 | Dated, append-only, strikethrough corrections; `by:` attribution | `log.md` | S19 |
@@ -59,7 +75,7 @@ Order = priority (S33: early instructions are followed more). IDs are identical 
 | DEC entry: results seen yes/no | `log.md` | S16, S20 |
 | Project file without overviews; commands, data, constraints, modules | project `AGENTS.md` | S28, S31, S32 |
 | `CLAUDE.md` = `@AGENTS.md`, real file not symlink | project `CLAUDE.md` | S29 |
-| Global file self-contained (no imports) | `global/AGENTS.md` | S30 |
+| Global layer and pinned method self-contained (no imports) | `global/AGENTS.md`, `.urutau/AGENTS.md` | S30 |
 | Guidance as HTML comments | templates | S29 (stripped in Claude Code; Codex `UNVERIFIED`) |
 | Mechanical checks: budgets, tags, pre-registration timing | `scripts/check.py` | S29, S30, S33 (DEC-009) |
 

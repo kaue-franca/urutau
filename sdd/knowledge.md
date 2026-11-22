@@ -15,3 +15,8 @@ Tags: `[established]` · `[supported: EXP-n]` · `[literature: S-id]` · `[assum
 
 ## Anomalies
 - N-01 S31's own introduction reports a 7% developer-vs-generated gap that its results (+2.4% vs −2%) do not show; v0.2 quoted ~4% — seen in: Phase 1 (`references/comparison.md` §3)
+
+## Cemetery
+| ID | Idea | Verdict | Why (1 line) | Evidence | Revive if |
+|---|---|---|---|---|---|
+| v0 `status.md` | Separate status file in `sdd/` | superseded (owner preference) | owner wants exactly three files; current task moved to `spec.md`, cemetery here | DEC-012 | pilot E1 cold-start fails because the task card is hard to find in `spec.md` |

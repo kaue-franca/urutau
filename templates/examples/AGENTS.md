@@ -17,5 +17,7 @@ Purpose: predict 90-day churn for subscription accounts so the retention team ca
 - No personal data leaves `data/`; never print raw rows in logs.
 
 ## Method
-- Scientific SDD (urutau). Records live in `sdd/`; start every session with `sdd/status.md`.
-- Active modules: `/home/kaue/urutau/modules/ml.md`
+- Scientific SDD (urutau v0.1.0). Records live in `sdd/`; start every session with `sdd/spec.md` (current task first).
+- One task at a time, on its own branch; merge or push only when the owner asks.
+- The method, urutau applied to this project (pinned copy; read it first): @.urutau/AGENTS.md
+- Active modules: `.urutau/modules/ml.md`

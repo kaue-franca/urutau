@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """urutau checks.
 
-Without arguments, checks this repository: budgets (PLAN.md §4.1, §5), rule
-traceability in references/sources.md (S2) and guide coverage (S3).
-With --project PATH, lints a project's sdd/ folder: required files, status
-length, evidence tags on claims (E3), EXP card fields, and whether each EXP
-card was committed before its result (E2).
+Without arguments, checks this repository: budgets (PLAN.md §4.1, §5, as
+amended by DEC-012), rule traceability in references/sources.md (S2), skills,
+version, and guide coverage (S3).
+With --project PATH, lints a project: the method pin (.urutau/), sdd/ holding
+exactly spec.md, knowledge.md and log.md, one detailed current task (R15),
+evidence tags on claims (E3), EXP card fields, and whether each EXP card was
+committed before its result (E2).
 """
 import argparse
 import re
@@ -16,19 +18,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 LINE_BUDGETS = {
-    "global/AGENTS.md": 100,
+    "global/AGENTS.md": 40,
+    "method/AGENTS.md": 100,
     "modules/ml.md": 60,
     "modules/rl.md": 30,
     "templates/project/AGENTS.md": 30,
     "templates/project/CLAUDE.md": 1,
     "templates/project/sdd/spec.md": 40,
-    "templates/project/sdd/status.md": 40,
     "templates/project/sdd/knowledge.md": 30,
     "templates/project/sdd/log.md": 40,
 }
 MAX_RULES = 15
-MAX_STATUS_IN_USE = 60
+MAX_GLOBAL_RULES = 8
+SDD_FILES = ["spec.md", "knowledge.md", "log.md"]
 RULE_RE = re.compile(r"^- \*\*(R\d+) ", re.M)
+GLOBAL_RE = re.compile(r"^- \*\*(G\d+) ", re.M)
 TAG_RE = re.compile(
     r"\[(established|supported: (EXP|EXPL)-\d+(, (EXP|EXPL)-\d+)*|literature: [^\]]+|assumption|speculation)\]"
 )
@@ -82,11 +86,14 @@ def check_repo(r):
         r.check(claude.read_text().strip() == "@AGENTS.md", "templates/project/CLAUDE.md is exactly '@AGENTS.md'")
 
     print("Rules (S1)")
-    global_text = (ROOT / "global/AGENTS.md").read_text(encoding="utf-8")
-    ids = rule_ids(global_text)
-    r.check(0 < len(ids) <= MAX_RULES, f"global/AGENTS.md has {len(ids)} rules (≤ {MAX_RULES})")
+    method_text = (ROOT / "method/AGENTS.md").read_text(encoding="utf-8")
+    ids = rule_ids(method_text)
+    r.check(0 < len(ids) <= MAX_RULES, f"method/AGENTS.md has {len(ids)} rules (≤ {MAX_RULES})")
     expected = [f"R{i}" for i in range(1, len(ids) + 1)]
     r.check(ids == expected, f"rule IDs are R1…R{len(ids)} in order")
+    gids = GLOBAL_RE.findall((ROOT / "global/AGENTS.md").read_text(encoding="utf-8"))
+    r.check(0 < len(gids) <= MAX_GLOBAL_RULES, f"global/AGENTS.md has {len(gids)} principles (≤ {MAX_GLOBAL_RULES})")
+    r.check(gids == [f"G{i}" for i in range(1, len(gids) + 1)], f"global IDs are G1…G{len(gids)} in order")
 
     print("Traceability (S2)")
     sources = (ROOT / "references/sources.md").read_text(encoding="utf-8")
@@ -98,6 +105,23 @@ def check_repo(r):
             continue
         traced = (re.search(r"\bM\d+\b", row) and re.search(r"\bS\d\d\b", row)) or "owner-preference" in row
         r.check(bool(traced), f"{rid} maps to a mechanism and source, or is owner-preference")
+    grows = {m.group(1): m.group(0) for m in re.finditer(r"^\| (G\d+) \|.*$", sources, re.M)}
+    for gid in gids:
+        row = grows.get(gid, "")
+        r.check(bool(re.search(r"\bR\d+\b", row)) or "owner-preference" in row,
+                f"{gid} maps to method rules or is owner-preference")
+
+    print("Skills and version")
+    skills = sorted(d for d in (ROOT / "skills").iterdir() if d.is_dir()) if (ROOT / "skills").exists() else []
+    for d in skills:
+        sk = d / "SKILL.md"
+        head = sk.read_text(encoding="utf-8")[:600] if sk.exists() else ""
+        r.check(re.search(rf"^name: {re.escape(d.name)}$", head, re.M) is not None and "\ndescription:" in head,
+                f"skills/{d.name}/SKILL.md has name '{d.name}' and a description")
+    version = (ROOT / "VERSION").read_text().strip() if (ROOT / "VERSION").exists() else ""
+    r.check(bool(re.fullmatch(r"\d+\.\d+\.\d+", version)), f"VERSION is semver ({version or 'missing'})")
+    changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8") if (ROOT / "CHANGELOG.md").exists() else ""
+    r.check(f"## {version}" in changelog or f"## v{version}" in changelog, f"CHANGELOG.md has a section for {version}")
 
     print("Examples")
     for p in sorted((ROOT / "templates/project").rglob("*.md")):
@@ -114,12 +138,13 @@ def check_repo(r):
     wanted = set(ids)
     wanted |= {f"tpl:{p.relative_to(ROOT / 'templates/project')}" for p in (ROOT / "templates/project").rglob("*.md")}
     wanted |= {f"mod:{p.stem}" for p in (ROOT / "modules").glob("*.md")}
+    wanted |= set(gids) | {f"skill:{d.name}" for d in skills}
     missing = sorted(wanted - cards)
     covered = len(wanted) - len(missing)
-    r.check(not missing, f"guide covers {covered}/{len(wanted)} rules, templates and modules"
+    r.check(not missing, f"guide covers {covered}/{len(wanted)} rules, templates, modules and skills"
             + (f" — missing: {', '.join(missing)}" if missing else ""))
-    extra = sorted(c for c in cards if re.fullmatch(r"R\d+", c) and c not in ids)
-    r.check(not extra, "guide has no rule IDs absent from global/AGENTS.md"
+    extra = sorted(c for c in cards if re.fullmatch(r"[RG]\d+", c) and c not in ids and c not in gids)
+    r.check(not extra, "guide has no rule IDs absent from method/ or global/"
             + (f" — extra: {', '.join(extra)}" if extra else ""))
 
 
@@ -168,15 +193,33 @@ def prereg_timing(project, log_rel):
 def check_project(r, project):
     sdd = project / "sdd"
     print(f"Project {project}")
-    for name in ["spec.md", "status.md", "knowledge.md", "log.md"]:
+    pin = project / ".urutau"
+    agents = project / "AGENTS.md"
+    agents_text = agents.read_text(encoding="utf-8") if agents.exists() else ""
+    if (project / "method/AGENTS.md").exists() and (project / "global/AGENTS.md").exists():
+        r.check("@method/AGENTS.md" in agents_text, "urutau itself: AGENTS.md loads the working copy (@method/AGENTS.md)")
+    else:
+        if (pin / "VERSION").exists():
+            r.ok(f"method pinned: {(pin / 'VERSION').read_text().strip()}")
+        else:
+            r.fail(".urutau/ pin missing (run urutau's scripts/install.sh --project)")
+        r.check("@.urutau/AGENTS.md" in agents_text, "AGENTS.md loads the pin (@.urutau/AGENTS.md)")
+    for name in SDD_FILES:
         r.check((sdd / name).exists(), f"sdd/{name} exists")
     if not sdd.exists():
         return
+    extra = sorted(p.name for p in sdd.iterdir() if p.name not in SDD_FILES)
+    r.check(not extra, "sdd/ holds only spec.md, knowledge.md, log.md"
+            + (f" — extra: {', '.join(extra)} (status.md: move its task to spec.md, cemetery to knowledge.md)" if extra else ""))
 
-    status = sdd / "status.md"
-    if status.exists():
-        n = len(lines(status))
-        r.check(n <= MAX_STATUS_IN_USE, f"sdd/status.md: {n} lines (≤ {MAX_STATUS_IN_USE})")
+    spec = sdd / "spec.md"
+    if spec.exists():
+        text = strip_comments(spec.read_text(encoding="utf-8"))
+        cur = re.search(r"^## Current task[ \t]*$(.*?)(?=^## |\Z)", text, re.M | re.S)
+        n = len(re.findall(r"^### T-\d+", cur.group(1), re.M)) if cur else 0
+        r.check(n == 1, f"R15: spec.md has exactly one detailed current task (found {n})")
+        nxt = re.search(r"^## Next tasks[ \t]*$(.*?)(?=^## |\Z)", text, re.M | re.S)
+        r.check(nxt is None or "###" not in nxt.group(1), "R15: next tasks stay one-liners (no ### cards)")
 
     knowledge = sdd / "knowledge.md"
     if knowledge.exists():
