@@ -57,7 +57,7 @@ svg #arrow path { fill: var(--muted); }
 <body>
 <main>
 <h1>Guia urutau — Scientific SDD (v0)</h1>
-<p class="sub">Desenvolvimento orientado a especificação com o método científico, para trabalho de ciência de dados com agentes (Claude Code, Codex). Leitura de ~15 min. Os IDs das regras (R1–R14) são os mesmos de <code>global/AGENTS.md</code>; as fontes (S01–S38) estão em <a href="../references/sources.md">references/sources.md</a>.</p>
+<p class="sub">Desenvolvimento orientado a especificação com o método científico, para trabalho de ciência de dados com agentes (Claude Code, Codex). Leitura de ~15 min. Duas camadas: a <b>global</b> (princípios G1–G6 em <code>global/AGENTS.md</code>, genéricos, valem em qualquer repositório) e a <b>do projeto</b> (o método completo, regras R1–R15 em <code>method/AGENTS.md</code>, fixado em <code>.urutau/</code> de cada projeto). Os IDs são os mesmos aqui; as fontes (S01–S38) estão em <a href="../references/sources.md">references/sources.md</a>.</p>
 
 <div class="progress" aria-live="polite">
   <span id="progress-text">Validados: 0 de 0</span>
@@ -65,9 +65,41 @@ svg #arrow path { fill: var(--muted); }
 </div>
 
 <nav class="toc">
-  <a href="#ciclo">Ciclo</a><a href="#modos">Modos</a><a href="#arquivos">Arquivos</a><a href="#regras">Regras</a>
-  <a href="#templates">Templates</a><a href="#modulos">Módulos</a><a href="#instalar">Instalar</a><a href="#mudou">O que mudou</a><a href="#limites">Limites</a>
+  <a href="#camadas">Camadas</a><a href="#ciclo">Ciclo</a><a href="#modos">Modos</a><a href="#arquivos">Arquivos</a><a href="#regras">Regras</a>
+  <a href="#tarefas">Tarefas e branches</a><a href="#templates">Templates</a><a href="#modulos">Módulos</a><a href="#instalar">Instalar</a><a href="#skills">Skills</a><a href="#mudou">O que mudou</a><a href="#limites">Limites</a>
 </nav>
+
+<section id="camadas">
+<h2>Duas camadas: global e projeto</h2>
+<p>O repositório urutau é a fonte única das duas camadas e de suas versões (<code>VERSION</code>, <code>CHANGELOG.md</code>). A camada global é instalada uma vez por máquina e aponta para o clone (um <code>git pull</code> atualiza). A camada do projeto é uma cópia fixada com versão em <code>&lt;projeto&gt;/.urutau/</code>, carregada pelo <code>AGENTS.md</code> do projeto; atualiza-se rodando de novo <code>install.sh --project</code>. Num projeto com urutau as duas valem juntas; onde diferirem, vale a do projeto.</p>
+<div class="grid">
+<article class="card" data-id="G1"><header><h3>G1 Evidência</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Separar o que foi checado do que é suposto; dizer como se sabe (comando, saída, arquivo, commit) ou marcar como suposição.</dd>
+<dt>Por quê</dt><dd>Versão genérica de R1.</dd>
+<dt>Como verificar</dt><dd>Respostas citam a origem ou dizem &quot;suposição&quot;.</dd></dl></article>
+<article class="card" data-id="G2"><header><h3>G2 Prever, depois checar</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Antes de rodar algo não trivial, dizer o que se espera; depois comparar e relatar diferenças, falhas e surpresas. Resultado bom demais é checado antes de ser relatado.</dd>
+<dt>Por quê</dt><dd>Versão genérica de R3 e R7.</dd>
+<dt>Como verificar</dt><dd>O agente escreve o esperado antes do comando e compara depois.</dd></dl></article>
+<article class="card" data-id="G3"><header><h3>G3 Uma tarefa por vez <span class="tag">preferência do dono</span></h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Detalhar só a tarefa atual (objetivo, resultado esperado, checagem de aceite, passos pequenos); o resto fica como itens genéricos. Um passo por vez: fazer, verificar, relatar e esperar o ok, salvo se o dono disser para seguir.</dd>
+<dt>Por quê</dt><dd>Preferência do dono; versão genérica de R15.</dd>
+<dt>Como verificar</dt><dd>Não aparece plano detalhado de várias tarefas; cada passo vem com sua checagem.</dd></dl></article>
+<article class="card" data-id="G4"><header><h3>G4 Simples primeiro</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>A solução mais simples que resolve; complexidade só para um problema nomeado.</dd>
+<dt>Por quê</dt><dd>Versão genérica de R11.</dd>
+<dt>Como verificar</dt><dd>Toda complexidade adicionada aponta o problema que resolve.</dd></dl></article>
+<article class="card" data-id="G5"><header><h3>G5 Rastreável</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Toda mudança é código ou texto versionado; nada de editar dados à mão; registrar o comando que gerou cada resultado.</dd>
+<dt>Por quê</dt><dd>Versão genérica de R9.</dd>
+<dt>Como verificar</dt><dd><code>git log</code> explica cada resultado.</dd></dl></article>
+<article class="card" data-id="G6"><header><h3>G6 Perguntar <span class="tag">preferência do dono</span></h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Perguntar antes de mudar escopo e de ações irreversíveis ou externas.</dd>
+<dt>Por quê</dt><dd>Versão genérica de R14.</dd>
+<dt>Como verificar</dt><dd>Merge, push e exclusões só depois de pedido explícito.</dd></dl></article>
+</div>
+<p>A camada global também fixa duas convenções: <b>branches</b> (ver <a href="#tarefas">Tarefas e branches</a>) e <b>uv</b> para Python (<code>uv sync</code>, <code>uv add</code>, <code>uv run</code>; nunca <code>pip install</code> fora do <code>.venv</code> do projeto).</p>
+</section>
 
 <section id="ciclo">
 <h2>O ciclo</h2>
@@ -95,7 +127,7 @@ svg #arrow path { fill: var(--muted); }
 <h2>Modos</h2>
 <div class="tablewrap"><table>
 <tr><th>Modo</th><th>Quando</th><th>Registro</th></tr>
-<tr><td><b>light</b></td><td>Trabalho determinístico sem incerteza real (refatorar, conectar peças, correção conhecida)</td><td>tarefa → teste de aceitação → <code>status.md</code></td></tr>
+<tr><td><b>light</b></td><td>Trabalho determinístico sem incerteza real (refatorar, conectar peças, correção conhecida)</td><td>cartão da tarefa em <code>spec.md</code> → teste de aceitação</td></tr>
 <tr><td><b>explore</b></td><td>Tentativas baratas para gerar ideias</td><td>uma linha <code>EXPL</code> em <code>log.md</code>: tentou → esperado → obtido → próximo</td></tr>
 <tr><td><b>confirm</b></td><td>Qualquer afirmação em que alguém vai se apoiar</td><td>cartão <code>EXP</code> commitado antes do teste; dados novos; veredito</td></tr>
 </table></div>
@@ -106,17 +138,19 @@ svg #arrow path { fill: var(--muted); }
 <h2>Mapa de arquivos</h2>
 <div class="tablewrap"><table>
 <tr><th>Onde</th><th>Arquivo</th><th>Para quê</th></tr>
-<tr><td>global (todas as máquinas)</td><td><code>global/AGENTS.md</code></td><td>O método: 14 regras, modos, protocolo de sessão, formato dos arquivos. ≤ 100 linhas.</td></tr>
+<tr><td>global (a máquina)</td><td><code>global/AGENTS.md</code></td><td>Princípios genéricos G1–G6, branches, uv. ≤ 40 linhas.</td></tr>
+<tr><td>projeto / <code>.urutau/</code></td><td><code>AGENTS.md</code> + <code>modules/</code> (cópia de <code>method/</code>)</td><td>O método completo: 15 regras, modos, protocolo de sessão, cartões. ≤ 100 linhas. Versão em <code>.urutau/VERSION</code>.</td></tr>
 <tr><td>sob demanda</td><td><code>modules/ml.md</code>, <code>modules/rl.md</code></td><td>Checklists de domínio, lidos só quando a tarefa toca o domínio.</td></tr>
 <tr><td>projeto</td><td><code>AGENTS.md</code> + <code>CLAUDE.md</code></td><td>Comandos, dados, restrições, módulos ativos. <code>CLAUDE.md</code> só importa <code>@AGENTS.md</code>.</td></tr>
-<tr><td>projeto / <code>sdd/</code></td><td><code>spec.md</code> · <code>status.md</code> · <code>knowledge.md</code> · <code>log.md</code></td><td>Pergunta e critérios · onde estamos · o que sabemos · o que fizemos.</td></tr>
+<tr><td>projeto / <code>sdd/</code> (só estes três)</td><td><code>spec.md</code> · <code>knowledge.md</code> · <code>log.md</code></td><td>Pergunta, critérios e tarefas (onde estamos) · o que sabemos e o cemitério · o que fizemos.</td></tr>
+<tr><td>projeto</td><td><code>pyproject.toml</code>, <code>uv.lock</code>, <code>.python-version</code>, <code>.venv/</code></td><td>Ambiente Python criado pelo uv no setup.</td></tr>
 <tr><td>este repositório</td><td><code>scripts/</code></td><td><code>install.sh</code>, <code>new-project.sh</code>, <code>check.py</code>.</td></tr>
 </table></div>
-<p>Protocolo de sessão: no início, ler <code>status.md</code> → <code>spec.md</code> → últimas entradas do <code>log.md</code> e repetir em uma linha a tarefa e o modo; no fim, atualizar status, log e knowledge e fazer commit.</p>
+<p>Protocolo de sessão: no início, ler <code>spec.md</code> (tarefa atual primeiro) → últimas entradas do <code>log.md</code> → <code>knowledge.md</code> se preciso, conferir a branch e repetir em uma linha a tarefa, o modo e o próximo passo; no fim, atualizar o cartão da tarefa, o log e o knowledge e fazer commit na branch da tarefa.</p>
 </section>
 
 <section id="regras">
-<h2>Regras (R1–R14)</h2>
+<h2>Regras do projeto (R1–R15)</h2>
 <p>Ordenadas por importância: modelos seguem melhor as instruções que vêm primeiro (S33). Cada cartão: o que diz · por quê (com fonte) · como verificar.</p>
 <div class="grid">
 
@@ -128,7 +162,7 @@ svg #arrow path { fill: var(--muted); }
 <article class="card" data-id="R2"><header><h3>R2 Modos</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
 <dt>O que diz</dt><dd>Todo trabalho é rotulado light, explore ou confirm. Só um teste confirm vira afirmação. Na dúvida, perguntar.</dd>
 <dt>Por quê</dt><dd>Escolhas que dependem dos dados criam falsos positivos mesmo sem má-fé; separar exploração de confirmação torna isso visível (Gelman &amp; Loken S13, Nosek S16). Um único ritual para tudo é pesado demais (SEP S01, Böckeler S34).</dd>
-<dt>Como verificar</dt><dd><code>status.md</code> mostra o modo da tarefa atual; entradas do log são EXPL ou EXP.</dd></dl></article>
+<dt>Como verificar</dt><dd>O cartão da tarefa atual em <code>spec.md</code> mostra o modo; entradas do log são EXPL ou EXP.</dd></dl></article>
 
 <article class="card" data-id="R3"><header><h3>R3 Prever antes</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
 <dt>O que diz</dt><dd>Antes de qualquer execução, escrever o resultado esperado. Antes de um teste confirm, commitar o cartão EXP: hipóteses rivais, o resultado que refuta cada uma, menor efeito relevante, regra de decisão, plano de análise, orçamento de execuções/busca e o que já foi visto dos dados.</dd>
@@ -153,7 +187,7 @@ svg #arrow path { fill: var(--muted); }
 <article class="card" data-id="R7"><header><h3>R7 Reportar tudo</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
 <dt>O que diz</dt><dd>Registrar toda execução, desvio e beco sem saída. Examinar resultados bons com o mesmo rigor que os ruins: um resultado bom demais dispara auditoria de bug e vazamento antes de ser reportado. Ideias refutadas ou abandonadas vão para o cemitério com evidência e condição de revivência.</dd>
 <dt>Por quê</dt><dd>Reportar o que pode invalidar o resultado e escrutínio simétrico (Feynman S07); flexibilidade não declarada (Simmons S12); relato completo (ASA S14); efeitos grandes demais são suspeitos (Ioannidis S11); resultados negativos (S25).</dd>
-<dt>Como verificar</dt><dd>Cemitério em <code>status.md</code> com coluna "Revive if"; EXPL com resultado surpreendente seguido de auditoria.</dd></dl></article>
+<dt>Como verificar</dt><dd>Cemitério em <code>knowledge.md</code> com coluna "Revive if"; EXPL com resultado surpreendente seguido de auditoria.</dd></dl></article>
 
 <article class="card" data-id="R8"><header><h3>R8 Estimar</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
 <dt>O que diz</dt><dd>Reportar efeito ± incerteza contra o baseline em execuções ou reamostragens repetidas; nunca um único score ou um p-valor sozinho. Dizer "sem efeito" só se um teste de equivalência contra o menor efeito relevante passar; senão, "inconclusivo".</dd>
@@ -188,13 +222,23 @@ svg #arrow path { fill: var(--muted); }
 <article class="card" data-id="R14"><header><h3>R14 Perguntar <span class="tag">preferência do dono</span></h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
 <dt>O que diz</dt><dd>Perguntar ao dono antes de mudar o escopo ou de ações irreversíveis.</dd>
 <dt>Por quê</dt><dd>Preferência pessoal do dono (<code>owner-preference</code>), não derivada de fonte.</dd>
-<dt>Como verificar</dt><dd>Pedidos aparecem em "Blockers / questions for the owner" no <code>status.md</code>.</dd></dl></article>
+<dt>Como verificar</dt><dd>Pedidos aparecem em "Open questions and blockers" no <code>spec.md</code>.</dd></dl></article>
+<article class="card" data-id="R15"><header><h3>R15 Uma tarefa <span class="tag">preferência do dono</span></h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Detalhar só a tarefa atual, como um pequeno experimento (cartão da tarefa); as seguintes ficam com uma linha genérica cada. Executar um passo por vez: fazer, comparar com a previsão, registrar, relatar e esperar o ok do dono, salvo se ele disser para seguir. A próxima tarefa só é detalhada quando a atual fecha, usando o que ela ensinou.</dd>
+<dt>Por quê</dt><dd>Preferência do dono (<code>owner-preference</code>, DEC-012). Os campos previsão e &quot;falha se&quot; do cartão vêm de Popper (S02) e do registro do esperado antes do resultado (S04).</dd>
+<dt>Como verificar</dt><dd><code>check.py --project</code> exige exatamente uma tarefa detalhada em &quot;Current task&quot; e só linhas em &quot;Next tasks&quot;.</dd></dl></article>
 </div>
+</section>
+
+<section id="tarefas">
+<h2>Tarefas e branches</h2>
+<p><b>Cartão da tarefa</b> (só a tarefa atual, em <code>spec.md</code>): objetivo · hipótese e rival · previsão escrita antes · teste de aceitação com o resultado que reprova · modo · branch · passos numerados, cada um com sua checagem · resultado (observado × previsto) · fechamento (feita · refutada · abandonada → cemitério) · aprendizado (K/A/N e o que muda nas próximas). Tarefa em modo confirm também aponta para o cartão EXP.</p>
+<p><b>Branches</b>: nunca commitar na branch padrão. Ao começar uma tarefa, o agente cria <code>t-nn-&lt;slug&gt;</code> sem perguntar, a partir da padrão ou da branch atual se ela ainda não foi mergeada (o trabalho pendente vem junto). Um commit por passo (<code>T-nn sK: …</code>). Merge na padrão, push ou PR só quando o dono pedir ("sobe pra prod"); aí as branches pendentes entram em ordem, sobe o push e as branches mergeadas são apagadas.</p>
 </section>
 
 <section id="templates">
 <h2>Templates do projeto</h2>
-<p>Copiados por <code>scripts/new-project.sh</code> sem sobrescrever nada. Cada um tem orientação curta em comentários HTML (o Claude Code remove comentários em bloco do arquivo de memória, então eles não gastam contexto ali; no Codex isso não está documentado). Exemplos preenchidos em <code>templates/examples/</code>.</p>
+<p>Copiados por <code>scripts/new-project.sh</code> sem sobrescrever nada. Cada um tem orientação curta em comentários HTML (o Claude Code remove comentários em bloco do arquivo de memória, então eles não gastam contexto ali; no Codex isso não está documentado). Exemplos preenchidos em <code>templates/examples/</code>. O <code>sdd/</code> tem só <code>spec.md</code>, <code>knowledge.md</code> e <code>log.md</code>.</p>
 <div class="grid">
 <article class="card" data-id="tpl:AGENTS.md"><header><h3>AGENTS.md (projeto)</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
 <dt>O que diz</dt><dd>Propósito em 1 linha, comandos copiáveis, dados (local, versão, holdout selado), restrições do domínio, módulos ativos. ≤ 30 linhas.</dd>
@@ -205,16 +249,12 @@ svg #arrow path { fill: var(--muted); }
 <dt>Por quê</dt><dd>O Claude Code importa o <code>AGENTS.md</code> por essa linha; o fallback automático para AGENTS.md desliga se existir qualquer CLAUDE.md, e um CLAUDE.md simbólico não pode ser editado pelo agente (docs e issue em S29).</dd>
 <dt>Como verificar</dt><dd><code>check.py</code> exige exatamente <code>@AGENTS.md</code>; no projeto, <code>/memory</code> lista o AGENTS.md.</dd></dl></article>
 <article class="card" data-id="tpl:sdd/spec.md"><header><h3>sdd/spec.md</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
-<dt>O que diz</dt><dd>Pergunta; tipo de objetivo (predição · explicação · descrição · construção); escopo e não-objetivos; restrições; critérios <code>AC-nn</code> que nomeiam o resultado que os reprova; tarefas <code>T-nn → AC-nn</code>.</dd>
+<dt>O que diz</dt><dd>Pergunta; tipo de objetivo (predição · explicação · descrição · construção); escopo e não-objetivos; restrições; critérios <code>AC-nn</code> que nomeiam o resultado que os reprova; a tarefa atual (um cartão detalhado, R15); próximas tarefas em uma linha genérica cada; tarefas feitas; dúvidas e bloqueios. É o ponto de partida de cada sessão.</dd>
 <dt>Por quê</dt><dd>O tipo de objetivo muda o que conta como evidência válida (Breiman S09, Shmueli S36); critérios refutáveis (Popper S02).</dd>
-<dt>Como verificar</dt><dd>Cada AC tem "fails if"; mudanças em AC só por DEC (R12).</dd></dl></article>
-<article class="card" data-id="tpl:sdd/status.md"><header><h3>sdd/status.md</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
-<dt>O que diz</dt><dd>Tarefa atual e modo, último resultado, próximo passo, hipóteses ativas, bloqueios e o cemitério. ≤ 60 linhas em uso.</dd>
-<dt>Por quê</dt><dd>É o ponto de partida de cada sessão (critério E1 do piloto); o cemitério evita repetir ideias mortas (Platt S06, Feynman S07).</dd>
-<dt>Como verificar</dt><dd>Numa sessão nova, o agente responde só pelos arquivos: tarefa atual, último resultado, hipóteses ativas, última ideia abandonada e por quê.</dd></dl></article>
+<dt>Como verificar</dt><dd>Cada AC tem "fails if"; mudanças em AC só por DEC (R12); <code>check.py --project</code> exige uma só tarefa detalhada. Numa sessão nova, o agente responde só pelos arquivos: tarefa atual, último resultado, hipóteses ativas, última ideia abandonada e por quê (E1).</dd></dl></article>
 <article class="card" data-id="tpl:sdd/knowledge.md"><header><h3>sdd/knowledge.md</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
-<dt>O que diz</dt><dd>Afirmações <code>K-nn</code> com tag de evidência; suposições <code>A-nn</code> com o que as checou; anomalias <code>N-nn</code> com onde apareceram; afirmações superadas tachadas.</dd>
-<dt>Por quê</dt><dd>Separar o que se sabe do que se supõe (S18, S25); listas explícitas de suposições e anomalias (Popper S02, Kuhn S03, Box S08). <code>[established]</code> exige replicação, não só reexecução (Pineau S24).</dd>
+<dt>O que diz</dt><dd>Afirmações <code>K-nn</code> com tag de evidência; suposições <code>A-nn</code> com o que as checou; anomalias <code>N-nn</code> com onde apareceram; afirmações superadas tachadas; o cemitério de ideias refutadas ou abandonadas, com "revive if".</dd>
+<dt>Por quê</dt><dd>Separar o que se sabe do que se supõe (S18, S25); listas explícitas de suposições e anomalias (Popper S02, Kuhn S03, Box S08). <code>[established]</code> exige replicação, não só reexecução (Pineau S24). O cemitério evita repetir ideias mortas (Platt S06, Feynman S07).</dd>
 <dt>Como verificar</dt><dd><code>check.py --project</code> mede a fração de afirmações com tag (E3 = 100%).</dd></dl></article>
 <article class="card" data-id="tpl:sdd/log.md"><header><h3>sdd/log.md</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
 <dt>O que diz</dt><dd>Entradas datadas, só acrescentadas: <code>EXPL</code> (uma linha com esperado), <code>EXP</code> (cartão de pré-registro), <code>DEC</code> (decisão com "results seen"), todas com <code>by:</code>.</dd>
@@ -240,16 +280,37 @@ svg #arrow path { fill: var(--muted); }
 <section id="instalar">
 <h2>Instalar</h2>
 <ol>
-<li><code>git clone</code> este repositório e rode <code>scripts/install.sh</code>. Ele adiciona <code>@&lt;caminho&gt;/global/AGENTS.md</code> entre marcadores em <code>~/.claude/CLAUDE.md</code> (sem apagar nada) e cria o link <code>~/.codex/AGENTS.md</code> se não existir. <code>--uninstall</code> desfaz.</li>
-<li>Novo projeto: <code>scripts/new-project.sh &lt;pasta&gt; [--ml] [--rl]</code>.</li>
-<li>Verificar: no Claude Code, <code>/memory</code> ou <code>/context</code> lista o arquivo global; no Codex, peça para citar a regra R1.</li>
+<li><b>Global (uma vez por máquina)</b>: <code>git clone</code> este repositório e rode <code>scripts/install.sh</code>. Ele adiciona <code>@&lt;caminho&gt;/global/AGENTS.md</code> entre marcadores em <code>~/.claude/CLAUDE.md</code> (sem apagar nada), liga cada skill de <code>skills/</code> em <code>~/.claude/skills/</code> e cria o link <code>~/.codex/AGENTS.md</code> se não existir. <code>--uninstall</code> desfaz. Para atualizar: <code>git pull</code> no clone.</li>
+<li><b>Projeto</b>: skill <code>urutau-setup</code> no Claude Code, ou <code>scripts/new-project.sh &lt;pasta&gt; [--ml] [--rl] [--python 3.12] [--with pacote]</code>. Cria os arquivos, fixa o método em <code>.urutau/</code> e monta o ambiente com uv (<code>pyproject.toml</code>, <code>.venv</code>, numpy, pandas, matplotlib, scipy + pytest, ruff, ipykernel; <code>--ml</code> soma scikit-learn, <code>--rl</code> soma gymnasium).</li>
+<li><b>Atualizar o método de um projeto</b>: <code>scripts/install.sh --project &lt;pasta&gt;</code> (mostra a versão antiga e a nova); commitar numa branch.</li>
+<li>Ver o que está instalado: <code>scripts/install.sh --status [&lt;pasta&gt;]</code>.</li>
+<li>Verificar: no Claude Code, <code>/memory</code> ou <code>/context</code> lista o arquivo global; no Codex, peça para citar o princípio G1.</li>
 <li>Checagens: <code>python3 scripts/check.py</code> (este repositório) e <code>python3 scripts/check.py --project &lt;pasta&gt;</code> (um projeto).</li>
 </ol>
-<p class="note">Testado em 2026-10-26 com Claude Code 2.1.310 e um <code>HOME</code> temporário: o agente citou R1 corretamente e carregou o <code>AGENTS.md</code> do projeto via <code>CLAUDE.md</code>. Codex não foi testado (não instalado no ambiente) — <code>UNVERIFIED</code>.</p>
+<p class="note">v0: testado em 2026-10-26 com Claude Code 2.1.310 e um <code>HOME</code> temporário (citou R1; carregou o <code>AGENTS.md</code> do projeto via <code>CLAUDE.md</code>). v0.1: <code>new-project.sh</code> testado em repositório temporário com uv 0.11.30; numa sessão <code>claude -p</code> (2026-11-22), o agente citou R15 vindo de <code>.urutau/AGENTS.md</code> pela cadeia <code>CLAUDE.md</code> → <code>@AGENTS.md</code> → <code>@.urutau/AGENTS.md</code>. Codex não testado — <code>UNVERIFIED</code>.</p>
+</section>
+
+<section id="skills">
+<h2>Skills</h2>
+<div class="grid">
+<article class="card" data-id="skill:urutau-setup"><header><h3>urutau-setup — setup de projeto</h3><label class="ok"><input type="checkbox"> validado</label></header><dl>
+<dt>O que diz</dt><dd>Inspeciona o repositório, faz uma rodada de perguntas (módulos, bibliotecas extras, versão do Python), cria a branch <code>t-00-setup</code>, roda <code>new-project.sh</code> (arquivos, método fixado, ambiente uv), verifica, preenche com o dono o <code>AGENTS.md</code> e o <code>spec.md</code> com <b>um</b> cartão de tarefa detalhado (T-01) e as demais genéricas, registra DEC-001 e commita. Não faz merge, não faz push, não começa a T-01.</dd>
+<dt>Por quê</dt><dd>Consolida o setup que se repete em todo projeto (preferência do dono, DEC-012); o trabalho determinístico fica no script, a conversa fica na skill.</dd>
+<dt>Como verificar</dt><dd>Rodar num repositório de teste e depois <code>check.py --project</code>; a branch <code>t-00-setup</code> tem um commit e a padrão continua intacta.</dd></dl></article>
+</div>
 </section>
 
 <section id="mudou">
-<h2>O que mudou (v0.2 → v0)</h2>
+<h2>O que mudou</h2>
+<h3>v0 → v0.1 (DEC-012)</h3>
+<ul>
+<li>Duas camadas: <code>global/AGENTS.md</code> virou princípios genéricos (G1–G6, branches, uv); o método completo foi para <code>method/AGENTS.md</code> e é fixado por projeto em <code>.urutau/</code> com versão.</li>
+<li><code>sdd/</code> com só três arquivos: o <code>status.md</code> saiu — a tarefa atual vai para o <code>spec.md</code> e o cemitério para o <code>knowledge.md</code>.</li>
+<li>R15 e o cartão da tarefa: uma tarefa detalhada por vez, como experimento, executada passo a passo.</li>
+<li>Fluxo de branches por tarefa; merge e push só quando o dono pede.</li>
+<li><code>new-project.sh</code> monta o ambiente com uv; skill <code>urutau-setup</code>; <code>install.sh --project</code> e <code>--status</code>.</li>
+</ul>
+<h3>v0.2 → v0</h3>
 <ul>
 <li>Leitura cega das 34 fontes por agentes novos; 31 lidas na íntegra (antes, 21 só pelo resumo). Quatro fontes novas: Kerr (S35), Shmueli (S36), Cawley &amp; Talbot (S37), Dodge (S38).</li>
 <li>Correções ao v0.2: o efeito dos arquivos de contexto escritos à mão é +2,4% e não significativo (S31); Pineau (S24) não prova que checklists melhoram a qualidade; o link do ASA (S14) era o comunicado de imprensa.</li>
@@ -272,7 +333,7 @@ svg #arrow path { fill: var(--muted); }
 </main>
 <script>
 (function () {
-  var KEY = "urutau-guide-v0-validated";
+  var KEY = "urutau-guide-v0.1-validated";
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { state = {}; }
   var cards = Array.prototype.slice.call(document.querySelectorAll(".card[data-id]"));
