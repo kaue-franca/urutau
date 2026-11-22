@@ -27,8 +27,8 @@
 | v0.1 `.urutau/` copy loaded by `@.urutau/AGENTS.md` | superseded | Devin and Codex do not follow `@` imports | DEC-013 | every tool the owner uses supports imports |
 | v0.1 split rules G1–G6 / R1–R15 | superseded | the two lists restated each other (~80 lines of overlap) | DEC-013 | — |
 | Rule numbers U1–U9 and coined codes (SC, TEST, TRY, H0/H1, M, L, E) | replaced by names | the owner could not follow replies full of codes | Decision 16 | — |
-| `project/modules/ml.md`, `rl.md` | removed | the method must work for any project; domain checklists become the owner's own skills | Decision 17 | a domain recurs across projects: `git show v0.1.0:modules/ml.md` for the v0.1 text; the v0.2 text is in commit 3afaa0a |
-| `scripts/` (install, setup, check), `skills/urutau-setup/`, `project/CLAUDE.md` | removed | tied to specific tools and out of date; an agent follows `INSTALL.md` instead | Decision 18 | `git show 1209705:<path>` |
+| `project/modules/ml.md`, `rl.md` | removed | the method must work for any project; domain checklists become the owner's own skills | Decision 17 | a domain recurs across projects: `git show v0.1.0:modules/ml.md` for the v0.1 text; the v0.2 text is in commit f5c1624 |
+| `scripts/` (install, setup, check), `skills/urutau-setup/`, `project/CLAUDE.md` | removed | tied to specific tools and out of date; an agent follows `INSTALL.md` instead | Decision 18 | `git show 8f64f1d:<path>` |
 | `PLAN.md`, `REFERENCES.md`, `references/`, `guide/index.html`, `CHANGELOG.md` | removed | v0 build history; `SCIENCE.md`, `sdd/log.md` and git tags hold what is still needed | Decision 17 | `git show v0.1.0:<path>` |
 
 ## Why each file exists

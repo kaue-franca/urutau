@@ -93,3 +93,10 @@ Decision: the rules speak of the goal, the success measure, the cases a check ru
 Results seen: n/a.
 Consequences: (+) the same text fits software, writing or research projects; (−) the only example is still a data project (Task 17).
 Supersedes: the data-specific wording of Decisions 13 and 16.
+
+## Decision 20 · 2026-11-22 · by: owner · Remove the AI co-author line from the whole history
+Context: 11 commits carried a `Co-Authored-By` line naming an AI; the owner wants no AI attribution anywhere (Decision 16).
+Decision: rewrite every commit message on all branches and the tag `v0.1.0` without that line (`git filter-branch --msg-filter`); file contents unchanged (same tree before and after); force-push `master`. Commit IDs therefore changed. Entries above keep the old IDs; read them through this table — 842bac1 → eb4a983 (v0.1.0) · 3ad83b6 → 304055c · 3afaa0a → f5c1624 · 1209705 → 8f64f1d. `spec.md` and `knowledge.md` use the new IDs.
+Results seen: n/a.
+Consequences: (+) no AI attribution in the repo's history; (−) old IDs in this log need the table; GitHub keeps the old commits of pull requests #1 and #2 on their pages.
+Supersedes: —

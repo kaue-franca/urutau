@@ -27,7 +27,7 @@ Constraints: everything in files in English, replies in the owner's language; so
 - Task 16 Domain-neutral wording: rules and skeletons speak of cases, measures, inputs and effort instead of data splits, seeds, metrics and the holdout; the project section's commands and inputs are placeholders, not Python tools — Decision 19
 - Task 15 Clear communication and fewer codes, independent of the agent tool — commits on branch task-15-clear-communication; Decisions 16–18
 - Task 10 Method v0.2: nine named rules, simple vocabulary, sdd skeletons, example, SCIENCE.md — merged in PR #2; its independent review is folded into Task 15 step 6
-- Task 9 v0.1 (two layers, 3-file sdd/, setup skill) — commits 842bac1, 3ad83b6; superseded by v0.2 (Decision 13)
+- Task 9 v0.1 (two layers, 3-file sdd/, setup skill) — commits eb4a983, 304055c; superseded by v0.2 (Decision 13)
 - Tasks 0–6 Phases 0–6 — v0 delivered 2026-10-26 (Decision 5)
 
 ## Open questions
