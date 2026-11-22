@@ -14,3 +14,9 @@
 ## Anomalies
 - N-01 `last_ticket_date` is filled after cancellation for 18% of churners — seen in: EXPL-004
 - N-02 Churn rate drops 40% in December 2025 only — seen in: EXPL-002; unexplained
+
+## Cemetery
+| ID | Idea | Verdict | Why (1 line) | Evidence | Revive if |
+|---|---|---|---|---|---|
+| EXPL-004 | Add `days_to_renewal` | abandoned | value is set after the cancel request (L2 leakage) | EXPL-004, N-01 | renewal date becomes available before the request |
+| EXPL-006 | Deep tabular net | refuted (explore) | 3 seeds: −1.1 pp ± 0.9 vs GBM at equal budget | EXPL-006 | > 5× more training data |
