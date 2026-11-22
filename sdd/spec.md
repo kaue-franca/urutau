@@ -1,45 +1,49 @@
-# Spec — urutau (Scientific SDD)
-<!-- Entries and IDs before DEC-013 (v0/v0.1) use the old vocabulary: AC = success criterion, EXP = test, EXPL = try, R1–R15/G1–G6 = rules now U1–U9. -->
-Question: Can a short, hand-written method grounded in the scientific method make agent-assisted data-science work traceable and resistant to self-deception, at an upkeep cost the owner accepts, in every tool the owner uses?
+# Spec — urutau
+<!-- Entries before Decision 16 in log.md use the old vocabulary: AC/SC = success criterion, EXP/TEST = experiment, EXPL/TRY = try, R1–R15/G1–G6/U1–U9 = rules now named, DEC-nnn = Decision n, T-nn = Task n. -->
+Question: Can a short, hand-written, tool-agnostic method based on the scientific method make work with AI agents on any of the owner's projects traceable, resistant to self-deception and clear to read, at an upkeep cost the owner accepts, in every tool the owner uses?
 Goal type: build
-Scope and non-goals: global and project `AGENTS.md` text, modules, project skeletons and example, three skills, one stdlib script `urutau.py`, README/GUIA/SCIENCE · not a product CLI; not spec-as-source; no copy of Spec Kit or Kiro; no Windows/macOS; no proxy/mirror auto-config.
-Constraints: agent files in English, human docs in pt-BR, identical rule IDs; sources paraphrased and linked; Linux with Python ≥ 3.11 on both machines (Ubuntu personal, Red Hat at work); tools: Claude Code and Devin CLI (DeepSeek).
+Scope and non-goals: global and project `AGENTS.md` text, project skeletons and example, skills, one stdlib script, README, SCIENCE.md · no domain-specific modules (the owner adds skills when a project needs them); not a product CLI; not spec-as-source; no copy of Spec Kit or Kiro; no Windows/macOS; no proxy/mirror auto-config.
+Constraints: everything in files in English, replies in the owner's language; sources paraphrased and linked; Linux with Python ≥ 3.11 on both machines (Ubuntu personal, Red Hat at work); tools: Claude Code and Devin CLI (DeepSeek); no AI attribution anywhere.
 
 ## Success criteria
-- SC-01: global file ≤ 20 lines; ≤ 9 rules; the project block (method + all modules) + a filled project section < 14 KiB (Devin cloud reads 16 KiB). Fails if any limit is exceeded.
-- SC-02: every rule maps to a mechanism and sources in `SCIENCE.md`, or is marked owner-preference. Fails if any rule has neither.
-- SC-03: given only README + GUIA, a fresh agent correctly states the project files, the session routine and the 3 setup cases. Fails on any wrong or missing item.
-- SC-04: after install on each machine, a session quotes U1 outside a project and U8 inside one, in Claude Code and in Devin CLI. Fails if any tool/machine pair does not load it.
-- SC-05: the Phase 7 pilot meets its pre-registered criteria E1–E4 (restated in the v0.2 vocabulary). Fails if any misses its threshold.
+- Criterion 1: global file ≤ 20 lines; ≤ 9 rules; the project method + a filled project section < 14 KiB (Devin cloud reads 16 KiB). Fails if any limit is exceeded.
+- Criterion 2: every rule maps to a scientific practice and sources in `SCIENCE.md`, or is marked owner-preference. Fails if any rule has neither.
+- Criterion 3: given only the README, an agent with no prior context correctly states the project files, the session routine and how to set up a project. Fails on any wrong or missing item.
+- Criterion 4: after install on each machine, a session states the Evidence rule outside a project and the Tries and experiments rule inside one, in Claude Code and in Devin CLI. Fails if any tool/machine pair does not load it.
+- Criterion 5: the pilot meets four criteria, fixed before it starts — cold start (in a fresh session the agent states the current task, last result, open ideas and the last dead end from the files alone, fully correct in ≥ 4 of 5 sessions); cards first (≥ 90% of experiment cards committed before their results, by git history); tagged claims (100% of Known lines in `knowledge.md` carry an evidence tag); upkeep (the owner rates it acceptable in ≥ 4 of 5 sessions). Fails if any misses its threshold.
 
 ## Current task
-### T-10 Method v0.2 content: rules U1–U9, simple vocabulary, sdd/ skeletons, example, SCIENCE.md (→ SC-01, SC-02) · branch: t-10-metodo-v02
-Why: the method text is what every tool will load (global and project); it must be short enough for Devin and traced to sources.
-Prediction: global ≤ 20 lines; method + ml < 14 KiB; every AI failure mode in the critics' table maps to a rule; every rule maps to sources in SCIENCE.md. Rival: cutting R1–R15 to U1–U9 loses real rigor (pre-registration, holdout log).
-Check: a fresh-context reviewer given only the files looks for a failure mode without a rule or a rule without a source — fails if one is found
+### Task 15 Clear communication and fewer codes (serves Criteria 1 and 2) · branch: task-15-clear-communication
+Why: the owner could not follow replies full of codes and coined terms, and wants every statement sourced, replies in their language, files in English, and only what is needed in the repo.
+Prediction: a Communication section fits the global file within 20 lines; the method needs only five numbered names (Task, Criterion, Try, Experiment, Decision); removing the v0 build files and the ml/rl modules breaks nothing that works today (the scripts were already out of date).
+Check: grep finds no old codes in `global/`, `project/`, `examples/`; global file ≤ 20 lines; an agent with no prior context reviewing the files finds no code or coined term without need — fails if it finds one
 Steps:
-1. [x] `global/AGENTS.md` with U1–U6 + conventions — check: 15 lines, 2.2 KB
-2. [x] `project/method.md` (U1–U9, files, session, tags, conventions) + modules on U-rules — check: method+ml 8.1 KB, +rl 9.7 KB (< 14 KiB)
-3. [x] `project/sdd/*` skeletons (task card, test card), `project/AGENTS.md`, `examples/churn-90d/`, this repo's own `sdd/` in the new vocabulary — check: example uses every section; pre-registered test still detectable by the field names
-4. [x] `SCIENCE.md`: rule → mechanism → sources; S50–S53 verified by web search, S54 = Devin docs read by critic B — check: U1–U9 and conventions each have a row with sources or owner-preference
-5. [ ] Independent review (fresh agent) — check: no gap found, or gaps fixed
+1. [x] Communication section in global and project method — check: global file 20 lines (commit 110ba21)
+2. [x] Plain vocabulary in method, skeletons and example; example's missing tries added; no-AI-attribution rule — check: grep clean (commit 3afaa0a)
+3. [x] `SCIENCE.md` in English, mechanisms by name, communication sources — check: no rule or mechanism codes left (commit 255ac81)
+4. [x] Remove v0 build files, changelog and ml/rl modules (tag v0.1.0); README and dev `AGENTS.md` — check: 25 tracked files (commit 98083f8)
+5. [x] This repo's own records in the new vocabulary — check: this card, Decisions 16 and 17
+6. [ ] Review by an agent with no prior context — check: no gap found, or gaps fixed
 Result:
 Closing: · Learned:
-Note: the old scripts point to removed paths until T-11 replaces them.
 
 ## Next tasks
-- T-11 `urutau.py` (install, init, update, check, map) + loading tests in Claude Code (→ SC-04)
-- T-12 Skills: urutau-setup (3 cases), urutau-audit, urutau-grill (→ SC-04)
-- T-13 README, GUIA.md, history/ — newcomer path (→ SC-03)
-- T-14 Field tests: mestrado (case a), a repo with code (case c), work PC with Devin CLI (→ SC-04)
-- T-07 Phase 7 — pre-registered pilot, EXP-001 (→ SC-05); the mestrado repo is a candidate pilot project
-- T-08 Phase 8 — second consolidation, tag `v1.0` (→ all)
+- Task 16 Domain-neutral wording: some rules still use data-science words (holdout, seeds, leakage); make them fit any project without losing rigor (serves the Question)
+- Task 11 One stdlib script `urutau.py` (install, set up, update, check) replacing the three out-of-date scripts + loading tests (serves Criterion 4)
+- Task 12 Skills: urutau-setup (new project · project with its own records · project with no method), urutau-audit, urutau-grill (serves Criterion 4)
+- Task 13 README as the newcomer path (serves Criterion 3)
+- Task 14 Field tests: mestrado, a repo with code, work PC with Devin CLI (serves Criterion 4)
+- Task 7 Pilot with the four criteria fixed before it starts; the mestrado repo is a candidate (serves Criterion 5)
+- Task 8 Second consolidation, tag `v1.0` (serves all)
 
 ## Done
-- T-09 v0.1 (two layers, 3-file sdd/, R15, setup skill) — commits 842bac1, 3ad83b6; owner test on mestrado superseded by v0.2 (DEC-013)
-- T-00…T-06 Phases 0–6 — v0 delivered 2026-10-26 (DEC-005); `check.py` passed; Claude Code loaded the method from a fresh HOME.
+- Task 10 Method v0.2: nine named rules, simple vocabulary, sdd skeletons, example, SCIENCE.md — merged in PR #2; its independent review is folded into Task 15 step 6
+- Task 9 v0.1 (two layers, 3-file sdd/, setup skill) — commits 842bac1, 3ad83b6; superseded by v0.2 (Decision 13)
+- Tasks 0–6 Phases 0–6 — v0 delivered 2026-10-26 (Decision 5)
 
 ## Open questions
-- `PLAN.md` §7 defaults adopted (DEC-001); owner may override at any checkpoint.
-- Owner review of v0/v0.1 rules, templates and guide cards; Codex install untested (AC-04 half open).
-- Install the global layer on this machine (`scripts/install.sh`)? Not done yet: it edits `~/.claude/CLAUDE.md`.
+- Codex install untested; Devin CLI's global file location unverified (docs conflict).
+- 11 commits already on `master` carry an AI co-author line; removing it means rewriting published history (force-push) — owner's call.
+- Context files did not clearly improve coding-task success in one study (S31); does urutau's file change agent behaviour enough to matter? Only the pilot will tell.
+- S31's introduction reports a 7% developer-vs-generated gap that its results (+2.4% vs −2%) do not show — seen in: Phase 1 comparison.
+- With the project inside the session scratchpad (`/tmp/claude-1000/…`), Claude Code loaded no project CLAUDE.md at all — seen in: Try EXPL-001.

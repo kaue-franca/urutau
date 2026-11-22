@@ -62,3 +62,19 @@ Context: AC-01…AC-05 measured v0 artifacts (15 rules, `guide/index.html` cards
 
 ## DEC-015 · 2026-11-22 · by: owner · Rename CIENCIA.md to SCIENCE.md
 Context: owner request. Decision: the sources file is `SCIENCE.md` (content stays in pt-BR); mentions of CIENCIA.md in DEC-013/014 refer to it. Results seen: n/a. Supersedes: the name in DEC-013.
+
+## Decision 16 · 2026-11-22 · by: owner (request) + agent (Claude Code) · Clear communication, plain vocabulary, English files, no AI attribution
+Context: the owner could not follow replies full of codes and coined terms (exp, expl, ac, SC-01, rule numbers); wants replies in their own language, everything in files in English, every statement sourced or marked as assumed, a short standard report, and no Co-Authored-By or AI mentions anywhere. Two sub-agents reviewed the repo (codes and their dependencies) and the research on reporting (sources S55–S69 in `SCIENCE.md`).
+Options: (a) keep the codes and only add a reply rule; (b) add the reply rule and also cut the codes to what other entries must point to.
+Decision: (b). A Communication section in the global file and the project method: reply language, plain words with no internal labels, and a report shape (what I understood before a task; then result, how I know, next). Rules are named, not numbered ("Disagree on evidence" → "Push back with evidence"). Numbered names only where something points to them: Task, Criterion, Try, Experiment (was test card), Decision. A try may record what was seen but never supports a claim. One name per idea: holdout, new method, pace, Dead ends, success criteria, "Worth retrying if", "Why each file exists", approval. "Unexplained" moves into Open questions. `SCIENCE.md` goes to English, reversing the "human docs in pt-BR" constraint and the language part of DEC-015. Branches are `task-<n>-<slug>`; commits `Task n step k: …`. No AI attribution anywhere. Criteria restated in words (Criterion 4 names the rules; Criterion 5 names the four pilot criteria).
+Results seen: no (no pilot yet).
+Consequences: (+) replies and files readable without a glossary; every rule still traced to sources; (−) entries before this one keep the old IDs (mapping at the top of `spec.md`); the out-of-date scripts still use the old names until Task 11; 11 commits on `master` keep an AI co-author line unless the owner approves a history rewrite.
+Supersedes: the vocabulary part of DEC-013; the pt-BR part of the constraints and of DEC-015; DEC-014's criteria wording.
+
+## Decision 17 · 2026-11-22 · by: owner · One agnostic method; remove domain modules and v0 build files
+Context: the owner's goal is a scientific, tool-agnostic method for working with AI on any project; domain checklists (ml, rl) tie it to one kind of work, and the v0 build files (`PLAN.md`, `REFERENCES.md`, `references/`, `guide/index.html`, `CHANGELOG.md`) were no longer read.
+Options: keep · move to a `history/` folder · delete and rely on git.
+Decision: delete; tag `v0.1.0` (commit 842bac1) keeps them reachable; no `history/` folder. Domain needs become the owner's own skills. The guide planned for the human reader is folded into the README. Rule wording that is still data-science specific is reworded in Task 16.
+Results seen: n/a.
+Consequences: (+) 25 tracked files instead of 34, about 71% fewer bytes; nothing that works today depended on them; (−) the ml and rl checklists must be rebuilt as skills if a project needs them.
+Supersedes: the modules part of DEC-012 and DEC-013; the `history/` and `GUIA.md` parts of DEC-013.
