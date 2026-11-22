@@ -1,5 +1,5 @@
-<!-- urutau:begin v0.2.0 modules=ml -->
-(The setup copies the urutau method and the ml module here; not shown in this example.)
+<!-- urutau:begin v0.2.0 -->
+(The setup copies the urutau method here; not shown in this example.)
 <!-- urutau:end -->
 
 # churn-90d

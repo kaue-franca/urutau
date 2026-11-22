@@ -1,26 +1,18 @@
 # urutau — development instructions
 
-Purpose: build and version a personal, portable, science-grounded spec-driven development (SDD) method — generic global layer, per-project method, templates, skills, pt-BR guide. `PLAN.md` is the original plan; DEC entries record departures from it.
+Purpose: build and version urutau, a short, tool-agnostic method for working with AI agents on any project, based on the scientific method. This repo uses its own method: the working copy is loaded below and its records are in `sdd/`.
 
-## Session protocol (dogfooding — this repo uses its own method via `sdd/`)
-- The method, working copy (this repo is its source): @project/method.md
-- Start: read `sdd/spec.md` (current task first) → latest entries of `sdd/log.md`; check the branch; restate the current task, mode and next step in one line.
-- End: update the current task card in `sdd/spec.md`, append to `sdd/log.md`, update `sdd/knowledge.md`, commit on the task branch. Merge into `master` or push only when the owner asks.
-- Work phase by phase (`PLAN.md` §6). At each CHECKPOINT, summarize in ≤ 10 bullets and wait for the owner's approval.
-- Do not open `REFERENCES.md` before Phase 1, step 3 (see DEC-002 in `sdd/log.md`).
+- The method: @project/method.md
 
 ## Conventions
-- Agent-facing files in English; the human guide (`guide/index.html`) in Brazilian Portuguese; identical rule IDs in both.
-- Paraphrase sources and link them; no long quotations. Mark anything unverified as `UNVERIFIED`.
-- Budgets in `PLAN.md` §4.1 are acceptance criteria: when over budget, merge or delete before adding.
-- No tool-specific features in core files (`global/`, `method/`, `modules/`, `templates/`); tool-specific helpers go in `skills/`.
-- A change to `global/`, `method/`, `modules/` or `templates/` bumps `VERSION` and gets a `CHANGELOG.md` entry.
-- A difference from `PLAN.md`, or a conflict with current tool docs, becomes a DEC entry in `sdd/log.md`.
-- Ask the owner before scope changes or irreversible actions.
+- Paraphrase sources and link them in `SCIENCE.md`; every rule maps to sources there or is marked owner-preference.
+- The limits in the success criteria of `sdd/spec.md` are hard limits: when over, merge or delete before adding.
+- No tool-specific features in `global/` or `project/`; tool-specific helpers go in `skills/`.
+- A change to `global/` or `project/` bumps `VERSION` and gets a Decision in `sdd/log.md`. So does a conflict with current tool docs.
 
 ## Layout
-`global/` generic layer · `method/` full method (pinned into projects) · `modules/` domain checklists · `skills/` Claude Code skills · `templates/` project files and filled examples · `references/` source analysis · `guide/` pt-BR guide · `scripts/` install, scaffold, checks · `sdd/` this repo's own records.
+`global/` rules for every session · `project/` what a project receives · `examples/` a filled project · `SCIENCE.md` sources · `skills/` agent skills · `scripts/` install and setup · `sdd/` this repo's own records.
 
 ## Commands
-- Checks: `python3 scripts/check.py` and `python3 scripts/check.py --project .`
-- Install: `scripts/install.sh` (global layer + skills) · `scripts/install.sh --project <path>` (pin the method) · `--status`.
+- Install the global rules: `scripts/install.sh` (`--status`, `--uninstall`).
+- `scripts/check.py`, `scripts/new-project.sh` and `install.sh --project` are out of date since v0.2 (they look for `method/`, `modules/`, `templates/`); a planned task replaces them.
