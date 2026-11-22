@@ -76,5 +76,5 @@ Context: the owner's goal is a scientific, tool-agnostic method for working with
 Options: keep · move to a `history/` folder · delete and rely on git.
 Decision: delete; tag `v0.1.0` (commit 842bac1) keeps them reachable; no `history/` folder. Domain needs become the owner's own skills. The guide planned for the human reader is folded into the README. Rule wording that is still data-science specific is reworded in Task 16.
 Results seen: n/a.
-Consequences: (+) 25 tracked files instead of 34, about 71% fewer bytes; nothing that works today depended on them; (−) the ml and rl checklists must be rebuilt as skills if a project needs them.
+Consequences: (+) 25 tracked files instead of 34, 69% fewer bytes (102,288 vs 333,735, measured after Task 15 step 5); nothing that works today depended on them; (−) the ml and rl checklists must be rebuilt as skills if a project needs them.
 Supersedes: the modules part of DEC-012 and DEC-013; the `history/` and `GUIA.md` parts of DEC-013.
