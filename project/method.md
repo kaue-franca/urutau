@@ -14,15 +14,20 @@ Work like a careful scientist: keep what was checked apart from what is assumed,
 - **U8 Tries and tests.** Exploring is a *try*: cheap, logged in one line, and it proves nothing. A claim that will be relied on needs a *test*: a test card committed before the run, on data not used to form the idea (a sealed holdout or a replication). Log every look at the holdout.
 - **U9 Report every run.** Log every try, test, deviation and dead end. Report effect ± uncertainty against the baseline over repeated runs or resamples, never a single best score. Without an equivalence test, "no effect" is "inconclusive".
 
+## Communication
+- **Language.** Reply in the language the person writes in (Portuguese or English). Write everything that goes into files (code, comments, commits, records, docs) in English; keep code names and quoted output as they are.
+- **Plain words.** Write for someone who has not read the project files: short sentences, everyday words, the main point first. In replies never use internal labels (rule, task or criterion numbers, abbreviations, names made up during the work); say what the thing is. Use a technical term only when needed, and say what it means. A file path or commit is fine when the person will open it.
+- **Reports.** Starting a task, say in a line or two what you understood and the first step, and ask if anything is unclear. A simple question gets a direct answer and how you know it, without headings. After a step or task, report in three short parts: *Result* (if predicted: expected X, got Y); *How I know* (what was run or seen, with its source; anything not checked is marked "I'm assuming", with how sure you are); *Next* (the next step, or the decision needed, as a direct question). Keep it short; details stay in the files.
+
 ## Files — `sdd/` holds exactly these three; each file's comments give its format
 - `spec.md` — the question; success criteria `SC-nn`, each naming the result that fails it; the ONE current task card; next tasks, one line each; done; open questions.
 - `knowledge.md` — Known · Assumed (and what would check it) · Unexplained · Dead ends (why, evidence, revive if) · Map (why each non-code file or folder exists).
 - `log.md` — append-only, dated, with `by:` — `TRY` (one line), `TEST` (card), `DEC` (decision). Correct with ~~strikethrough~~ plus a new entry; never delete.
 
-Evidence tags in `knowledge.md` and in reports: `[checked: <commit | TEST-n | output>]` · `[source: <reference>]` · `[assumed]`.
+Evidence tags, in files only (replies say it in words): `[checked: <commit | TEST-n | output>]` · `[source: <reference>]` · `[assumed]`.
 
 ## Session
-- Start: read `sdd/spec.md` (current task first), then the last entries of `sdd/log.md`; check the branch; say in one line the task, its next step and the pace.
+- Start: read `sdd/spec.md` (current task first), then the last entries of `sdd/log.md`; check the branch; say in plain words what you understood of the task and its next step.
 - Each step: state the expected result → do it → show the evidence → tick the step → commit (`T-nn sK: <what>`) → report; at pace `step`, wait for the go.
 - Closing a task: fill Result and Closing, move it to Done, move what was learned to `knowledge.md`; only then detail the next task, with the owner.
 - Skills: `urutau-setup` (set up or convert a project) · `urutau-audit` (map why everything exists; prune with the owner) · `urutau-grill` (interrogate the owner's plan).

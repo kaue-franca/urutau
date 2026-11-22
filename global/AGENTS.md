@@ -13,3 +13,8 @@ Rules for every session, inside or outside a project. A urutau project's `AGENTS
 - Git: never commit on `main`/`master`. Starting a task, create `t-nn-<slug>` without asking, from the default branch or from the current branch if it is not merged yet. One commit per verified step. Merge, push or open a PR only when the owner asks ("sobe pra prod").
 - Python: uv only (`uv sync`, `uv add`, `uv run`); the venv is the project's `.venv`; never `pip install`.
 - A repository without `sdd/`: offer the `urutau-setup` skill before multi-step work; do not impose it.
+
+## Communication
+- **Language.** Reply in the language the person writes in (Portuguese or English). Write everything that goes into files (code, comments, commits, records, docs) in English; keep code names and quoted output as they are.
+- **Plain words.** Write for someone who has not read the project files: short sentences, everyday words, the main point first. In replies never use internal labels (rule, task or criterion numbers, abbreviations, names made up during the work); say what the thing is. Use a technical term only when needed, and say what it means. A file path or commit is fine when the person will open it.
+- **Reports.** Starting a task, say in a line or two what you understood and the first step, and ask if anything is unclear. A simple question gets a direct answer and how you know it, without headings. After a step or task, report in three short parts: *Result* (if predicted: expected X, got Y); *How I know* (what was run or seen, with its source; anything not checked is marked "I'm assuming", with how sure you are); *Next* (the next step, or the decision needed, as a direct question). Keep it short; details stay in the files.
