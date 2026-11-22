@@ -287,7 +287,7 @@ svg #arrow path { fill: var(--muted); }
 <li>Verificar: no Claude Code, <code>/memory</code> ou <code>/context</code> lista o arquivo global; no Codex, peça para citar o princípio G1.</li>
 <li>Checagens: <code>python3 scripts/check.py</code> (este repositório) e <code>python3 scripts/check.py --project &lt;pasta&gt;</code> (um projeto).</li>
 </ol>
-<p class="note">v0: testado em 2026-10-26 com Claude Code 2.1.310 e um <code>HOME</code> temporário (citou R1; carregou o <code>AGENTS.md</code> do projeto via <code>CLAUDE.md</code>). v0.1: <code>new-project.sh</code> testado em repositório temporário com uv 0.11.30; o carregamento de <code>@.urutau/AGENTS.md</code> pelo <code>AGENTS.md</code> do projeto ainda não foi testado numa sessão — <code>UNVERIFIED</code>. Codex não testado — <code>UNVERIFIED</code>.</p>
+<p class="note">v0: testado em 2026-10-26 com Claude Code 2.1.310 e um <code>HOME</code> temporário (citou R1; carregou o <code>AGENTS.md</code> do projeto via <code>CLAUDE.md</code>). v0.1: <code>new-project.sh</code> testado em repositório temporário com uv 0.11.30; numa sessão <code>claude -p</code> (2026-11-22), o agente citou R15 vindo de <code>.urutau/AGENTS.md</code> pela cadeia <code>CLAUDE.md</code> → <code>@AGENTS.md</code> → <code>@.urutau/AGENTS.md</code>. Codex não testado — <code>UNVERIFIED</code>.</p>
 </section>
 
 <section id="skills">

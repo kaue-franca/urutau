@@ -24,7 +24,7 @@ Steps:
 3. [x] `new-project.sh` (uv + pin), `install.sh` (`--project`, `--status`, skills) — check: scratch repo, re-run idempotent
 4. [x] `skills/urutau-setup`, `check.py`, `references/sources.md`, guide, README, CHANGELOG, VERSION — check: `check.py` passes
 5. [ ] Owner tests the skill on `~/repos/mestrado` — check: `check.py --project` passes there; default branch untouched
-Result: steps 1–4 as predicted (`check.py` PASSED; scratch env Python 3.12.13 imported numpy, pandas, matplotlib, scipy, sklearn).
+Result: steps 1–4 as predicted (`check.py` PASSED; scratch env Python 3.12.13 imported numpy, pandas, matplotlib, scipy, sklearn; pinned method loads in a live session, EXPL-001).
 Closing: · Learned:
 
 ## Next tasks

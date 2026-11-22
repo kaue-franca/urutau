@@ -47,3 +47,5 @@ Decision: (b). `global/AGENTS.md` → generic G1–G6 + git + uv (≤ 40 lines);
 Results seen: no (no pilot yet).
 Consequences: (+) projects carry the method version they used and can be updated deliberately; one skill sets up a repo end to end; (−) in Claude Code both layers load in a urutau project (~80 lines, some overlap: G1–G6 restate R-rules generically); E1 cold start now depends on `spec.md` (watch in the pilot); `@.urutau/AGENTS.md` loading from a project `AGENTS.md` not yet verified in a live session (`UNVERIFIED`).
 Supersedes: DEC-010; the `status.md` part of DEC-001.
+
+## EXPL-001 · 2026-11-22 · by: agent (Claude Code) · does Claude Code load the pinned method via `CLAUDE.md` → `@AGENTS.md` → `@.urutau/AGENTS.md`? → expected: yes (nested imports) → got: yes in `~/urutau-pin-test` (quoted R15, named `.urutau/AGENTS.md`); in this repo via `@method/AGENTS.md` too; NOT loaded when the project sat in the session scratchpad under `/tmp/claude-1000/…` (no project CLAUDE.md loaded at all — environment, not the import) → next: clears the `UNVERIFIED` in DEC-012 for Claude Code; Codex still untested
