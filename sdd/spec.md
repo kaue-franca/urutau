@@ -21,7 +21,7 @@ Steps:
 1. [x] `global/AGENTS.md` with U1–U6 + conventions — check: 15 lines, 2.2 KB
 2. [x] `project/method.md` (U1–U9, files, session, tags, conventions) + modules on U-rules — check: method+ml 8.1 KB, +rl 9.7 KB (< 14 KiB)
 3. [x] `project/sdd/*` skeletons (task card, test card), `project/AGENTS.md`, `examples/churn-90d/`, this repo's own `sdd/` in the new vocabulary — check: example uses every section; pre-registered test still detectable by the field names
-4. [ ] `CIENCIA.md`: rule → mechanism → sources, new sources verified — check: every U-rule has a row with sources
+4. [x] `CIENCIA.md`: rule → mechanism → sources; S50–S53 verified by web search, S54 = Devin docs read by critic B — check: U1–U9 and conventions each have a row with sources or owner-preference
 5. [ ] Independent review (fresh agent) — check: no gap found, or gaps fixed
 Result:
 Closing: · Learned:
