@@ -56,3 +56,6 @@ Decision: (1) project `AGENTS.md` self-contained — a versioned urutau block (m
 Results seen: no (no pilot yet).
 Consequences: (+) the method reaches every tool the owner uses; less to read and maintain; (−) v0 projects need conversion (setup case b); E1–E4 pilot criteria must be restated in the new vocabulary; Devin's global file location is UNVERIFIED (docs conflict) until tested on the work PC.
 Supersedes: DEC-012 (layer split and pin), R1–R15, G1–G6.
+
+## DEC-014 · 2026-11-22 · by: agent (Claude Code), within owner-approved DEC-013 · Restate success criteria for v0.2
+Context: AC-01…AC-05 measured v0 artifacts (15 rules, `guide/index.html` cards, `install.sh`, Codex) that DEC-013 replaced. Options: keep the old ACs · restate them. Decision: SC-01 size limits for Devin (≤ 9 rules, global ≤ 20 lines, block < 14 KiB); SC-02 traceability via `CIENCIA.md`; SC-03 newcomer test of README + GUIA; SC-04 loading in Claude Code and Devin CLI on both machines; SC-05 unchanged (pilot E1–E4, restated in the new vocabulary before it starts). Results seen: no (no pilot yet; only file sizes measured in T-10 s2). Consequences: (+) criteria test what matters now; (−) owner should confirm them. Supersedes: AC-01…AC-05.

@@ -3,7 +3,7 @@
 Purpose: build and version a personal, portable, science-grounded spec-driven development (SDD) method — generic global layer, per-project method, templates, skills, pt-BR guide. `PLAN.md` is the original plan; DEC entries record departures from it.
 
 ## Session protocol (dogfooding — this repo uses its own method via `sdd/`)
-- The method, working copy (this repo is its source): @method/AGENTS.md
+- The method, working copy (this repo is its source): @project/method.md
 - Start: read `sdd/spec.md` (current task first) → latest entries of `sdd/log.md`; check the branch; restate the current task, mode and next step in one line.
 - End: update the current task card in `sdd/spec.md`, append to `sdd/log.md`, update `sdd/knowledge.md`, commit on the task branch. Merge into `master` or push only when the owner asks.
 - Work phase by phase (`PLAN.md` §6). At each CHECKPOINT, summarize in ≤ 10 bullets and wait for the owner's approval.
