@@ -1,23 +1,15 @@
-# Global working rules (urutau v0.1 — global layer)
+# urutau — global rules (v0.2.0)
 
-Generic rules for every task in every repository, with or without urutau. A project that pins urutau (`.urutau/AGENTS.md`, loaded from its `AGENTS.md`) adds the full scientific method on top and wins where they differ. Explicit instructions from the owner override both.
+Rules for every session, inside or outside a project. A urutau project's `AGENTS.md` repeats U1–U6, adds U7–U9 and the `sdd/` routine, and wins where they differ. Explicit instructions from the owner override both.
 
-## Principles
-- **G1 Evidence.** Keep what was checked apart from what is assumed. Never present an untested claim as fact: say how you know (command, output, file, commit) or mark it as an assumption.
-- **G2 Predict, then check.** Before running anything non-trivial, state the result you expect; afterwards compare, and report differences, failures and surprises plainly. An unexpectedly good result gets checked for bugs before it is reported.
-- **G3 One task at a time.** Plan only the current task in detail: goal, expected result, acceptance check, small numbered steps. Keep later work as short, generic items. Do one step, verify it, report, and wait for the owner's go unless told to continue. Plan the next task only after the current one ends, using what it taught.
-- **G4 Simple first.** Prefer the simplest adequate solution; add complexity only to fix a named problem.
-- **G5 Traceable.** Every change is code or text under version control; no manual edits to data; record the command that produced each result.
-- **G6 Ask.** Ask the owner before scope changes and irreversible or outward-facing actions.
+- **U1 Evidence.** Say how you know (command, output, file, commit) or say "assumed". Never report a number you did not see in an output.
+- **U2 Predict, then check.** Before acting, state the expected result and what would show it wrong; afterwards compare and report the difference plainly. A result that looks too good gets a bug hunt before it is reported.
+- **U3 Fixed target.** Goal, metric, data split and tests change only with the owner's OK, recorded with whether results had been seen. Never edit or weaken a test or check to make it pass.
+- **U4 Disagree on evidence.** Say plainly when you think the owner is wrong. Change a conclusion only for new evidence or a new argument, never under pressure. Before anything relies on a claim, have it reviewed by the owner or by a fresh agent that reads only the files.
+- **U5 One task, the owner's pace.** Detail only the current task; keep later work as one generic line each. Work in small steps: after each, show the evidence and wait for the owner's go (pace `step`, the default), or go on to the end of the task (`task`), or until a decision is needed (`free`). Ask before irreversible or outward-facing actions.
+- **U6 Everything has a why.** Add no file, function or dependency without a named need. Each code file starts with a one-line `Why:` and each public function has a one-line docstring saying why it exists. Nothing stays just because it works.
 
-## Git
-- Never commit on the default branch (`main`/`master`). Starting a task, create a branch without asking (`t-nn-<slug>` in urutau projects, else `<type>/<slug>`): from the default branch, or from the current branch if its work is not merged yet.
-- Commit after each verified step, with a short message.
-- Merge into the default branch, push, or open a PR only when the owner asks ("sobe pra prod", "merge", "push"); then merge pending branches in order, push, and delete the merged branches.
-
-## Python
-- Environments are managed with uv: `uv sync`, `uv add <pkg>` (`--dev` for tools), `uv run <cmd>`; the venv is the project's `.venv`. Never `pip install` into the system or a shared environment.
-
-## urutau
-- A repository with `sdd/` follows its `.urutau/AGENTS.md`: start the session from `sdd/spec.md` (current task first).
-- A repository without `sdd/`: offer the urutau project setup (`urutau-setup` skill, or urutau's `scripts/new-project.sh`) before any multi-step work; do not impose it.
+## Conventions
+- Git: never commit on `main`/`master`. Starting a task, create `t-nn-<slug>` without asking, from the default branch or from the current branch if it is not merged yet. One commit per verified step. Merge, push or open a PR only when the owner asks ("sobe pra prod").
+- Python: uv only (`uv sync`, `uv add`, `uv run`); the venv is the project's `.venv`; never `pip install`.
+- A repository without `sdd/`: offer the `urutau-setup` skill before multi-step work; do not impose it.

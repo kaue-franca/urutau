@@ -13,25 +13,31 @@ Constraints: budgets in `PLAN.md` §4.1; agent files in English, guide in pt-BR,
 - AC-05 (S5): the Phase 7 pilot meets its pre-registered criteria E1–E4 (EXP-001). Fails if any of E1–E4 misses its threshold.
 
 ## Current task
-### T-09 v0.1: two layers, 3-file sdd/, R15 task card, git workflow, uv setup skill (→ AC-01, AC-03, AC-04) · mode: light · branch: feat/setup-skill
-Goal: the owner can install urutau globally (generic layer + skills) and per project (pinned method), and set up a repo with one skill: branch, uv env, `sdd/{spec,knowledge,log}.md`, one detailed first task.
-Hypothesis: owner requests of 2026-11-22 fit the v0 structure with a layer split and no new script · Rival: the split pushes files over budget or breaks the guide/check coverage
-Prediction: `check.py` passes with the method ≤ 100 lines and ≤ 15 rules; `new-project.sh` builds a working uv env in a throwaway repo
-Acceptance test: `python3 scripts/check.py` and `--project .` pass; scratch-repo run prints `ok: python …` — fails if any check fails or the env does not import
+### T-10 Method v0.2 content: rules U1–U9, simple vocabulary, sdd/ skeletons, example, CIENCIA.md (→ AC-01, AC-02) · mode: light · branch: t-10-metodo-v02
+Goal: the method text that every tool will load (global and project), short enough for Devin's 16 KiB cut and traced to sources.
+Hypothesis: 9 rules cover every AI failure mode in the critics' table without losing any verifiable control we have now · Rival: cutting rules loses real rigor (pre-registration, holdout log)
+Prediction: global ≤ 20 lines; project block with the ml module < 14 KiB; every failure mode maps to a rule; every rule maps to sources in CIENCIA.md
+Acceptance test: a fresh-context reviewer given only the files looks for a failure mode without a rule or a rule without a source — fails if one is found
 Steps:
-1. [x] Split `global/` (generic G1–G6) and `method/` (R1–R15); R15 + task card; git workflow — check: `check.py` rules/budgets
-2. [x] Templates: drop `status.md`, task card in `spec.md`, cemetery in `knowledge.md`; examples — check: `check.py` examples
-3. [x] `new-project.sh` (uv + pin), `install.sh` (`--project`, `--status`, skills) — check: scratch repo, re-run idempotent
-4. [x] `skills/urutau-setup`, `check.py`, `references/sources.md`, guide, README, CHANGELOG, VERSION — check: `check.py` passes
-5. [ ] Owner tests the skill on `~/repos/mestrado` — check: `check.py --project` passes there; default branch untouched
-Result: steps 1–4 as predicted (`check.py` PASSED; scratch env Python 3.12.13 imported numpy, pandas, matplotlib, scipy, sklearn; pinned method loads in a live session, EXPL-001).
+1. [x] `global/AGENTS.md` with U1–U6 + conventions — check: 15 lines, 2.6 KB
+2. [ ] `project/method.md` (U1–U9, files, session, tags) + modules trimmed — check: size with ml < 14 KiB
+3. [ ] `project/sdd/*` skeletons (task card, test card) + `project/AGENTS.md`; example; this repo's own sdd/ in the new vocabulary — check: diff
+4. [ ] `CIENCIA.md`: rule → mechanism → sources, new sources verified — check: every U-rule has a row with sources
+5. [ ] Independent review (fresh agent) — check: no gap found, or gaps fixed
+Result:
 Closing: · Learned:
+Note: the old scripts and `check.py` point to removed paths until T-11 replaces them.
 
 ## Next tasks
+- T-11 `urutau.py` (install, init, update, check, map) + loading tests in Claude Code (→ AC-04)
+- T-12 Skills: urutau-setup (3 cases), urutau-audit, urutau-grill (→ AC-04)
+- T-13 README, GUIA.md, history/ — newcomer path (→ AC-03)
+- T-14 Field tests: mestrado (case a), a repo with code (case c), work PC with Devin CLI (→ AC-04)
 - T-07 Phase 7 — pre-registered pilot, EXP-001 (→ AC-05); the mestrado repo is a candidate pilot project
 - T-08 Phase 8 — second consolidation, tag `v1.0` (→ all)
 
 ## Done
+- T-09 v0.1 (two layers, 3-file sdd/, R15, setup skill) — commits 842bac1, 3ad83b6; owner test on mestrado superseded by v0.2 (DEC-013)
 - T-00…T-06 Phases 0–6 — v0 delivered 2026-10-26 (DEC-005); `check.py` passed; Claude Code loaded the method from a fresh HOME.
 
 ## Open questions and blockers
