@@ -2,14 +2,14 @@
 <!-- Source numbers (S31 …) point to the Sources table in SCIENCE.md. Old log IDs (EXPL-001, DEC-013) are kept as written in log.md. -->
 
 ## Known
-- Context files did not significantly improve coding-task success; developer-written files +2.4% (n.s.), cost up to +19% [source: S31] — 2026-10-26
+- Context files did not significantly improve coding-task success; developer-written files +2.4% (not significant), cost up to +19% [source: S31] — 2026-10-26
 - Instruction-following drops with instruction count; early instructions are favoured; failures are mostly silent omissions [source: S33] — 2026-10-26
 - Claude Code strips block-level HTML comments from CLAUDE.md before injecting it [source: S29] — 2026-10-26
 - Codex and Devin document no `@` import syntax; their AGENTS.md must be self-contained [source: S30, S54] — 2026-11-22
 - Claude Code loads `@` imports from `~/.claude/CLAUDE.md` without a prompt, and nested project imports (`CLAUDE.md` → `@AGENTS.md` → `@<file>`) [checked: fresh-HOME test 2026-10-26; EXPL-001 in log.md] — 2026-11-22
 - Claude Code resolves an `@path` relative to the file that contains it [source: S29, read by a reviewer agent 2026-11-22] — 2026-11-22
 - uv ignores `pip.conf`; it uses `UV_DEFAULT_INDEX`, `HTTPS_PROXY`, `UV_SYSTEM_CERTS`, `SSL_CERT_FILE`, and downloads Python from GitHub unless told otherwise [source: docs.astral.sh/uv, read by a reviewer agent] — 2026-11-22
-- The global rules are installed on the owner's personal notebook: `~/.claude/CLAUDE.md` imports `global/AGENTS.md`; `~/.claude/skills/urutau-setup` and `~/.codex/AGENTS.md` link into this repo [checked: `scripts/install.sh --status`, 2026-11-22] — 2026-11-22
+- The global rules are installed on the owner's personal notebook: `~/.claude/CLAUDE.md` imports `global/AGENTS.md` and `~/.codex/AGENTS.md` links to it; the old setup-skill link was removed [checked: `ls -la` and file contents, 2026-11-22] — 2026-11-22
 - Jargon makes text harder to process and definitions do not fully undo it; made-up acronyms are rarely shared vocabulary [source: S59, S60] — 2026-11-22
 - Restating the task before acting (read-back, receiver's summary) reduced errors in clinical studies, none randomized [source: S64, S65] — 2026-11-22
 - Users over-trust confident AI answers, more so when they are long; first-person uncertainty reduces over-reliance [source: S56, S58] — 2026-11-22
@@ -28,17 +28,17 @@
 | v0.1 split rules G1–G6 / R1–R15 | superseded | the two lists restated each other (~80 lines of overlap) | DEC-013 | — |
 | Rule numbers U1–U9 and coined codes (SC, TEST, TRY, H0/H1, M, L, E) | replaced by names | the owner could not follow replies full of codes | Decision 16 | — |
 | `project/modules/ml.md`, `rl.md` | removed | the method must work for any project; domain checklists become the owner's own skills | Decision 17 | a domain recurs across projects: `git show v0.1.0:modules/ml.md` for the v0.1 text; the v0.2 text is in commit 3afaa0a |
+| `scripts/` (install, setup, check), `skills/urutau-setup/`, `project/CLAUDE.md` | removed | tied to specific tools and out of date; an agent follows `INSTALL.md` instead | Decision 18 | `git show 1209705:<path>` |
 | `PLAN.md`, `REFERENCES.md`, `references/`, `guide/index.html`, `CHANGELOG.md` | removed | v0 build history; `SCIENCE.md`, `sdd/log.md` and git tags hold what is still needed | Decision 17 | `git show v0.1.0:<path>` |
 
 ## Why each file exists
 | Path | Why it exists | Status: core · support · one-off · legacy · ? |
 |---|---|---|
 | `global/AGENTS.md` | rules for every session on a machine | core |
-| `project/` | exactly what lands in a project: method, project section, sdd skeletons, CLAUDE.md | core |
+| `project/` | exactly what lands in a project: method, project section, sdd skeletons | core |
+| `INSTALL.md` | install, setup, update and removal steps for any agent | core |
 | `examples/churn-90d/` | a filled project to learn the format from | support |
 | `SCIENCE.md` | why each rule exists and its sources (Criterion 2) | core |
-| `skills/urutau-setup/` | setup skill; out of date since v0.2 (Task 12) | legacy |
-| `scripts/install.sh` | installs the global rules (works); its project part is out of date (Task 11) | support |
-| `scripts/check.py`, `scripts/new-project.sh` | out of date since v0.2; replaced in Task 11 | legacy |
 | `sdd/` | this repo's own records | core |
-| `README.md`, `AGENTS.md`, `CLAUDE.md`, `VERSION`, `LICENSE`, `.gitignore` | entry point, dev instructions, version, license, ignores | support |
+| `README.md`, `AGENTS.md`, `VERSION`, `LICENSE`, `.gitignore` | entry point, dev instructions, version, license, ignores | support |
+| `CLAUDE.md` | one-line pointer to `AGENTS.md` for the tool used in this repo today (`INSTALL.md` setup step 3) | support |

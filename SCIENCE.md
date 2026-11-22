@@ -22,7 +22,7 @@ An AI agent writes fluent code and explanations much faster than anyone can chec
 | Conventions: git, uv | work that cannot be traced or reproduced | track provenance; one command regenerates results | S18; owner-preference |
 | Conventions: no AI attribution | — | — | owner-preference |
 
-## Formats and skills → sources
+## Formats → sources
 | What | Where | Sources |
 |---|---|---|
 | Task card: why, prediction, check with "fails if", steps | `sdd/spec.md` | S02, S04, S06 |
@@ -33,15 +33,20 @@ An AI agent writes fluent code and explanations much faster than anyone can chec
 | Dead ends with "worth retrying if" | `sdd/knowledge.md` | S06, S07, S25 |
 | Why each file exists; `Why:` line in code | `sdd/knowledge.md`, code | S53 |
 | Self-contained, short `AGENTS.md`, no repo overview, critical rules first | project and global | S28–S34, S54 |
-| Planned skill `urutau-grill`: one question at a time, the agent's own answer written first, "what would make you drop it", rivals, pre-mortem | skill | S02, S05, S51, S52 |
-| Planned skill `urutau-audit`: Chesterton's fence; deleting as a testable claim ("nothing changes") checked by the code tests | skill | S53, S02, S18 |
+| Session routine: say what you understood; then one step at a time: expected → do → evidence → commit → report | `project/method.md` | S04, S06, S19, S64, S65; owner-preference (pace) |
+| Numbered names only where other entries point to them (Task, Criterion, Try, Experiment, Decision) | `sdd/` | S20, S60; owner-preference |
+| Evidence tags `[checked]` `[source]` `[assumed]` | `sdd/knowledge.md` | S18, S55 |
+| Offer to set up urutau in a repo without it, never impose | `global/AGENTS.md` | owner-preference |
+| Install and setup written for an agent, independent of the tool | `INSTALL.md` | S28; owner-preference |
+| Planned procedure `grill`: one question at a time, the agent's own answer written first, "what would make you drop it", rivals, pre-mortem | procedure | S02, S05, S51, S52 |
+| Planned procedure `audit`: Chesterton's fence; deleting as a testable claim ("nothing changes") checked by the code tests | procedure | S53, S02, S18 |
 
 ## Sources
 URL = canonical link; "read at" = the copy actually read. Accessed 2026-10-26 (S01–S38) and 2026-11-22 (S50–S69).
 
 | ID | Source | URL | Depth | Principles used |
 |---|---|---|---|---|
-| S01 | Hepburn & Andersen, *Scientific Method*, SEP (rev. 8 Aug 2026) | https://plato.stanford.edu/entries/scientific-method/ | full | no single method; modes; systematic exclusion of alternatives; open claims to criticism |
+| S01 | Hepburn & Andersen, *Scientific Method*, Stanford Encyclopedia of Philosophy (SEP) (rev. 8 Aug 2026) | https://plato.stanford.edu/entries/scientific-method/ | full | no single method; modes; systematic exclusion of alternatives; open claims to criticism |
 | S02 | Thornton, *Karl Popper*, SEP (rev. 31 Jul 2026) | https://plato.stanford.edu/entries/popper/ | full | refutation criteria fixed in advance; no ad hoc rescue; background assumptions held provisionally |
 | S03 | Bird, *Thomas Kuhn*, SEP (rev. 2 Sep 2025) | https://plato.stanford.edu/entries/thomas-kuhn/ | full | anomalies accumulate; exemplars; diverse evaluators |
 | S04 | UC Berkeley, *Understanding Science flowchart* (text) | https://undsci.berkeley.edu/the-understanding-science-flowchart-text-description/ | full (text) | non-linear loop; expected vs actual; revise assumptions; community feedback |
@@ -51,23 +56,23 @@ URL = canonical link; "read at" = the copy actually read. Accessed 2026-10-26 (S
 | S08 | Box, *Science and Statistics*, JASA 1976 | https://www.gwern.net/doc/statistics/decision/1976-box.pdf | full | iterate on discrepancy; sponsor then critic; parsimony; worry about tigers |
 | S09 | Breiman, *Two Cultures*, Stat Sci 2001 (+ comments) | https://doi.org/10.1214/ss/1009213726 (read at https://www.stat.cmu.edu/~ryantibs/journalclub/breiman_2001.pdf) | full | goal type; beat a trivial baseline; Rashomon stability; equal tuning effort (Efron) |
 | S10 | Gelman & Shalizi, *Philosophy and the practice of Bayesian statistics*, BJMSP 2013 | https://arxiv.org/abs/1006.3868 | full (arXiv v4) | fit–check–expand; posterior predictive checks; severity |
-| S11 | Ioannidis, *Why Most Published Research Findings Are False*, PLoS Med 2005 | https://doi.org/10.1371/journal.pmed.0020124 | full | flexibility and many tests lower PPV; too-good effects suspect |
+| S11 | Ioannidis, *Why Most Published Research Findings Are False*, PLoS Med 2005 | https://doi.org/10.1371/journal.pmed.0020124 | full | flexibility and many tests lower the positive predictive value; too-good effects suspect |
 | S12 | Simmons, Nelson & Simonsohn, *False-Positive Psychology*, Psych Sci 2011 | https://papers.ssrn.com/abstract=1850704 (read at https://www2.psych.ubc.ca/~schaller/528Readings/SimmonsNelsonSimonsohn2011.pdf) | full | disclose all choices; fixed stopping rule; with/without exclusions |
 | S13 | Gelman & Loken, *Garden of Forking Paths*, 2013 | https://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf | full | data-contingent choices; label exploratory; confirm on new data |
 | S14 | Wasserstein & Lazar, *ASA Statement on p-values*, Am Stat 2016 | https://doi.org/10.1080/00031305.2016.1154108 (read at https://www.stat.berkeley.edu/~aldous/Real_World/ASA_statement.pdf; plan URL is the press release) | full | no threshold-only conclusions; full reporting; p ≠ effect size |
-| S15 | Lakens 2017; Lakens, Scheel & Isager 2018, *Equivalence testing* | https://pmc.ncbi.nlm.nih.gov/articles/PMC5502906 · https://doi.org/10.1177/2515245918770963 (read at https://osf.io/download/5a0f36936c613b026c4a1848) | full | SESOI fixed in advance; equivalence before "no effect"; four outcomes |
-| S16 | Nosek et al., *The Preregistration Revolution*, PNAS 2018 | https://doi.org/10.1073/pnas.1708274114 (read at https://pmc.ncbi.nlm.nih.gov/articles/PMC5856500/) | full | prediction vs postdiction; deviations reported; sealed holdout; SOPs; what was already seen |
+| S15 | Lakens 2017; Lakens, Scheel & Isager 2018, *Equivalence testing* | https://pmc.ncbi.nlm.nih.gov/articles/PMC5502906 · https://doi.org/10.1177/2515245918770963 (read at https://osf.io/download/5a0f36936c613b026c4a1848) | full | smallest effect size of interest fixed in advance; equivalence before "no effect"; four outcomes |
+| S16 | Nosek et al., *The Preregistration Revolution*, PNAS 2018 | https://doi.org/10.1073/pnas.1708274114 (read at https://pmc.ncbi.nlm.nih.gov/articles/PMC5856500/) | full | prediction vs postdiction; deviations reported; sealed holdout; standard operating procedures; what was already seen |
 | S17 | Munafò et al., *A Manifesto for Reproducible Science*, Nat Hum Behav 2017 | https://doi.org/10.1038/s41562-016-0021 | full (Table 1 not rendered) | blinding; independent oversight; automation amplifies false discovery |
 | S18 | Sandve et al., *Ten Simple Rules for Reproducible Computational Research*, PLoS CB 2013 | https://doi.org/10.1371/journal.pcbi.1003285 | full | track provenance; no manual edits; seeds; link text to results |
 | S19 | Schnell, *Ten Simple Rules for a Lab Notebook*, PLoS CB 2015 | https://pmc.ncbi.nlm.nih.gov/articles/PMC4565690 | full | dated, chronological, strike-through; rationale; who did what |
 | S20 | Nygard, *Documenting Architecture Decisions*, 2011 | https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions | full | short numbered decision records; superseded not deleted |
 | S21 | Kapoor et al., *REFORMS*, Sci Adv 2024 | https://reforms.cs.princeton.edu/ (read at arXiv 2308.07832v2 + checklist beta) | full | 32 items / 8 modules; reproducibility bundle; equal tuning of baselines |
-| S22 | Kapoor & Narayanan, *Leakage and the reproducibility crisis*, Patterns 2023 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10499856 | full | 8 leakage types (L1–L3); model info sheet; simple baselines win after fixes |
+| S22 | Kapoor & Narayanan, *Leakage and the reproducibility crisis*, Patterns 2023 | https://pmc.ncbi.nlm.nih.gov/articles/PMC10499856 | full | 8 leakage types; model info sheet; simple baselines win after fixes |
 | S23 | Lones, *How to avoid ML pitfalls*, arXiv v5 2024 | https://arxiv.org/abs/2108.02497 | full | lock test set; pipeline is training; naive baselines; multiple comparisons |
 | S24 | Pineau et al., *Improving reproducibility in ML research*, JMLR 2021 | https://jmlr.org/papers/v22/20-303.html | full | reproducible ≠ replicable ≠ robust ≠ generalisable; run record; no proof checklists work |
 | S25 | Lipton & Steinhardt, *Troubling Trends in ML Scholarship*, 2018 | https://arxiv.org/abs/1807.03341 | full | speculation vs explanation; ablations; negative results |
 | S26 | Henderson et al., *Deep RL that Matters*, AAAI 2018 | https://arxiv.org/abs/1709.06560 | main | seeds, hyperparameters, implementations change results; all runs |
-| S27 | Agarwal et al., *Statistical Precipice*, NeurIPS 2021 | https://arxiv.org/abs/2108.13264 | main | interval estimates; IQM; profiles; locked protocol |
+| S27 | Agarwal et al., *Statistical Precipice*, NeurIPS 2021 | https://arxiv.org/abs/2108.13264 | main | interval estimates; interquartile mean; profiles; locked protocol |
 | S28 | agents.md | https://agents.md/ | full | plain Markdown; nearest file; list runnable checks |
 | S29 | Claude Code memory docs; AGENTS.md fallback; issue #66559 | https://code.claude.com/docs/en/memory · https://devops.com/claude-code-adds-agents-md-fallback-cutting-instruction-file-sprawl (unreadable; secondary used) · https://github.com/anthropics/claude-code/issues/66559 | full / partial | `@` imports; user scope no prompt; < 200 lines; HTML comments stripped; no symlinked CLAUDE.md |
 | S30 | Codex customization and AGENTS.md docs | https://developers.openai.com/codex/concepts/customization.md (now learn.chatgpt.com) | full | `~/.codex/AGENTS.md`; override masks; 32 KiB; no imports |
@@ -80,7 +85,7 @@ URL = canonical link; "read at" = the copy actually read. Accessed 2026-10-26 (S
 | S37 | Cawley & Talbot, *Over-fitting in model selection*, JMLR 2010 | https://www.jmlr.org/papers/volume11/cawley10a/cawley10a.pdf | main | selection inside folds; nested CV; multiple partitions |
 | S38 | Dodge et al., *Show Your Work*, EMNLP 2019 | https://arxiv.org/abs/1909.03004 | main | results depend on search budget; report trials |
 | S50 | Zhong, Raghunathan & Carlini, *ImpossibleBench: Measuring LLMs' Propensity of Exploiting Test Cases*, arXiv 2025 / ICLR 2026 | https://arxiv.org/abs/2510.20270 | abstract | agents "pass" impossible tasks by editing or bypassing tests; stronger models cheat more |
-| S51 | Sharma et al., *Towards Understanding Sycophancy in Language Models*, arXiv 2023 (v4 2025) | https://arxiv.org/abs/2310.13548 | abstract | RLHF assistants favour answers that agree with the user over true ones |
+| S51 | Sharma et al., *Towards Understanding Sycophancy in Language Models*, arXiv 2023 (v4 2025) | https://arxiv.org/abs/2310.13548 | abstract | assistants trained on human feedback (RLHF) favour answers that agree with the user over true ones |
 | S52 | Klein, *Performing a Project Premortem*, HBR 85(9) 2007 | https://www.Wikipedia.org/wiki/Premortem (secondary; original not read) | abstract | assume the project has already failed and list why; surfaces unspoken doubts |
 | S53 | Chesterton, *The Thing* (1929), ch. "The Drift from Domesticity" ("Chesterton's fence") | https://www.chesterton.org/taking-a-fence-down/ | partial | do not remove an institution without knowing why it was put there; the popular phrasing is a paraphrase |
 | S54 | Devin CLI docs: rules, configuration, skills | https://docs.devin.ai/cli/extensibility/rules.md · https://docs.devin.ai/cli/extensibility/configuration.md · https://docs.devin.ai/cli/extensibility/skills/overview.md | partial (read by a reviewer agent) | reads the project `AGENTS.md`/`CLAUDE.md`; global at `~/.config/devin/AGENTS.md`; skills in `~/.agents/skills`; no imports |
@@ -93,7 +98,7 @@ URL = canonical link; "read at" = the copy actually read. Accessed 2026-10-26 (S
 | S61 | Camerer, Loewenstein & Weber, *The curse of knowledge*, J Political Economy 1989 | https://www.cmu.edu/dietrich/sds/docs/loewenstein/CurseknowledgeEconSet.pdf | full (research agent) | better-informed people cannot ignore what they know when writing for others |
 | S62 | US federal plain language guidelines, *Avoid jargon* | https://digital.gov/guides/plain-language/principles/avoid-jargon | full (research agent) | keep only necessary technical terms, and define them |
 | S63 | ISO 24495-1:2023, *Plain language — Part 1* | https://www.din.de/de/mitwirken/normenausschuesse/nat/veroeffentlichungen/wdc-beuth:din21:370015899/toc-3456451/download | partial (table of contents) | readers get what they need, find it, understand it and can use it |
-| S64 | Read-back of orders on ICU rounds, Can J Hosp Pharm | https://cjhp-online.ca/index.php/cjhp/article/download/1702/2656?inline=1 | main (research agent) | rounds with at least one error fell from 76% to 21% with read-back; not randomized |
+| S64 | Read-back of orders on intensive care unit rounds, Can J Hosp Pharm | https://cjhp-online.ca/index.php/cjhp/article/download/1702/2656?inline=1 | main (research agent) | rounds with at least one error fell from 76% to 21% with read-back; not randomized |
 | S65 | I-PASS handoff study (Starmer et al., NEJM 2014), Harvard Medical School news | https://hms.harvard.edu/news/safer-patient-handoffs | partial (secondary) | handoff ending with the receiver's own summary: medical errors −23%, preventable adverse events −30%; before-and-after design |
 | S66 | Stray et al., daily stand-up meetings, 2018 | https://arxiv.org/pdf/1808.07650.pdf | full (research agent) | "what I did" turns into status reporting; first recommendation: omit it |
 | S67 | Anthropic, *Prompting Claude Fable 5.2* | https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2 | full (research agent) | say first what you will do; close with what was found, done and next; low-context reader; no terms made up during the work |
@@ -121,4 +126,4 @@ URL = canonical link; "read at" = the copy actually read. Accessed 2026-10-26 (S
 - Pre-registration and checklists have little direct experimental support (S16, S24).
 - "One task, the owner's pace", part of "Everything has a why", the reply language and "no AI attribution" are owner preferences, not derived from a source.
 - No study tests the exact report shape "what I understood / result / how I know / next"; it follows a standard (S55) and vendor guidance (S67, S68), with study support only for its parts (S56, S58, S64–S66).
-- S50–S53, S56, S57, S63, S65 and S69 were read only as abstract, table of contents or secondary source.
+- S35, S50–S52, S56, S57, S63, S65 and S69 were read only as abstract, table of contents or secondary source; S29, S53 and S54 only in part.

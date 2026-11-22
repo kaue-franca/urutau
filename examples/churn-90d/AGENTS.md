@@ -1,4 +1,4 @@
-<!-- urutau:begin v0.2.0 -->
+<!-- urutau:begin v0.3.0 -->
 (The setup copies the urutau method here; not shown in this example.)
 <!-- urutau:end -->
 

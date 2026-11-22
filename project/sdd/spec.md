@@ -3,7 +3,7 @@
 Question:
 Goal type: prediction | explanation | description | build
 Scope and non-goals:
-Constraints:
+Constraints (on the solution):
 
 ## Success criteria
 <!-- Each names the result that would fail it: metric, threshold, data/split, baseline. -->

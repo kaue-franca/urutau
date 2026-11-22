@@ -78,3 +78,11 @@ Decision: delete; tag `v0.1.0` (commit 842bac1) keeps them reachable; no `histor
 Results seen: n/a.
 Consequences: (+) 25 tracked files instead of 34, 69% fewer bytes (102,288 vs 333,735, measured after Task 15 step 5); nothing that works today depended on them; (−) the ml and rl checklists must be rebuilt as skills if a project needs them.
 Supersedes: the modules part of DEC-012 and DEC-013; the `history/` and `GUIA.md` parts of DEC-013.
+
+## Decision 18 · 2026-11-22 · by: owner · Independent of the agent tool; install by an agent from INSTALL.md
+Context: the method is meant to work with any AI tool, which is why it is built on `AGENTS.md`; the owner never installs by hand but asks an agent to do it from this repo. The install scripts, the setup skill and `project/CLAUDE.md` were tied to specific tools and out of date. An independent review of Task 15 (22 findings) also pointed at them.
+Options: rewrite the scripts as one tool-aware script · write the steps for an agent and drop the scripts.
+Decision: drop `scripts/`, `skills/urutau-setup/` and `project/CLAUDE.md`; `INSTALL.md` tells any agent how to install the global rules (find its own tool's user-level file from the docs; import, link or marked copy; check), set up, update and remove urutau in a project. The method files name no tool. VERSION 0.3.0, because `global/` and `project/` changed. Criteria 3 and 4 restated without tool names; Task 11 dropped; Task 12 becomes plain-Markdown procedures.
+Results seen: n/a.
+Consequences: (+) one path for every tool; nothing to keep in sync per tool; (−) no mechanical check of the records (the old `check.py` already checked nothing); each install depends on the agent reading its tool's documentation correctly, so step 3 of the install checks it.
+Supersedes: the scripts and skills parts of DEC-012 and DEC-013; Task 11.
