@@ -1,5 +1,5 @@
-<!-- urutau:begin v0.2.0 modules=ml -->
-(The urutau method and the ml module are generated here by `urutau init` / `urutau update`.)
+<!-- urutau:begin v0.3.0 -->
+(The setup copies the urutau method here; not shown in this example.)
 <!-- urutau:end -->
 
 # churn-90d
@@ -9,15 +9,15 @@ Pace: step
 
 ## Commands
 - Setup: `uv sync`
-- Tests / lint: `uv run pytest -q && uv run python -m churn.checks.leakage` · `uv run ruff check .`
+- Code tests / lint: `uv run pytest -q && uv run python -m churn.checks.leakage` · `uv run ruff check .`
 - Reproduce every reported number: `uv run make results` (writes `results/*.json` and figures)
 
-## Data
+## Inputs
 - Raw: `data/raw/accounts_2024-01_2026-06.parquet` (sha256 in `data/raw/SHA256SUMS`) — read-only
 - Features use only events before the scoring date; see `churn/features.py`.
-- Holdout: `data/holdout/2026-04_2026-06.parquet` — sealed; every look is logged in `sdd/log.md`
+- Holdout: `data/holdout/2026-04_2026-06.parquet` — kept untouched for the final check; every look is logged in `sdd/log.md`
 
 ## Constraints
 - A false positive costs one discount (≈ R$ 30); a missed churner costs ≈ R$ 400 of margin.
-- "Churn" = cancellation or 30 days unpaid; definition frozen by DEC-001.
+- "Churn" = cancellation or 30 days unpaid; definition fixed by Decision 1 in `sdd/log.md`.
 - No personal data leaves `data/`; never print raw rows in logs.

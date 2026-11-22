@@ -62,3 +62,41 @@ Context: AC-01…AC-05 measured v0 artifacts (15 rules, `guide/index.html` cards
 
 ## DEC-015 · 2026-11-22 · by: owner · Rename CIENCIA.md to SCIENCE.md
 Context: owner request. Decision: the sources file is `SCIENCE.md` (content stays in pt-BR); mentions of CIENCIA.md in DEC-013/014 refer to it. Results seen: n/a. Supersedes: the name in DEC-013.
+
+## Decision 16 · 2026-11-22 · by: owner (request) + agent (Claude Code) · Clear communication, plain vocabulary, English files, no AI attribution
+Context: the owner could not follow replies full of codes and coined terms (exp, expl, ac, SC-01, rule numbers); wants replies in their own language, everything in files in English, every statement sourced or marked as assumed, a short standard report, and no Co-Authored-By or AI mentions anywhere. Two sub-agents reviewed the repo (codes and their dependencies) and the research on reporting (sources S55–S69 in `SCIENCE.md`).
+Options: (a) keep the codes and only add a reply rule; (b) add the reply rule and also cut the codes to what other entries must point to.
+Decision: (b). A Communication section in the global file and the project method: reply language, plain words with no internal labels, and a report shape (what I understood before a task; then result, how I know, next). Rules are named, not numbered ("Disagree on evidence" → "Push back with evidence"). Numbered names only where something points to them: Task, Criterion, Try, Experiment (was test card), Decision. A try may record what was seen but never supports a claim. One name per idea: holdout, new method, pace, Dead ends, success criteria, "Worth retrying if", "Why each file exists", approval. "Unexplained" moves into Open questions. `SCIENCE.md` goes to English, reversing the "human docs in pt-BR" constraint and the language part of DEC-015. Branches are `task-<n>-<slug>`; commits `Task n step k: …`. No AI attribution anywhere. Criteria restated in words (Criterion 4 names the rules; Criterion 5 names the four pilot criteria).
+Results seen: no (no pilot yet).
+Consequences: (+) replies and files readable without a glossary; every rule still traced to sources; (−) entries before this one keep the old IDs (mapping at the top of `spec.md`); the out-of-date scripts still use the old names until Task 11; 11 commits on `master` keep an AI co-author line unless the owner approves a history rewrite.
+Supersedes: the vocabulary part of DEC-013; the pt-BR part of the constraints and of DEC-015; DEC-014's criteria wording.
+
+## Decision 17 · 2026-11-22 · by: owner · One agnostic method; remove domain modules and v0 build files
+Context: the owner's goal is a scientific, tool-agnostic method for working with AI on any project; domain checklists (ml, rl) tie it to one kind of work, and the v0 build files (`PLAN.md`, `REFERENCES.md`, `references/`, `guide/index.html`, `CHANGELOG.md`) were no longer read.
+Options: keep · move to a `history/` folder · delete and rely on git.
+Decision: delete; tag `v0.1.0` (commit 842bac1) keeps them reachable; no `history/` folder. Domain needs become the owner's own skills. The guide planned for the human reader is folded into the README. Rule wording that is still data-science specific is reworded in Task 16.
+Results seen: n/a.
+Consequences: (+) 25 tracked files instead of 34, 69% fewer bytes (102,288 vs 333,735, measured after Task 15 step 5); nothing that works today depended on them; (−) the ml and rl checklists must be rebuilt as skills if a project needs them.
+Supersedes: the modules part of DEC-012 and DEC-013; the `history/` and `GUIA.md` parts of DEC-013.
+
+## Decision 18 · 2026-11-22 · by: owner · Independent of the agent tool; install by an agent from INSTALL.md
+Context: the method is meant to work with any AI tool, which is why it is built on `AGENTS.md`; the owner never installs by hand but asks an agent to do it from this repo. The install scripts, the setup skill and `project/CLAUDE.md` were tied to specific tools and out of date. An independent review of Task 15 (22 findings) also pointed at them.
+Options: rewrite the scripts as one tool-aware script · write the steps for an agent and drop the scripts.
+Decision: drop `scripts/`, `skills/urutau-setup/` and `project/CLAUDE.md`; `INSTALL.md` tells any agent how to install the global rules (find its own tool's user-level file from the docs; import, link or marked copy; check), set up, update and remove urutau in a project. The method files name no tool. VERSION 0.3.0, because `global/` and `project/` changed. Criteria 3 and 4 restated without tool names; Task 11 dropped; Task 12 becomes plain-Markdown procedures.
+Results seen: n/a.
+Consequences: (+) one path for every tool; nothing to keep in sync per tool; (−) no mechanical check of the records (the old `check.py` already checked nothing); each install depends on the agent reading its tool's documentation correctly, so step 3 of the install checks it.
+Supersedes: the scripts and skills parts of DEC-012 and DEC-013; Task 11.
+
+## Decision 19 · 2026-11-22 · by: owner (approved) + agent · Domain-neutral wording
+Context: the owner's goal is one method for any project (Decision 17); the independent review of Task 15 listed the rules and skeletons that still assumed data work (data split, seeds, resamples, leakage, the holdout, Python commands in the project section).
+Decision: the rules speak of the goal, the success measure, the cases a check runs on, inputs, settings and effort; "the answer leaking into the check" and "a quirk of the chosen cases" replace leakage and data artifacts; "cases kept apart for the final check" replaces the holdout, which is named only as the data-work term. The project section has placeholder commands and an Inputs section. The rigor is unchanged: baseline reproduced, equal effort, card before the run, every run reported. VERSION stays 0.3.0, because 0.3.0 was never released before this change.
+Results seen: n/a.
+Consequences: (+) the same text fits software, writing or research projects; (−) the only example is still a data project (Task 17).
+Supersedes: the data-specific wording of Decisions 13 and 16.
+
+## Decision 20 · 2026-11-22 · by: owner · Remove the AI co-author line from the whole history
+Context: 11 commits carried a `Co-Authored-By` line naming an AI; the owner wants no AI attribution anywhere (Decision 16).
+Decision: rewrite every commit message on all branches and the tag `v0.1.0` without that line (`git filter-branch --msg-filter`); file contents unchanged (same tree before and after); force-push `master`. Commit IDs therefore changed. Entries above keep the old IDs; read them through this table — 842bac1 → eb4a983 (v0.1.0) · 3ad83b6 → 304055c · 3afaa0a → f5c1624 · 1209705 → 8f64f1d. `spec.md` and `knowledge.md` use the new IDs.
+Results seen: n/a.
+Consequences: (+) no AI attribution in the repo's history; (−) old IDs in this log need the table; GitHub keeps the old commits of pull requests #1 and #2 on their pages.
+Supersedes: —

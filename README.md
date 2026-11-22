@@ -1,19 +1,21 @@
 # urutau
+A short method for working with AI agents on any project, based on the scientific method and independent of the agent tool. The agent keeps what was checked apart from what is assumed, predicts before it acts, tests an idea before relying on it, explains itself in plain words, and leaves records the next session can trust.
 
-A personal, portable spec-driven development (SDD) method grounded in the scientific method, for agent-assisted data-science work. This repository is the single source of every version of the method (`VERSION`, `CHANGELOG.md`).
+The method is plain Markdown read through `AGENTS.md`. To install or set it up, ask an agent to follow `INSTALL.md` from this repository.
 
-Two layers, used together:
-- **global** — `global/AGENTS.md`: generic working principles (G1–G6), git workflow and uv, for every session on the machine; plus `skills/` for Claude Code. Installed once; linked to this clone, so `git pull` updates it.
-- **project** — `method/AGENTS.md` + `modules/`: the full method (R1–R15) applied to one project, pinned with its version into `<project>/.urutau/` and loaded by the project's `AGENTS.md`. Project records live in `sdd/{spec,knowledge,log}.md`.
+## What is here
+| Path | What it is |
+|---|---|
+| `global/AGENTS.md` | Rules for every session on a machine: six rules, conventions, communication. |
+| `project/` | What a project receives: `method.md` (all nine rules, communication, the `sdd/` routine), the project section `AGENTS.md`, and the three `sdd/` files. |
+| `INSTALL.md` | Steps for the agent that installs urutau on a machine, or sets it up, updates or removes it in a project. |
+| `examples/churn-90d/` | A filled, fictional project to learn the format from. |
+| `SCIENCE.md` | Why each rule exists and the sources behind it. |
+| `sdd/` | This repository's own records: urutau is built with its own method. |
 
-Also: `templates/` (project files and filled examples), `guide/index.html` (guia em português para validar cada regra), `references/` (sources behind each rule), `scripts/`.
+## A project's records (`sdd/`)
+- `spec.md`: the question, the success criteria, the one current task in detail, the next tasks in one line each, open questions.
+- `knowledge.md`: what is known (with evidence), what is assumed, dead ends, why each file exists.
+- `log.md`: append-only record of tries, experiments and decisions.
 
-Quick start:
-```sh
-scripts/install.sh                        # global layer + skills (Claude Code, Codex); --uninstall to undo
-scripts/new-project.sh ~/code/my-proj --ml  # files + method pin + uv env; or the urutau-setup skill
-scripts/install.sh --project ~/code/my-proj # update a project's pin to this version
-scripts/install.sh --status [<project>]   # what is installed where
-python3 scripts/check.py [--project <path>]
-```
-Status: v0.1.0; the Phase 7 pilot has not started. This repository manages its own development with the method, in `sdd/`.
+Version: `VERSION`. History: git tags and the decisions in `sdd/log.md`.
