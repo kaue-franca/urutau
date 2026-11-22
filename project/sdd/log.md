@@ -8,11 +8,11 @@
 <!-- Experiment: commit the card BEFORE running; fill Result and Verdict in a later commit.
 ## Experiment 1 · <date> · by: <who> · <title>
 Question:
-Rival explanations: our idea … | no effect (baseline) … | boring ones: bug, leakage, data or selection artifact, chance
+Rival explanations: our idea … | no effect (baseline) … | boring ones: bug, answer leaking into the check, quirk of the chosen cases, chance
 Fails if: <for each explanation, the result that rules it out>
-Plan: data and split (not used to form the idea) · already seen · baseline reproduced? · runs/seeds · search budget · smallest effect that matters and decision rule
+Plan: cases used (not used to form the idea) · what was already seen · baseline reproduced? · number of runs or cases · effort budget (e.g. tuning trials) · smallest effect that matters and decision rule
 Card committed at: <commit>
-Result: effect ± uncertainty vs baseline, all runs
+Result: effect with its uncertainty vs the baseline, all runs
 Verdict: supported | refuted | inconclusive
 Reviewed by: <owner or an agent with no prior context>
 -->

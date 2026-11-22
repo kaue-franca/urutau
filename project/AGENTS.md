@@ -5,13 +5,13 @@ Pace: step
 <!-- step: wait for the owner after each step · task: after each task · free: only when a decision is needed -->
 
 ## Commands
-- Setup: `uv sync`
-- Code tests / lint: `uv run pytest -q` · `uv run ruff check .`
-- Reproduce every reported number: `<command>`
+- Setup: `<command>`
+- Checks (code tests, lint, build): `<command>`
+- Reproduce every reported result: `<command>`
 
-## Data
-- Raw: `<path>` (version: <hash or date>) — read-only
-- Holdout: `<path>` — kept untouched for the final check; every look is logged in `sdd/log.md`
+## Inputs
+- Source material (data, documents, systems): `<where>` (version: <hash or date>) — read-only
+- Kept apart for final checks: `<where>` — every look is logged in `sdd/log.md`
 
 ## Constraints
 - <rule for every session: privacy, cost of errors, definitions that must not change>

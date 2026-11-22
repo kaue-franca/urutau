@@ -13,10 +13,10 @@ Constraints: everything in files in English, replies in the owner's language; so
 - Criterion 5: the pilot meets four criteria, fixed before it starts — cold start (in a fresh session the agent states the current task, last result, open ideas and the last dead end from the files alone, fully correct in ≥ 4 of 5 sessions); cards first (≥ 90% of experiment cards committed before their results, by git history); tagged claims (100% of Known lines in `knowledge.md` carry an evidence tag); upkeep (the owner rates it acceptable in ≥ 4 of 5 sessions). Fails if any misses its threshold.
 
 ## Current task
-<!-- None: Task 16 is detailed next, with the owner. -->
+<!-- None: the next task is detailed with the owner. -->
 
 ## Next tasks
-- Task 16 Domain-neutral wording: some rules still use data-science words (holdout, seeds, leakage); make them fit any project without losing rigor (serves the Question)
+- Task 17 A second example outside data work (for instance a software or writing project), to show the method fits any project (serves the Question)
 - Task 12 Procedures `audit` and `grill` as plain Markdown any agent can follow (serves the Question)
 - Task 13 Newcomer test of README + `INSTALL.md` (serves Criterion 3)
 - Task 14 Field tests: the owner's master's thesis repo, a repo with code, install on the work PC by an agent (serves Criterion 4)
@@ -24,6 +24,7 @@ Constraints: everything in files in English, replies in the owner's language; so
 - Task 8 Second consolidation, tag `v1.0` (serves all)
 
 ## Done
+- Task 16 Domain-neutral wording: rules and skeletons speak of cases, measures, inputs and effort instead of data splits, seeds, metrics and the holdout; the project section's commands and inputs are placeholders, not Python tools — Decision 19
 - Task 15 Clear communication and fewer codes, independent of the agent tool — commits on branch task-15-clear-communication; Decisions 16–18
 - Task 10 Method v0.2: nine named rules, simple vocabulary, sdd skeletons, example, SCIENCE.md — merged in PR #2; its independent review is folded into Task 15 step 6
 - Task 9 v0.1 (two layers, 3-file sdd/, setup skill) — commits 842bac1, 3ad83b6; superseded by v0.2 (Decision 13)

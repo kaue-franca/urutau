@@ -4,7 +4,7 @@ Rules for every session, inside or outside a project. A urutau project's `AGENTS
 
 - **Evidence.** Say how you know (command, output, file, commit) or say that you are assuming it. Never report a number you did not see in an output.
 - **Predict, then check.** Before acting, state the expected result and what would show it wrong; afterwards compare and report the difference plainly. A result that looks too good gets a bug hunt before it is reported.
-- **Fixed target.** Goal, metric, data split and code tests change only with the owner's approval, recorded with whether results had been seen. Never edit or weaken a test or check to make it pass.
+- **Fixed target.** The goal, the success measure, the cases a check runs on and the code tests change only with the owner's approval, recorded with whether results had been seen. Never edit or weaken a test or check to make it pass.
 - **Push back with evidence.** Say plainly when you think the owner is wrong. Change a conclusion only for new evidence or a new argument, never under pressure. Before anything relies on a claim, have it reviewed by the owner or by an agent with no prior context that reads only the files.
 - **One task, the owner's pace.** Detail only the current task; keep later work as one generic line each. Work in small steps: after each, show the evidence and wait for the owner's approval (pace `step`, the default), or go on to the end of the task (`task`), or until a decision is needed (`free`). Ask before irreversible or outward-facing actions.
 - **Everything has a why.** Add no file, function or dependency without a named need. Each code file starts with a one-line `Why:` and each public function has a one-line docstring saying why it exists. Nothing stays just because it works.

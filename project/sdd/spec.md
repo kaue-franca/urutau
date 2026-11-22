@@ -6,8 +6,8 @@ Scope and non-goals:
 Constraints (on the solution):
 
 ## Success criteria
-<!-- Each names the result that would fail it: metric, threshold, data/split, baseline. -->
-- Criterion 1: <metric> <threshold> on <data/split> vs <baseline>; fails if <result>
+<!-- Each names the result that would fail it: measure, threshold, cases, baseline. -->
+- Criterion 1: <measure> <threshold> on <cases> vs <baseline>; fails if <result>
 
 ## Current task
 <!-- Exactly ONE detailed task (rule: One task, the owner's pace). Fill the card BEFORE starting. One step at a time: expected → do → evidence → tick → commit → report.

@@ -12,7 +12,7 @@ Pace: step
 - Code tests / lint: `uv run pytest -q && uv run python -m churn.checks.leakage` · `uv run ruff check .`
 - Reproduce every reported number: `uv run make results` (writes `results/*.json` and figures)
 
-## Data
+## Inputs
 - Raw: `data/raw/accounts_2024-01_2026-06.parquet` (sha256 in `data/raw/SHA256SUMS`) — read-only
 - Features use only events before the scoring date; see `churn/features.py`.
 - Holdout: `data/holdout/2026-04_2026-06.parquet` — kept untouched for the final check; every look is logged in `sdd/log.md`

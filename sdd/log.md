@@ -86,3 +86,10 @@ Decision: drop `scripts/`, `skills/urutau-setup/` and `project/CLAUDE.md`; `INST
 Results seen: n/a.
 Consequences: (+) one path for every tool; nothing to keep in sync per tool; (−) no mechanical check of the records (the old `check.py` already checked nothing); each install depends on the agent reading its tool's documentation correctly, so step 3 of the install checks it.
 Supersedes: the scripts and skills parts of DEC-012 and DEC-013; Task 11.
+
+## Decision 19 · 2026-11-22 · by: owner (approved) + agent · Domain-neutral wording
+Context: the owner's goal is one method for any project (Decision 17); the independent review of Task 15 listed the rules and skeletons that still assumed data work (data split, seeds, resamples, leakage, the holdout, Python commands in the project section).
+Decision: the rules speak of the goal, the success measure, the cases a check runs on, inputs, settings and effort; "the answer leaking into the check" and "a quirk of the chosen cases" replace leakage and data artifacts; "cases kept apart for the final check" replaces the holdout, which is named only as the data-work term. The project section has placeholder commands and an Inputs section. The rigor is unchanged: baseline reproduced, equal effort, card before the run, every run reported. VERSION stays 0.3.0, because 0.3.0 was never released before this change.
+Results seen: n/a.
+Consequences: (+) the same text fits software, writing or research projects; (−) the only example is still a data project (Task 17).
+Supersedes: the data-specific wording of Decisions 13 and 16.
