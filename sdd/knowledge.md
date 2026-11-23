@@ -14,6 +14,8 @@
 - Restating the task before acting (read-back, receiver's summary) reduced errors in clinical studies, none randomized [source: S64, S65] — 2026-11-22
 - Users over-trust confident AI answers, more so when they are long; first-person uncertainty reduces over-reliance [source: S56, S58] — 2026-11-22
 
+- Devin CLI loads skills from `.agents/skills/` and `~/.agents/skills/` (also `.devin/skills/`, `~/.config/devin/skills/`), in the SKILL.md format [source: docs.devin.ai/cli/extensibility/skills, read 2026-11-23] — 2026-11-23
+
 ## Assumed
 - A short, hand-written instruction file loaded in every session changes agent behaviour enough to matter for this method — would be checked by: the pilot (Criterion 5)
 - Codex loads `~/.codex/AGENTS.md` (masked by `AGENTS.override.md`) — would be checked by: a Codex session on this notebook
@@ -39,6 +41,7 @@
 | `INSTALL.md` | install, setup, update and removal steps for any agent | core |
 | `examples/churn-90d/` | a filled project to learn the format from | support |
 | `SCIENCE.md` | why each rule exists and its sources (Criterion 2) | core |
+| `skills/` | optional catalog of self-contained skills outside the method; each skill keeps its own sources (Decision 21, Criterion 6) | support |
 | `sdd/` | this repo's own records | core |
 | `README.md`, `AGENTS.md`, `VERSION`, `LICENSE`, `.gitignore` | entry point, dev instructions, version, license, ignores | support |
 | `CLAUDE.md` | one-line pointer to `AGENTS.md` for the tool used in this repo today (`INSTALL.md` setup step 3) | support |

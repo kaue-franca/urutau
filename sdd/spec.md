@@ -16,14 +16,14 @@ Constraints: everything in files in English, replies in the owner's language; so
 ## Current task
 ### Task 18 Presentation and paper skills (serves Criterion 6) · branch: task-18-presentation-skills
 Why: the owner wants to build executive and academic presentations and papers in LaTeX with an agent, following sourced good practice (data storytelling; paper and talk structure), from the same repo as the method.
-Prediction: two self-contained skills, `exec-deck` and `academic-writing`, each with a SKILL.md under 500 lines, pass Criterion 6 on the test cases of steps 4 and 6.
-Check: Criterion 6 on the outputs of steps 4 and 6 — fails if any part fails.
+Prediction: two self-contained skills, `exec-deck` and `academic-writing`, each with a SKILL.md under 500 lines, pass Criterion 6 on the test cases of steps 5 and 6.
+Check: Criterion 6 on the outputs of steps 5 and 6 — fails if any part fails.
 Steps:
 1. [x] Record the scope change (Decision 21), Criterion 6 and this card — check: `sdd/spec.md` and `sdd/log.md` on this branch
-2. [ ] Shared LaTeX base: deck and paper templates (Beamer + Moloch, LuaLaTeX), `latexmkrc`, figure style — check: both templates compile with no errors on the owner's TeX Live
-3. [ ] `skills/exec-deck/`: SKILL.md, references, `check.py` — check: SKILL.md < 500 lines; `check.py` flags a deck with a planted overfull box and a broken reference
-4. [ ] Test `exec-deck` on `examples/churn-90d`: an agent with no prior context builds the deck from the skill alone — check: Criterion 6, owner's rating
-5. [ ] `skills/academic-writing/`: paper part, then talk part — check: SKILL.md < 500 lines; templates compile
+2. [x] Skill text before templates (owner's request, 2026-11-23): `skills/exec-deck/` and `skills/academic-writing/`, each a SKILL.md plus `references/` — check: SKILL.md 58 lines each (< 500); the rule lists of Mensh & Kording, Gopen & Swan and Peyton Jones checked against the original texts
+3. [ ] Shared LaTeX base: deck and paper templates (Beamer + Moloch, LuaLaTeX), `latexmkrc`, figure style, copied into each skill's `assets/` — check: both templates compile with no errors on the owner's TeX Live
+4. [ ] `check.py` in each skill — check: it flags a document with a planted overfull box and a broken reference
+5. [ ] Test `exec-deck` on `examples/churn-90d`: an agent with no prior context builds the deck from the skill alone — check: Criterion 6, owner's rating
 6. [ ] Test `academic-writing` on a real case of the owner's (MBA work or thesis project) — check: Criterion 6, owner's rating
 7. [ ] Skills section in `INSTALL.md`, `VERSION` 0.4.0, README; install on the notebook and the work PC — check: a new session in each tool lists both skills
 8. [ ] Independent review by an agent that reads only the files — check: findings answered or recorded
