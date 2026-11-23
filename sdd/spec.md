@@ -39,6 +39,7 @@ Closing: · Learned:
 - Task 8 Second consolidation, tag `v1.0` (serves all)
 
 ## Done
+- Task 19 `[parallel]` steps and tasks run by sub-agents at the same time, in the rule "One task, the owner's pace" and the session routine; VERSION 0.5.0 — Decision 23 (done at the owner's request while Task 18 stays current)
 - Task 16 Domain-neutral wording: rules and skeletons speak of cases, measures, inputs and effort instead of data splits, seeds, metrics and the holdout; the project section's commands and inputs are placeholders, not Python tools — Decision 19
 - Task 15 Clear communication and fewer codes, independent of the agent tool — commits on branch task-15-clear-communication; Decisions 16–18
 - Task 10 Method v0.2: nine named rules, simple vocabulary, sdd skeletons, example, SCIENCE.md — merged in PR #2; its independent review is folded into Task 15 step 6

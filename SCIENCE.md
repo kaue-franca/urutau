@@ -34,6 +34,7 @@ An AI agent writes fluent code and explanations much faster than anyone can chec
 | Why each file exists; `Why:` line in code | `sdd/knowledge.md`, code | S53 |
 | Self-contained, short `AGENTS.md`, no repo overview, critical rules first | project and global | S28–S34, S54 |
 | Session routine: say what you understood; then one step at a time: expected → do → evidence → commit → report | `project/method.md` | S04, S06, S19, S64, S65; owner-preference (pace) |
+| `[parallel]` steps and tasks: four independence tests (no result needed from another, own files, no approval between, own check); one sub-agent each, started at the same time; the main agent checks, ticks and commits each | `project/method.md`, `global/AGENTS.md`, `sdd/spec.md` | S70; owner-preference |
 | Numbered names only where other entries point to them (Task, Criterion, Try, Experiment, Decision) | `sdd/` | S20, S60; owner-preference |
 | Evidence tags `[checked]` `[source]` `[assumed]` | `sdd/knowledge.md` | S18, S55 |
 | Offer to set up urutau in a repo without it, never impose | `global/AGENTS.md` | owner-preference |
@@ -42,7 +43,7 @@ An AI agent writes fluent code and explanations much faster than anyone can chec
 | Planned procedure `audit`: Chesterton's fence; deleting as a testable claim ("nothing changes") checked by the code tests | procedure | S53, S02, S18 |
 
 ## Sources
-URL = canonical link; "read at" = the copy actually read. Accessed 2026-10-26 (S01–S38) and 2026-11-22 (S50–S69).
+URL = canonical link; "read at" = the copy actually read. Accessed 2026-10-26 (S01–S38), 2026-11-22 (S50–S69) and 2026-11-23 (S70).
 
 | ID | Source | URL | Depth | Principles used |
 |---|---|---|---|---|
@@ -104,6 +105,7 @@ URL = canonical link; "read at" = the copy actually read. Accessed 2026-10-26 (S
 | S67 | Anthropic, *Prompting Claude Fable 5.2* | https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2 | full (research agent) | say first what you will do; close with what was found, done and next; low-context reader; no terms made up during the work |
 | S68 | OpenAI, *GPT-5 prompting guide* | https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide.md | full (research agent) | restate the user's goal before acting; summarize completed work |
 | S69 | Budescu et al. 2009, interpretation of IPCC probability words | https://research.library.fordham.edu/psych_facultypubs/87 | abstract (research agent) | readers' reading of probability words departs from the official meaning even with the guide in hand |
+| S70 | Anthropic, *How we built our multi-agent research system* (2025) | https://www.anthropic.com/engineering/multi-agent-research-system | partial (search excerpts, read 2026-11-23) | sub-agents with their own context run independent directions at the same time; gains are largest on breadth-first work; most coding tasks have fewer truly parallel parts; more agents cost more tokens |
 
 ### Recorded, not yet read
 | ID | Source | URL | Why it may matter |
@@ -126,4 +128,4 @@ URL = canonical link; "read at" = the copy actually read. Accessed 2026-10-26 (S
 - Pre-registration and checklists have little direct experimental support (S16, S24).
 - "One task, the owner's pace", part of "Everything has a why", the reply language and "no AI attribution" are owner preferences, not derived from a source.
 - No study tests the exact report shape "what I understood / result / how I know / next"; it follows a standard (S55) and vendor guidance (S67, S68), with study support only for its parts (S56, S58, S64–S66).
-- S35, S50–S52, S56, S57, S63, S65 and S69 were read only as abstract, table of contents or secondary source; S29, S53 and S54 only in part.
+- S35, S50–S52, S56, S57, S63, S65, S69 and S70 were read only as abstract, table of contents or secondary source; S29, S53 and S54 only in part.

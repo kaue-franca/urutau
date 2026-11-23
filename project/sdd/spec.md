@@ -18,12 +18,13 @@ Prediction: <observable result expected, written before any work>
 Check: <command or observation> — fails if <result>
 Steps:
 1. [ ] <small step> — check: <how we know it worked>
-2. [ ] <small step> — check: <...>
+2. [ ] [parallel] <step that needs no other step's output and writes its own files> — check: <...>
+3. [ ] [parallel] <another independent step: runs at the same time as step 2> — check: <...>
 Result: <observed vs predicted, with evidence>
 Closing: <done | refuted | abandoned → Dead ends> · Learned: <what goes to knowledge.md; what changes for the next tasks>
 
 ## Next tasks
-<!-- One generic line each; detail one only when it becomes the current task. Reorder or drop them as results come in. -->
+<!-- One generic line each; detail one only when it becomes the current task. Reorder or drop them as results come in. Tag `[parallel]` the tasks that could run at the same time (see Session in AGENTS.md). -->
 - Task 2 <rough idea> (serves Criterion n)
 
 ## Done

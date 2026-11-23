@@ -115,3 +115,11 @@ Decision: `INSTALL.md` gets "On a machine: optional skills": the agent finds its
 Results seen: n/a.
 Consequences: (+) the skills reach any tool with a skills folder, through the same agent-driven install as the rules; (−) each machine still needs a person or agent session there to run it; the notebook was not reachable from this session.
 Supersedes: —
+
+## Decision 23 · 2026-11-23 · by: owner (request) + agent · `[parallel]` steps and tasks, run by sub-agents at the same time; VERSION 0.5.0
+Context: the owner often sees agents run independent work one item after another. He asked for a way to find work that can run in parallel, mark it with a `[parallel]` tag in steps or tasks, and instructions to start a sub-agent per item and mark it done. Limits: the global file is at 20 lines and the method at 9 rules (Criterion 1), and nothing may name a tool.
+Options: a tenth rule · a sentence in the "One task, the owner's pace" rule plus a procedure in the session routine.
+Decision: the second. The rule (global and project) says to mark and run independent work at the same time and check each result. The session routine gives the four tests (no result needed from another item of the group, separate files, no approval in between, its own check), the grouping (consecutive tagged steps; an untagged step closes the group), the dispatch (one sub-agent per step, all at once, each told its step, check and files and not to commit; without sub-agents, parallel calls or back to back, said plainly), and the closing (the main agent checks, ticks and commits each step; at pace `step` a group is one approval). Parallel tasks need the owner's approval and get one branch, one working copy (`git worktree`) and one card each. The spec skeleton shows the tag. Source S70 (multi-agent research system): parallel sub-agents pay off on independent work and cost more tokens, so "when unsure, leave it untagged".
+Results seen: n/a.
+Consequences: (+) independent work no longer waits in line; the main agent stays the single place that verifies and commits, so the one-commit-per-verified-step trail holds; (−) more tokens per group; sub-agents writing in the same working copy rely on the separate-files test; the "one current task" rule now has an owner-approved exception.
+Supersedes: —
