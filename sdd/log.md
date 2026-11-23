@@ -100,3 +100,11 @@ Decision: rewrite every commit message on all branches and the tag `v0.1.0` with
 Results seen: n/a.
 Consequences: (+) no AI attribution in the repo's history; (−) old IDs in this log need the table; GitHub keeps the old commits of pull requests #1 and #2 on their pages.
 Supersedes: —
+
+## Decision 21 · 2026-11-23 · by: owner (chose option A) + agent · Optional `skills/` catalog outside the method; Criterion 6
+Context: the owner wants skills for executive presentations (data storytelling), academic presentations and papers, built in LaTeX, kept in this repo. The scope said "no domain-specific modules"; Decision 17 removed the ml and rl modules and Decision 18 removed `skills/urutau-setup/` because it was tied to one tool. Since then the SKILL.md format is an open standard read by several tools, Devin CLI included (`.agents/skills/`, `~/.agents/skills/`) [source: docs.devin.ai/cli/extensibility/skills, read 2026-11-23]. Plan and sources: the owner's planning doc of 2026-11-23.
+Options: (A) an optional `skills/` catalog in this repo, outside the method · (B) a separate repo for skills.
+Decision: (A). `skills/` holds self-contained skill folders in the Agent Skills format; `global/` and `project/` never name a skill, so the method stays domain-free. First two skills: `exec-deck` and `academic-writing` (paper and talk share one claims-to-evidence map, so they are one skill until its SKILL.md passes 500 lines). New Criterion 6 fixes how they are judged. `INSTALL.md` gets a skills section and VERSION goes to 0.4.0 in Task 18 step 7, when that file changes.
+Results seen: no (nothing built yet).
+Consequences: (+) one repo to version and install; skills reach every tool the owner uses; (−) the repo grows beyond the method; each skill carries its own copy of the small LaTeX base, so the copies must be kept identical.
+Supersedes: the "no domain-specific modules" part of the scope; the skills part of Decision 18 (its reason, tool lock-in, no longer holds for the SKILL.md format).

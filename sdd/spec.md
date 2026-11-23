@@ -2,7 +2,7 @@
 <!-- Entries before Decision 16 in log.md use the old vocabulary: AC/SC = success criterion, EXP/TEST = experiment, EXPL/TRY = try, R1–R15/G1–G6/U1–U9 = rules now named, M1–M13 = scientific practices (now named in SCIENCE.md), E1–E4 = the four pilot criteria in Criterion 5, DEC-nnn = Decision n, T-nn = Task n, "s2" = step 2, Phase n = v0 build phase (PLAN.md, in tag v0.1.0). -->
 Question: Can a short, hand-written method, independent of the agent tool, based on the scientific method make work with AI agents on any of the owner's projects traceable, resistant to self-deception and clear to read, at an upkeep cost the owner accepts, in every tool the owner uses?
 Goal type: build
-Scope and non-goals: global and project `AGENTS.md` text, project skeletons and example, `INSTALL.md` for the agent that installs it, README, SCIENCE.md · no domain-specific modules (the owner adds skills when a project needs them); no install scripts or tool-specific setup (an agent installs it from `INSTALL.md`); not a tool that generates code from the spec; no copy of other spec-driven tools (Spec Kit, Kiro); no Windows/macOS; no proxy/mirror auto-config.
+Scope and non-goals: global and project `AGENTS.md` text, project skeletons and example, `INSTALL.md` for the agent that installs it, README, SCIENCE.md; an optional `skills/` catalog in the open Agent Skills format (SKILL.md), outside the method, starting with presentation and paper skills (Decision 21) · no domain-specific modules inside the method: `global/` and `project/` never name a skill; no install scripts or tool-specific setup (an agent installs it from `INSTALL.md`); not a tool that generates code from the spec; no copy of other spec-driven tools (Spec Kit, Kiro); no Windows/macOS; no proxy/mirror auto-config.
 Constraints: everything in files in English, replies in the owner's language; sources paraphrased and linked; Linux with Python ≥ 3.11 on both machines (Ubuntu personal, Red Hat at work); works in any agent tool that reads `AGENTS.md`; no AI attribution anywhere.
 
 ## Success criteria
@@ -11,9 +11,24 @@ Constraints: everything in files in English, replies in the owner's language; so
 - Criterion 3: given only the README and `INSTALL.md`, an agent with no prior context correctly states the project files and the session routine, and sets up a project. Fails on any wrong or missing item.
 - Criterion 4: after an agent installs urutau from `INSTALL.md` on a machine, a new session in each agent tool the owner uses there states the Evidence rule outside a project and the Tries and experiments rule inside one. Fails if any tool on any machine does not load it.
 - Criterion 5: the pilot meets four criteria, fixed before it starts — cold start (in a fresh session the agent states the current task, last result, open ideas and the last dead end from the files alone, fully correct in ≥ 4 of 5 sessions); cards first (≥ 90% of experiment cards committed before their results, by git history); tagged claims (100% of Known lines in `knowledge.md` carry an evidence tag); upkeep (the owner rates it acceptable in ≥ 4 of 5 sessions). Fails if any misses its threshold.
+- Criterion 6: each skill in `skills/` is self-contained (no file outside its folder), its SKILL.md is under 500 lines, and it is found and used in every agent tool the owner uses; a deck or paper it produces passes its `check.py` (no errors, no overfull boxes, no broken references, fonts embedded), traces every number to the script or query that made it, and, for an executive deck, lets the owner state the recommendation and the ask from the slide titles alone; the owner rates the output "would use without redoing" in ≥ 2 of 3 test cases. Fails if any part fails.
 
 ## Current task
-<!-- None: the next task is detailed with the owner. -->
+### Task 18 Presentation and paper skills (serves Criterion 6) · branch: task-18-presentation-skills
+Why: the owner wants to build executive and academic presentations and papers in LaTeX with an agent, following sourced good practice (data storytelling; paper and talk structure), from the same repo as the method.
+Prediction: two self-contained skills, `exec-deck` and `academic-writing`, each with a SKILL.md under 500 lines, pass Criterion 6 on the test cases of steps 4 and 6.
+Check: Criterion 6 on the outputs of steps 4 and 6 — fails if any part fails.
+Steps:
+1. [x] Record the scope change (Decision 21), Criterion 6 and this card — check: `sdd/spec.md` and `sdd/log.md` on this branch
+2. [ ] Shared LaTeX base: deck and paper templates (Beamer + Moloch, LuaLaTeX), `latexmkrc`, figure style — check: both templates compile with no errors on the owner's TeX Live
+3. [ ] `skills/exec-deck/`: SKILL.md, references, `check.py` — check: SKILL.md < 500 lines; `check.py` flags a deck with a planted overfull box and a broken reference
+4. [ ] Test `exec-deck` on `examples/churn-90d`: an agent with no prior context builds the deck from the skill alone — check: Criterion 6, owner's rating
+5. [ ] `skills/academic-writing/`: paper part, then talk part — check: SKILL.md < 500 lines; templates compile
+6. [ ] Test `academic-writing` on a real case of the owner's (MBA work or thesis project) — check: Criterion 6, owner's rating
+7. [ ] Skills section in `INSTALL.md`, `VERSION` 0.4.0, README; install on the notebook and the work PC — check: a new session in each tool lists both skills
+8. [ ] Independent review by an agent that reads only the files — check: findings answered or recorded
+Result:
+Closing: · Learned:
 
 ## Next tasks
 - Task 17 A second example outside data work (for instance a software or writing project), to show the method fits any project (serves the Question)
