@@ -1,0 +1,68 @@
+% Why: starting point for an academic talk made with the academic-writing skill: assertion-evidence slides derived from claims.md.
+% Build (from the project folder): uv run --with matplotlib python make_figures.py && cd talk && latexmk main.tex
+\documentclass[11pt,aspectratio=169]{beamer}
+\usetheme{moloch}
+\usecolortheme{urutau}
+\usepackage[brazilian,english]{babel} % the last language is the talk's main one
+\usepackage{booktabs}
+\usepackage{siunitx}
+\sisetup{mode=match} % numbers in the slide's text font, not the math font
+\setbeamertemplate{itemize item}{\textbullet} % bullets from the text font
+\input{../numbers.tex} % written by make_figures.py
+
+\title{<Title that states the central contribution>}
+\author{<Name>}
+\institute{<Affiliation · event>}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% Every content slide: the title is the assertion (a full sentence, at most two lines); the body is visual evidence.
+% Never start an \item with < : Beamer reads it as an overlay and hides the item.
+
+\begin{frame}{<Motivation: a concrete example of the problem, as a sentence>}
+  \centering
+  <Figure or diagram of the example>
+  \note{Motivate in the first minutes with one concrete case.}
+\end{frame}
+
+\begin{frame}{<The key idea, as a sentence>}
+  \centering
+  <Diagram of the idea>
+\end{frame}
+
+\begin{frame}{The new method beats the baseline in all \nRuns{} paired runs}
+  \centering
+  \includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{../figures/talk/runs.pdf}
+  \note{Mean \newMean{} vs \baselineMean; paired gain \gainMean, from \gainMin{} to \gainMax.}
+\end{frame}
+
+\begin{frame}{<Limitations: where the result does not hold yet>}
+  \begin{itemize}
+    \item Limitation 1, in one line
+    \item Limitation 2, in one line
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{<Take-home message, as a sentence>}
+  \centering
+  {\Large\alert{<One sentence to remember>}}
+\end{frame}
+
+\appendix
+
+\begin{frame}{Backup: scores per method}
+  \centering
+  \begin{tabular}{lr}
+    \toprule
+    Method & Mean score over \nRuns{} runs \\
+    \midrule
+    Baseline & \baselineMean \\
+    New method & \newMean \\
+    \bottomrule
+  \end{tabular}
+\end{frame}
+
+\end{document}

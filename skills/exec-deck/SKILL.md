@@ -25,27 +25,28 @@ Work one step at a time. After each step, show its output and wait for the owner
 3. **Pyramid.** Write the opening as Situation, Complication, Question, Answer. Under the answer, 2 to 4 key arguments that do not overlap and leave no gap; under each argument, the evidence it needs. Output: an indented outline. (`references/story.md`, Minto)
 4. **Ghost deck.** Write only the slide titles, in order: title slide; executive summary (answer + ask); one or more slides per argument; the ask and next steps; appendix. Test: read the titles alone, in order. They must tell the whole story and make the ask. The owner approves the titles before any chart is made.
 5. **Evidence per slide.** For each title, choose the visual that proves it (`references/charts.md`). Make every figure with a script, at its final size, from a saved snapshot of the data. Record each number shown in `sources.md`: number, slide, script or query, data date.
-6. **Build in Beamer.** Follow the LaTeX conventions below.
+6. **Build in Beamer.** Copy `assets/deck/` into the deck's folder (it holds `main.tex`, the color theme, `latexmkrc`, the figure style, `make_figures.py` with example data, and `brief.md` and `sources.md` to fill). Replace the example content, then build with `uv run --with matplotlib python make_figures.py && latexmk main.tex`. Follow the LaTeX conventions below.
 7. **Check.** Run the checks below and show their output.
 8. **Speaker notes and timing.** Write a `\note` per main slide with what to say in one or two sentences. Time the main deck against the slot and cut or move slides to the appendix until it fits.
 
 ## LaTeX conventions
 - Class and theme: `\documentclass[11pt,aspectratio=169]{beamer}` with `\usetheme{moloch}`, the maintained fork of the Metropolis theme, in TeX Live and MiKTeX. Check it is installed with `kpsewhich beamerthememoloch.sty`. If it is missing and cannot be installed, use `metropolis` and say so.
-- Engine: LuaLaTeX through latexmk: `latexmk -lualatex -interaction=nonstopmode main.tex`.
+- Engine: LuaLaTeX through latexmk; the template's `latexmkrc` sets it, so `latexmk main.tex` is enough. Logs and aux files go to `build/`.
 - Language: `\usepackage[<language>]{babel}` with the language from the brief (`brazilian` or `english`).
 - Titles: the action title goes in `\frametitle{...}`, at most two lines; shorten the sentence before shrinking the font.
 - Figures: one per frame, `\includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{figures/<name>.pdf}`. Make them at the final size with a font size equal to the slide text, so they are never scaled (`references/charts.md`).
 - A single key number: show it large (`{\Huge 12\%}`) with one line of context under it, instead of a chart.
 - Emphasis: `\alert{}` for the one thing to look at; no other colors for emphasis.
-- Executive summary: at most 3 short bullets; the other main slides avoid bullet lists.
+- Executive summary: at most 3 short bullets; the other main slides avoid bullet lists. Never start an `\item` with `<`: Beamer reads it as an overlay and hides the item.
+- Numbers and bullets in the text font: the template sets `\sisetup{mode=match}` and a text bullet, so the PDF uses one font family.
 - Appendix: `\appendix` and then the backup frames.
 - Speaker notes: `\note{...}` inside each frame. For a presenter view on two screens, the pympress viewer reads the notes when built with `\setbeameroption{show notes on second screen=right}` in a separate build.
-- Do not hard-code numbers that a script produced: keep them in `sources.md` and copy them from there, or have the script write a small `.tex` file of macros that the deck `\input`s.
+- Do not hard-code numbers that a script produced: `make_figures.py` writes them to `numbers.tex` as macros (`\valueBefore`), and the slides use the macros.
 
 ## Checks before handing over
 Show the evidence of each one.
 - Build: `latexmk` exits with code 0.
-- Log: `grep -nE "Overfull|undefined" main.log` prints nothing (use the log in the build folder if latexmk writes one).
+- Log: `grep -nE "Overfull|undefined" build/main.log` prints nothing. Known exception: Moloch v0.1.0 (TeX Live 2023) reports `Overfull \vbox (15.6pt too high)` on the title page even for a minimal document; that one line comes from the theme, not the deck.
 - Titles only: list the frame titles (`grep -o '\\frametitle{[^}]*}' main.tex`). The owner states the recommendation and the ask from that list alone.
 - Numbers: every number on a slide is in `sources.md`.
 - Fonts: `pdffonts main.pdf` shows `yes` in the `emb` column for every font.

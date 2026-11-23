@@ -1,0 +1,19 @@
+# Why: figure style for urutau slides: final size for a 16:9 Beamer slide, slide font via LuaLaTeX, grey for context and one accent (Knaflic; Rougier rule 5).
+figure.figsize: 5.5, 2.4
+figure.constrained_layout.use: True
+font.size: 10
+lines.linewidth: 2
+axes.prop_cycle: cycler('color', ['8A8F98', 'C2410C', '22313F'])
+axes.spines.top: False
+axes.spines.right: False
+axes.edgecolor: 8A8F98
+axes.labelcolor: 22313F
+axes.titlesize: 10
+axes.grid: False
+xtick.color: 22313F
+ytick.color: 22313F
+legend.frameon: False
+savefig.transparent: True
+pgf.texsystem: lualatex
+pgf.rcfonts: False
+pgf.preamble: \renewcommand{\familydefault}{\sfdefault}

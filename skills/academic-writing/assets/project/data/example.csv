@@ -1,0 +1,11 @@
+method,run,score
+baseline,1,0.781
+baseline,2,0.776
+baseline,3,0.784
+baseline,4,0.779
+baseline,5,0.780
+new,1,0.802
+new,2,0.797
+new,3,0.806
+new,4,0.799
+new,5,0.803

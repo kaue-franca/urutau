@@ -21,8 +21,8 @@ Check: Criterion 6 on the outputs of steps 5 and 6 — fails if any part fails.
 Steps:
 1. [x] Record the scope change (Decision 21), Criterion 6 and this card — check: `sdd/spec.md` and `sdd/log.md` on this branch
 2. [x] Skill text before templates (owner's request, 2026-11-23): `skills/exec-deck/` and `skills/academic-writing/`, each a SKILL.md plus `references/` — check: SKILL.md 58 lines each (< 500); the rule lists of Mensh & Kording, Gopen & Swan and Peyton Jones checked against the original texts
-3. [ ] Shared LaTeX base: deck and paper templates (Beamer + Moloch, LuaLaTeX), `latexmkrc`, figure style, copied into each skill's `assets/` — check: both templates compile with no errors on the owner's TeX Live
-4. [ ] `check.py` in each skill — check: it flags a document with a planted overfull box and a broken reference
+3. [x] Templates in each skill's `assets/`: `exec-deck/assets/deck/` and `academic-writing/assets/project/` (paper and talk sharing one `make_figures.py` and `numbers.tex`); Beamer + Moloch, LuaLaTeX, `latexmkrc`, figure styles; shared files are identical copies — check: in this workspace (TeX Live 2023) deck, talk and paper build with exit 0, no undefined references, every font Latin Modern and embedded, pages rendered and looked at; the only Overfull is Moloch v0.1.0's own title page (a one-line document shows it too). Not checked here: biber (could not be installed; the paper was built with `backend=bibtex` in a test copy) and the owner's TeX Live
+4. [ ] `check.py` in each skill, after step 7 (owner's order, 2026-11-23: templates, then install) — check: it flags a document with a planted overfull box and a broken reference
 5. [ ] Test `exec-deck` on `examples/churn-90d`: an agent with no prior context builds the deck from the skill alone — check: Criterion 6, owner's rating
 6. [ ] Test `academic-writing` on a real case of the owner's (MBA work or thesis project) — check: Criterion 6, owner's rating
 7. [ ] Skills section in `INSTALL.md`, `VERSION` 0.4.0, README; install on the notebook and the work PC — check: a new session in each tool lists both skills

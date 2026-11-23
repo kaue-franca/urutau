@@ -1,0 +1,19 @@
+# Why: figure style for urutau papers: final size for the default 11pt article text width, the paper's serif font via LuaLaTeX, grey for context and one accent (Rougier rules 3 and 5).
+figure.figsize: 4.98, 2.2
+figure.constrained_layout.use: True
+font.size: 9
+lines.linewidth: 1.5
+axes.prop_cycle: cycler('color', ['8A8F98', 'C2410C', '22313F'])
+axes.spines.top: False
+axes.spines.right: False
+axes.edgecolor: 8A8F98
+axes.labelcolor: 22313F
+axes.titlesize: 9
+axes.grid: False
+xtick.color: 22313F
+ytick.color: 22313F
+legend.frameon: False
+savefig.transparent: True
+pgf.texsystem: lualatex
+pgf.rcfonts: False
+pgf.preamble:

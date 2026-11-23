@@ -1,0 +1,70 @@
+% Why: starting point for an executive deck made with the exec-deck skill; every slide below is example content to replace.
+% Build: uv run --with matplotlib python make_figures.py && latexmk main.tex
+\documentclass[11pt,aspectratio=169]{beamer}
+\usetheme{moloch}
+\usecolortheme{urutau}
+\usepackage[brazilian,english]{babel} % the last language is the deck's main one: put the brief's language last
+\usepackage{booktabs}
+\usepackage{siunitx}
+\sisetup{mode=match} % numbers in the slide's text font, not the math font
+\setbeamertemplate{itemize item}{\textbullet} % bullets from the text font
+\input{numbers.tex} % written by make_figures.py
+
+\title{<The Big Idea, in one short sentence>}
+\subtitle{<Audience · meeting>}
+\author{<Name>}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% Executive summary: the answer and the ask come first (Minto).
+% Never start an \item with < : Beamer reads it as an overlay and hides the item.
+\begin{frame}{<Answer: we recommend X because Y; we ask for Z>}
+  \begin{itemize}
+    \item Argument 1, in one line
+    \item Argument 2, in one line
+    \item The decision asked, with a date
+  \end{itemize}
+  \note{Say the recommendation and the ask in two sentences.}
+\end{frame}
+
+% Action title + one visual that proves it.
+\begin{frame}{Average monthly churn fell from \valueBefore{} to \valueAfter{} after the change}
+  \centering
+  \includegraphics[width=\linewidth,height=0.72\textheight,keepaspectratio]{figures/trend.pdf}
+  \note{Point at the orange line: every month after the change is below every month before it.}
+\end{frame}
+
+% One key number: large text instead of a chart.
+\begin{frame}{The change cut average monthly churn by \valueDrop}
+  \centering
+  {\Huge\alert{\valueDrop}}\\[1ex]
+  average monthly churn, June to October against January to May 2026
+  \note{Give the number, then the period it covers.}
+\end{frame}
+
+\begin{frame}{<The ask: approve X by <date> to reach Y>}
+  \begin{itemize}
+    \item What is decided today
+    \item Next steps, with owner and date
+  \end{itemize}
+\end{frame}
+
+\appendix
+
+\begin{frame}{Backup: how the numbers were computed}
+  \centering
+  \begin{tabular}{lr}
+    \toprule
+    Period & Average monthly churn \\
+    \midrule
+    January to May 2026 & \valueBefore \\
+    June to October 2026 & \valueAfter \\
+    \bottomrule
+  \end{tabular}\\[2ex]
+  \small Source: \texttt{make\_figures.py} on \texttt{data/example.csv}; see \texttt{sources.md}.
+\end{frame}
+
+\end{document}

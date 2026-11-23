@@ -1,0 +1,81 @@
+% Why: starting point for a paper made with the academic-writing skill; the venue's own class and template replace this one when they exist.
+% Build (from the project folder): uv run --with matplotlib python make_figures.py && cd paper && latexmk main.tex
+% Tagged, accessible PDF: uncomment the next line with a LaTeX release from 2025 or later, if the venue allows it.
+% \DocumentMetadata{lang=en, pdfstandard=ua-2, tagging=on}
+\documentclass[11pt,a4paper]{article}
+\usepackage[brazilian,english]{babel} % the last language is the paper's main one
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\sisetup{mode=match} % numbers in the text font
+\usepackage[backend=biber,style=authoryear]{biblatex} % citation style: the venue's, or numeric/authoryear by field
+\addbibresource{references.bib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref} % load after hyperref
+\input{../numbers.tex} % written by make_figures.py
+
+\title{<Title that states the central contribution>}
+\author{<Name>\\<Affiliation>}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% Abstract in five moves (Mensh and Kording): context, gap, what was done, main result with its number, what it means.
+\begin{abstract}
+<Context in one sentence.> <The gap.> Here we <what was done>.
+Over \nRuns{} runs, the new method scored \newMean{} against \baselineMean{} for the baseline, a paired gain of \gainMean{} (range \gainMin{} to \gainMax{}).
+<What it means.>
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+% Context, then the gap, then the contributions as claims a reader can check (Peyton Jones). Start with a concrete example.
+<Context and a concrete example.> <The gap.> This paper makes the following contributions:
+\begin{itemize}
+  \item <Claim 1, as listed in claims.md> (\cref{sec:results}).
+  \item <Claim 2>.
+\end{itemize}
+
+\section{Methods}\label{sec:methods}
+% Enough to reproduce: data, cases kept apart for the final check, settings, number of runs, compute, and how the baseline was reproduced and tuned.
+<Methods.>
+
+\section{Results}\label{sec:results}
+% One subsection per claim; its first sentence states the claim, then the evidence.
+\subsection{<Claim 1 as a sentence>}
+The new method beats the baseline in every one of the \nRuns{} paired runs (\cref{fig:runs,tab:summary}).
+<Why the evidence supports the claim.>
+
+\begin{figure}[t]
+  \centering
+  \includegraphics{../figures/paper/runs.pdf}
+  \caption{The new method scores higher than the baseline in every run. Dots are single runs; bars are means over \nRuns{} runs.}
+  \label{fig:runs}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \caption{Mean score over \nRuns{} runs and paired gain.}
+  \label{tab:summary}
+  \begin{tabular}{lr}
+    \toprule
+    Method & Mean score \\
+    \midrule
+    Baseline & \baselineMean \\
+    New method & \newMean \\
+    \midrule
+    Paired gain (range) & \gainMean{} (\gainMin{} to \gainMax) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Discussion}\label{sec:discussion}
+% How the gap was filled, the limitations, the relevance to the field (Mensh and Kording).
+<What the results mean.> The structure of this template follows \textcite{mensh2017}.
+
+\subsection{Limitations}
+<Where the results do not apply, what was not tested, what could break them.>
+
+\printbibliography
+\end{document}

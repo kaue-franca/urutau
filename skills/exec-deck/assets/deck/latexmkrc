@@ -1,0 +1,6 @@
+# Why: one build command for every urutau template (`latexmk main.tex`): LuaLaTeX, biber when biblatex is used, aux files kept apart.
+$pdf_mode = 4;                     # LuaLaTeX
+$postscript_mode = $dvi_mode = 0;
+$aux_dir = 'build';                # log and aux files go here; main.pdf stays next to main.tex
+$emulate_aux = 1;
+$bibtex_use = 1;                   # run biber/bibtex only when the .bib files exist

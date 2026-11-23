@@ -1,0 +1,7 @@
+# Why: generated outputs are rebuilt from make_figures.py and latexmk, so they are not versioned.
+figures/
+numbers.tex
+paper/build/
+paper/main.pdf
+talk/build/
+talk/main.pdf

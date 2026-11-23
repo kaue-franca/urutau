@@ -15,12 +15,15 @@
 - Users over-trust confident AI answers, more so when they are long; first-person uncertainty reduces over-reliance [source: S56, S58] — 2026-11-22
 
 - Devin CLI loads skills from `.agents/skills/` and `~/.agents/skills/` (also `.devin/skills/`, `~/.config/devin/skills/`), in the SKILL.md format [source: docs.devin.ai/cli/extensibility/skills, read 2026-11-23] — 2026-11-23
+- Moloch v0.1.0 (TeX Live 2023, Ubuntu 24.04 packages) reports `Overfull \vbox (15.6pt too high)` on the Beamer title page even in a one-line document, in 16:9 and 4:3 [checked: minimal document built with lualatex, 2026-11-23] — 2026-11-23
+- In Beamer, `\item <text>` is read as an overlay specification and the item is never shown [checked: rendered pages of the deck template, 2026-11-23] — 2026-11-23
 
 ## Assumed
 - A short, hand-written instruction file loaded in every session changes agent behaviour enough to matter for this method — would be checked by: the pilot (Criterion 5)
 - Codex loads `~/.codex/AGENTS.md` (masked by `AGENTS.override.md`) — would be checked by: a Codex session on this notebook
 - Devin CLI loads `~/.config/devin/AGENTS.md` as global rules (docs also name `~/.devin/global_rules.md`) — would be checked by: Criterion 4 on the work PC
 - The report shape (understood → result → how I know → next) helps the owner more than free-form replies — would be checked by: the owner's rating in the pilot (upkeep criterion)
+- Moloch 2.x (TeX Live 2025 or later) no longer has the title-page Overfull — would be checked by: building the templates on the owner's notebook
 
 ## Dead ends
 | What | Verdict | Why (1 line) | Evidence | Worth retrying if |
