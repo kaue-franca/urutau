@@ -108,3 +108,10 @@ Decision: (A). `skills/` holds self-contained skill folders in the Agent Skills 
 Results seen: no (nothing built yet).
 Consequences: (+) one repo to version and install; skills reach every tool the owner uses; (−) the repo grows beyond the method; each skill carries its own copy of the small LaTeX base, so the copies must be kept identical.
 Supersedes: the "no domain-specific modules" part of the scope; the skills part of Decision 18 (its reason, tool lock-in, no longer holds for the SKILL.md format).
+
+## Decision 22 · 2026-11-23 · by: owner (request) + agent · Install steps for the optional skills; VERSION 0.4.0
+Context: Task 18 step 7; the owner asked to install the skills right after the templates. A change to `INSTALL.md` bumps `VERSION` and gets a Decision (repo convention).
+Decision: `INSTALL.md` gets "On a machine: optional skills": the agent finds its own tool's user-level skills folder in the tool's documentation, links each skill folder there (copy if links are not followed), reports missing LaTeX and Python tools without installing them unasked, and checks in a new session that the skills are listed. "Remove" also removes the links. Nothing names a specific tool. VERSION 0.4.0.
+Results seen: n/a.
+Consequences: (+) the skills reach any tool with a skills folder, through the same agent-driven install as the rules; (−) each machine still needs a person or agent session there to run it; the notebook was not reachable from this session.
+Supersedes: —

@@ -11,7 +11,7 @@ The method is plain Markdown read through `AGENTS.md`. To install or set it up, 
 | `INSTALL.md` | Steps for the agent that installs urutau on a machine, or sets it up, updates or removes it in a project. |
 | `examples/churn-90d/` | A filled, fictional project to learn the format from. |
 | `SCIENCE.md` | Why each rule exists and the sources behind it. |
-| `skills/` | Optional skills outside the method, in the open SKILL.md format: `exec-deck` (executive decks with data storytelling) and `academic-writing` (papers and academic talks), both in LaTeX. Templates and install steps are still to come. |
+| `skills/` | Optional skills outside the method, in the open SKILL.md format: `exec-deck` (executive decks with data storytelling) and `academic-writing` (papers and academic talks), both in LaTeX, with templates in each skill's `assets/`. Install them by asking an agent to follow `INSTALL.md`. |
 | `sdd/` | This repository's own records: urutau is built with its own method. |
 
 ## A project's records (`sdd/`)

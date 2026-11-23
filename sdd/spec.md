@@ -25,7 +25,7 @@ Steps:
 4. [ ] `check.py` in each skill, after step 7 (owner's order, 2026-11-23: templates, then install) — check: it flags a document with a planted overfull box and a broken reference
 5. [ ] Test `exec-deck` on `examples/churn-90d`: an agent with no prior context builds the deck from the skill alone — check: Criterion 6, owner's rating
 6. [ ] Test `academic-writing` on a real case of the owner's (MBA work or thesis project) — check: Criterion 6, owner's rating
-7. [ ] Skills section in `INSTALL.md`, `VERSION` 0.4.0, README; install on the notebook and the work PC — check: a new session in each tool lists both skills
+7. [ ] Skills section in `INSTALL.md`, `VERSION` 0.4.0, README; install on the notebook and the work PC — check: a new session in each tool lists both skills · progress: `INSTALL.md`, `VERSION` and README done (Decision 22); install on both machines pending, the notebook was not connected to this session
 8. [ ] Independent review by an agent that reads only the files — check: findings answered or recorded
 Result:
 Closing: · Learned:
